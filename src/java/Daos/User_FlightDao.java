@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,5 +97,70 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
         }
         // Return id
         return newId;
+    }
+
+    /**
+     * Gets an ArrayList of all of the taken seats of a particular travelClass
+     * on a flight.
+     * 
+     * @param flightId The id of the flight.
+     * @param travelClass The travelClass of the seats taken.
+     * @return An ArrayList of Strings of the seats taken.
+     */
+    @Override
+    public ArrayList<String> getTakenSeats(int flightId, String travelClass) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        // ArrayList to store results
+        ArrayList<String> takenSeats = new ArrayList();
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT seat FROM user_flight "
+                        + "WHERE flightId = ? "
+                        + "AND travelClass = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setInt(1, flightId);
+            ps.setString(2, travelClass);
+            // Execute SQL
+            rs = ps.executeQuery();
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                String seat = rs.getString("seat");
+
+                // Store each book in the ArrayList
+                takenSeats.add(seat);
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the user_flight table in the getTakenSeats() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return takenSeats;
     }
 }
