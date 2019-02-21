@@ -1,0 +1,24 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Daos;
+
+import Dtos.User_Flight;
+
+/**
+ *
+ * @author D00191889
+ */
+public interface User_FlightDaoInterface {
+    
+    /**
+     * Adds a User_Flight to the database to book a user on a flight.
+     * 
+     * @param uf The User_Flight record to be added.
+     * @return An int of the newly generated id or -1 if unsuccessful.
+     */
+    public int addUser_Flight(User_Flight uf);
+    
+}
