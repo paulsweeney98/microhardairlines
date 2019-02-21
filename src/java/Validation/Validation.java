@@ -94,9 +94,14 @@ public class Validation {
             valid = false;
         } else if (cvv.length() != 3) {
             valid = false;
-        } else if (((todaysDate.getMonth() + 1) > expiry_monthInt) && ((todaysDate.getYear() + 1900) >= expiry_yearInt)) {
+        } else if ((todaysDate.getYear() + 1900) > expiry_yearInt) {
+            valid = false;
+        } else if (((todaysDate.getMonth() + 1) > expiry_monthInt) && ((todaysDate.getYear() + 1900) == expiry_yearInt)) {
             valid = false;
         }
+        
+        int month = todaysDate.getMonth() + 1;
+        int year = todaysDate.getYear() + 1900;
         
         return valid;
     }

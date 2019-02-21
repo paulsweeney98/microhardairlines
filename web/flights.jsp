@@ -27,47 +27,55 @@
             
                 Flight flight = flights.get(0);
 
-                // Cookies evaluate the amount of times a user has search for these flights 
-                // and raises the price if user has shown interest
-    //            double priceInflation = 1;
-    //            boolean cookieFound = false;
-    //            String cookieTest = "Nothing";
-    //            
-    //            Cookie[] cookies = request.getCookies();
-    //            if (cookies != null && cookies.length != 0) {
-    //                for (Cookie cookie : cookies) {
-    //                    if (cookie.getName().equals("timesFlightSearched" + flight.getArrivalAirportAbbreviation() + flight.getDate())) {
-    //                        int timesFlightSearched = Integer.valueOf(cookie.getValue());
-    //                        timesFlightSearched = timesFlightSearched + 1;
-    //                        
-    //                        cookie.setValue(timesFlightSearched+"");
-    //                        
-    //                        if (timesFlightSearched > 2) {
-    //                            priceInflation = 1.3;
-    //                        }
-    //                        
-    //                        cookieFound = true;
-    //                        cookieTest = "Cookie created " + cookie.getValue();
-    //                    }
-    //                }
-    //            }
-    //            
-    //            if (cookieFound == false) {
-    //                if (flight.getArrivalAirportAbbreviation().equals("DUB")) {
-    //                    Cookie newCookie = new Cookie("timesFlightSearched" + flight.getArrivalAirportAbbreviation() + flight.getDate(), "1");
-    //                    response.addCookie(newCookie);
-    //                    cookieTest = "Cookie being created" + newCookie.getValue();
-    //                } else if (flight.getArrivalAirportAbbreviation().equals("LHR")) {
-    //                    Cookie timesFlightSearchedLHR = new Cookie("timesFlightSearchedLHR", "1");
-    //                    response.addCookie(timesFlightSearchedLHR);
-    //                } else if (flight.getArrivalAirportAbbreviation().equals("CDG")) {
-    //                    Cookie timesFlightSearchedCDG = new Cookie("timesFlightSearchedCDG", "1");
-    //                    response.addCookie(timesFlightSearchedCDG);
-    //                } else if (flight.getArrivalAirportAbbreviation().equals("JFK")) {
-    //                    Cookie timesFlightSearchedJFK = new Cookie("timesFlightSearchedJFK", "1");
-    //                    response.addCookie(timesFlightSearchedJFK);
-    //                }
-    //            }
+//                 Cookies evaluate the amount of times a user has search for these flights 
+//                 and raises the price if user has shown interest
+                double priceInflation = 1;
+                boolean cookieFound = false;
+                String cookieTest = "Nothing";
+                
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null && cookies.length != 0) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("timesFlightSearched" + flight.getArrivalAirportAbbreviation())) {
+                            int timesFlightSearched = Integer.valueOf(cookie.getValue());
+                            
+                            timesFlightSearched = timesFlightSearched + 1;
+                            
+                            String stringVersion = Integer.toString(timesFlightSearched);
+                            
+//                            cookie.setValue(stringVersion);
+                            Cookie newCookie = new Cookie("timesFlightSearched" + flight.getArrivalAirportAbbreviation(), stringVersion);
+                            response.addCookie(newCookie);
+                            
+                            
+                            if ((timesFlightSearched > 2) && (timesFlightSearched <= 4)) {
+                                priceInflation = 1.2;
+                            } else if (timesFlightSearched > 4) {
+                                priceInflation = 1.3;
+                            }
+                            
+                            cookieFound = true;
+                            cookieTest = "Cookie created " + cookie.getValue();
+                        }
+                    }
+                }
+                
+                if (cookieFound == false) {
+                    if (flight.getArrivalAirportAbbreviation().equals("DUB")) {
+                        Cookie newCookie = new Cookie("timesFlightSearched" + flight.getArrivalAirportAbbreviation() + flight.getDate(), "1");
+                        response.addCookie(newCookie);
+                        cookieTest = "Cookie being created" + newCookie.getValue();
+                    } else if (flight.getArrivalAirportAbbreviation().equals("LHR")) {
+                        Cookie timesFlightSearchedLHR = new Cookie("timesFlightSearchedLHR", "1");
+                        response.addCookie(timesFlightSearchedLHR);
+                    } else if (flight.getArrivalAirportAbbreviation().equals("CDG")) {
+                        Cookie timesFlightSearchedCDG = new Cookie("timesFlightSearchedCDG", "1");
+                        response.addCookie(timesFlightSearchedCDG);
+                    } else if (flight.getArrivalAirportAbbreviation().equals("JFK")) {
+                        Cookie timesFlightSearchedJFK = new Cookie("timesFlightSearchedJFK", "1");
+                        response.addCookie(timesFlightSearchedJFK);
+                    }
+                }
 
                 String numPassengers = request.getParameter("numPassengers");
                 String returnDate = request.getParameter("returnDate");
@@ -94,13 +102,9 @@
         
         <%
                 // PRICING
-    //            double standardPrice = f.getPrice() * priceInflation;
-    //            double businessPrice = (f.getPrice() * priceInflation) * 1.4;
-    //            double firstClassPrice = (f.getPrice() * priceInflation) * 3;
-
-                double standardPrice = f.getPrice();
-                double businessPrice = f.getPrice() * 1.4;
-                double firstClassPrice = f.getPrice() * 3;
+                double standardPrice = f.getPrice() * priceInflation;
+                double businessPrice = (f.getPrice() * priceInflation) * 1.4;
+                double firstClassPrice = (f.getPrice() * priceInflation) * 3;
         %>
         <div class="row mt-3">
             <div class="col-4"></div>
