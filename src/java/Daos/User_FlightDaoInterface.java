@@ -32,4 +32,7 @@ public interface User_FlightDaoInterface {
      */
     public ArrayList<String> getTakenSeats(int flightId, String travelClass);
     
+    
+    public int updateSeat(int User_FlightId, String seat, String boardingDoor);
+    
 }

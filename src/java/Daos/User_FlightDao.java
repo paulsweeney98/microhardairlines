@@ -163,4 +163,47 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
         // Return results
         return takenSeats;
     }
+
+    @Override
+    public int updateSeat(int User_FlightId, String seat, String boardingDoor) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        int rowsUpdated = -1;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "UPDATE user_flight "
+                    + "SET seat = ?, boardingDoor = ? "
+                    + "WHERE id = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+
+            ps.setString(1, seat);
+            ps.setString(2, boardingDoor);
+            ps.setInt(3, User_FlightId);
+            // Execute SQL
+            rowsUpdated = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the user_flight table in the updateSeat() method\n"
+                    + ex.getMessage());
+            rowsUpdated = -1;
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        return rowsUpdated;
+    }
 }

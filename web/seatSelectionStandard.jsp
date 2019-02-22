@@ -18,22 +18,12 @@
     <body>
         <%
             // For test purposes only
-            int flightId = 2345;
+            int flightId = 2354;
             
             User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
             ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "standard");
-            for (String seat : takenSeats) {
-        %>
-        <h3><%=seat%></h3>
-        <%
-            }
         %>
         <div class="row">
-            
-            <%
-                String seatsBookedJSON = request.getParameter("seatsBookedJSON");
-            %>
-            <h3><%=seatsBookedJSON%></h3>
             <div class="col-5"></div>
             <div class="col-2 border border-primary rounded text-center">
                 <div class="float-left">
@@ -89,16 +79,24 @@
                 </div>
             </div>
             <div class="col-2"></div>
-            <form action="seatSelectionStandard.jsp" method="post">
+            <form action="Servlet" method="post">
                 
                 </br><button type="submit" class="btn btn-success">Submit</button>
                 <input type="hidden" name="seatsBookedJSON" id="seatsBookedJSON" value="" />
+                <input type="hidden" name ="action" value="selectSeat" />
             </form>
         </div>
                 
         <script>
             
             $(document).ready(function(){
+                
+//                if (document.getElementById("seatsBookedJSON").value.length === 12) {
+//                    var aLinks = document.getElementsByTagName("a");
+//                    for (var i = 1; i <= 30; i++) {
+//                        aLinks[i].className += "disabled";
+//                    }
+//                }S
                 
                 // Example of code properly structured
 //                $("#2a").click(function(){ 

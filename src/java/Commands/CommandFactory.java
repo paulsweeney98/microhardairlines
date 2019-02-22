@@ -53,6 +53,10 @@ public class CommandFactory {
                     // Do all logic for storing the checked baggage
                     c = new BookFlightCommand();
                     break;
+                case "selectSeat":
+                    // Do all logic for storing the checked baggage
+                    c = new SelectSeatCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();
