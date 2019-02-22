@@ -4,6 +4,8 @@
     Author     : D00191889
 --%>
 
+<%@page import="Dtos.User_Flight"%>
+<%@page import="Validation.Validation"%>
 <%@page import="Daos.User_FlightDao"%>
 <%@page import="Daos.Dao"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,14 +19,36 @@
     </head>
     <body>
         <%
-            // For test purposes only
-            int flightId = 2354;
-            
-            User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
-            ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "standard");
+            if (loggedInUser != null) {
+                
+                Validation v = new Validation();
+                int flightId = v.convertStringToInt(request.getParameter("flightId"));
+
+                if (flightId > -1) {
+                    User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
+                    ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "standard");
+                    ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserId(flightId, loggedInUser.getUserId());
+                        if (takenSeats != null && !takenSeats.isEmpty() && user_flights != null && !user_flights.isEmpty()) {
+                            session.setAttribute("user_flights", user_flights);
         %>
-        <div class="row">
-            <div class="col-5"></div>
+        <div class="row text-center">
+            <%
+                if (session.getAttribute("errorMessage") != null) {
+            %>
+            <h3><%=session.getAttribute("errorMessage")%></h3>
+            <%
+                }
+            %>
+            <div class="col-5 text-center">
+                <h3>Please select <%=user_flights.size()%> seats for:</h3>
+                <%
+                    for (User_Flight user_flight : user_flights) {
+                %>
+                <h4><%=user_flight.getPassengerFirstName()%> <%=user_flight.getPassengerLastName()%></h4>
+                <%
+                    }
+                %>
+            </div>
             <div class="col-2 border border-primary rounded text-center">
                 <div class="float-left">
                     <%
@@ -81,11 +105,29 @@
             <div class="col-2"></div>
             <form action="Servlet" method="post">
                 
+                
                 </br><button type="submit" class="btn btn-success">Submit</button>
                 <input type="hidden" name="seatsBookedJSON" id="seatsBookedJSON" value="" />
                 <input type="hidden" name ="action" value="selectSeat" />
             </form>
         </div>
+            
+        <%          } else {
+                        out.println("Problem retrieving taken seats and users booked for this flight.");
+                    }
+                } else {
+                    out.println("Invalid flight.");
+                }
+            } else {
+        %>
+        <div class="text-center">
+            <h3>Please login</h3>
+            <a href="login.jsp" class="btn btn-success">Login</a>
+            <a href="register.jsp" class="btn btn-success">Register</a>
+        </div>
+        <%
+            }
+        %>
                 
         <script>
             

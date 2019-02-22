@@ -32,7 +32,23 @@ public interface User_FlightDaoInterface {
      */
     public ArrayList<String> getTakenSeats(int flightId, String travelClass);
     
-    
+    /**
+     * Updates the seat and boardingDoor of a User_Flight.
+     * 
+     * @param User_FlightId The id of the User_Flight.
+     * @param seat The seat to be added.
+     * @param boardingDoor The boardingDoor to be added.
+     * @return 
+     */
     public int updateSeat(int User_FlightId, String seat, String boardingDoor);
+    
+    /**
+     * Gets User_Flights that have vacant seats by flightId and userId.
+     * 
+     * @param flightId The id of the flight.
+     * @param userId The id of the user.
+     * @return An ArrayList of User_Flights.
+     */
+    public ArrayList<User_Flight> getUser_FlightsByFlightIdUserId(int flightId, int userId);
     
 }
