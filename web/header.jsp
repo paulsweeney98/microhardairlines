@@ -79,7 +79,9 @@
           <div class="navbar-nav">
             <a class="nav-item nav-link active text-light" href="index.jsp"><%=dataBundle.getString("header_searchFlights")%></a>
             <a class="nav-item nav-link text-light" href="#"><%=dataBundle.getString("header_manageTrips")%></a>
-            <a class="nav-item nav-link text-light" href="seatSelectionStandard.jsp">Seat Selection</a>
+            <a class="nav-item nav-link text-light" href="seatSelectionStandard.jsp">SS Standard</a>
+            <a class="nav-item nav-link text-light" href="seatSelectionBusiness.jsp">SS Business</a>
+            <a class="nav-item nav-link text-light" href="seatSelectionFirstClass.jsp">SS First Class</a>
             <%
                 User loggedInUser = (User)session.getAttribute("loggedInUser");
                 if(loggedInUser != null){

@@ -223,7 +223,7 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
      * @return An ArrayList of User_Flights.
      */
     @Override
-    public ArrayList<User_Flight> getUser_FlightsByFlightIdUserId(int flightId, int userId) {
+    public ArrayList<User_Flight> getUser_FlightsByFlightIdUserIdTravelClass(int flightId, int userId, String travelClass) {
         // DB interaction
         Connection con = null;
         PreparedStatement ps = null;
@@ -238,11 +238,13 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
             String query = "SELECT * FROM user_flight "
                         + "WHERE flightId = ? "
                         + "AND userId = ? "
+                        + "AND travelClass = ? "
                         + "AND seat IS NULL ";
             // Compile into SQL
             ps = con.prepareStatement(query);
             ps.setInt(1, flightId);
             ps.setInt(2, userId);
+            ps.setString(3, travelClass);
             // Execute SQL
             rs = ps.executeQuery();
 
@@ -253,7 +255,7 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
                 userId = rs.getInt("userId");
                 String passengerFirstName = rs.getString("passengerFirstName");
                 String passengerLastName = rs.getString("passengerLastName");
-                String travelClass = rs.getString("travelClass");
+                travelClass = rs.getString("travelClass");
                 String queue = rs.getString("queue");
                 String seat = rs.getString("seat");
                 String boardingDoor = rs.getString("boardingDoor");
@@ -266,7 +268,74 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
                 user_flights.add(uf);
             }
         } catch (SQLException ex) {
-            System.out.println("An exception occurred while querying the user_flight table in the getUser_FlightsByFlightIdUserId() method\n"
+            System.out.println("An exception occurred while querying the user_flight table in the getUser_FlightsByFlightIdUserIdTravelClass() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return user_flights;
+    }
+
+    @Override
+    public ArrayList<User_Flight> getDistinctUser_FlightsByUserId(int userId) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        // ArrayList to store results
+        ArrayList<User_Flight> user_flights = new ArrayList();
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT DISTINCT flightId, userId FROM user_flight "
+                        + "WHERE userId = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+            // Execute SQL
+            rs = ps.executeQuery();
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                int id = -1;
+                int flightId = rs.getInt("flightId");
+                userId = rs.getInt("userId");
+                String passengerFirstName = null;
+                String passengerLastName = null;
+                String travelClass = null;
+                String queue = null;
+                String seat = null;
+                String boardingDoor = null;
+                int specialAssistanceRequired = -1;
+                double pricePaid = -1;
+
+                User_Flight uf = new User_Flight(id, userId, flightId, passengerFirstName, passengerLastName, travelClass, queue, seat, boardingDoor, specialAssistanceRequired, pricePaid);
+
+                // Store each book in the ArrayList
+                user_flights.add(uf);
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the user_flight table in the getDistinctUser_FlightsByFlightIdUserId() method\n"
                     + ex.getMessage());
         } // Close open components
         finally {

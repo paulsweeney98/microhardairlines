@@ -91,4 +91,5 @@ public interface FlightDaoInterface {
      * @return An int of the number of rows updated.
      */
     public int updateSeats(Flight flight, String seatType, int changeBy);
+    
 }

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : seatSelection
-    Created on : 21-Feb-2019, 12:59:42
-    Author     : D00191889
+    Document   : seatSelectionFirstClass
+    Created on : 23-Feb-2019, 09:34:31
+    Author     : pauls
 --%>
 
 <%@page import="Dtos.User_Flight"%>
@@ -26,8 +26,8 @@
 
                 if (flightId > -1) {
                     User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
-                    ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "standard");
-                    ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserIdTravelClass(flightId, loggedInUser.getUserId(), "standard");
+                    ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "firstClass");
+                    ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserIdTravelClass(flightId, loggedInUser.getUserId(), "firstClass");
                         if (takenSeats != null && !takenSeats.isEmpty() && user_flights != null && !user_flights.isEmpty()) {
                             session.setAttribute("user_flights", user_flights);
         %>
@@ -72,7 +72,7 @@
                         String classE = "";
                         String classF = "";
                         
-                        for (int i = 1; i <= 30; i++) {
+                        for (int i = 1; i <= 3; i++) {
                             if (takenSeats.contains(i + "a")) {
                                 colourA = "red";
                                 classA = "disabled";
@@ -94,12 +94,6 @@
                                 colourC = "limegreen";
                                 classC = "";
                             }
-                            
-                            if (i == 11 || i == 21) {
-                    %>
-                    </br>
-                    <%
-                            }
                     %>
                     <a href="#" id="<%=i%>a" class="<%=classA%>" style="font-size: 30px; color: <%=colourA%>;"><i class="fas fa-user"></i></a>
                     <a href="#" id="<%=i%>b" class="<%=classB%>" style="font-size: 30px; color: <%=colourB%>;"><i class="fas fa-user"></i></a>
@@ -111,7 +105,7 @@
                 
                 <div class="float-right">
                     <%
-                        for (int i = 1; i <= 30; i++) {
+                        for (int i = 1; i <= 3; i++) {
                             if (takenSeats.contains(i + "a")) {
                                 colourD = "red";
                                 classD = "disabled";
@@ -132,12 +126,6 @@
                             } else {
                                 colourC = "limegreen";
                                 classC = "";
-                            }
-                            
-                            if (i == 11 || i == 21) {
-                    %>
-                    </br>
-                    <%
                             }
                     %>
                     <a href="#" id="<%=i%>d" class="<%=classD%>" style="font-size: 30px; color: <%=colourD%>;"><i class="fas fa-user"></i></a>

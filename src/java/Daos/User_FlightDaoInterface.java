@@ -49,6 +49,8 @@ public interface User_FlightDaoInterface {
      * @param userId The id of the user.
      * @return An ArrayList of User_Flights.
      */
-    public ArrayList<User_Flight> getUser_FlightsByFlightIdUserId(int flightId, int userId);
+    public ArrayList<User_Flight> getUser_FlightsByFlightIdUserIdTravelClass(int flightId, int userId, String travelClass);
+    
+    public ArrayList<User_Flight> getDistinctUser_FlightsByUserId(int userId);
     
 }

@@ -73,7 +73,15 @@ public class SelectSeatCommand implements Command {
                 } else {
                     String errorMessage = "Please select the correct amount of seats";
                     session.setAttribute("errorMessage", errorMessage);
-                    forwardToJsp = "seatSelectionStandard.jsp?flightId=" + user_flights.get(0).getFlightId();
+                    if (user_flights.get(0).getTravelClass().equals("standard")) {
+                        forwardToJsp = "seatSelectionStandard.jsp?flightId=" + user_flights.get(0).getFlightId();
+                    } else if (user_flights.get(0).getTravelClass().equals("business")) {
+                        forwardToJsp = "seatSelectionBusiness.jsp?flightId=" + user_flights.get(0).getFlightId();
+                    } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
+                        forwardToJsp = "seatSelectionFirstClass.jsp?flightId=" + user_flights.get(0).getFlightId();
+                    } else {
+                        forwardToJsp = "error.jsp";
+                    }
                 }
             } else {
                 String errorMessage = "You must select a seat";
