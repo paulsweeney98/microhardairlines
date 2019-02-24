@@ -51,6 +51,21 @@ public interface User_FlightDaoInterface {
      */
     public ArrayList<User_Flight> getUser_FlightsByFlightIdUserIdTravelClass(int flightId, int userId, String travelClass);
     
+    /**
+     * Gets all of the user's flights after the current date, without repeats.
+     * 
+     * @param userId The if of the user.
+     * @return An ArrayList of User_Fights.
+     */
     public ArrayList<User_Flight> getDistinctUser_FlightsByUserId(int userId);
+    
+    /**
+     * Gets User_Flights by flight id and user id.
+     * 
+     * @param flightId The id of the flight.
+     * @param userId The id of the user.
+     * @return An ArrayList of User_Flights.
+     */
+    public ArrayList<User_Flight> getUser_FlightsByFlightIdUserId(int flightId, int userId);
     
 }

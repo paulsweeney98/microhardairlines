@@ -89,6 +89,7 @@
             <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%>
             <span class="caret"></span></button>
             <ul class="dropdown-menu text-center">
+              <li><a href="upcomingTrips.jsp">Upcoming Trips</a></li>
               <li><a href="manageAccount.jsp"><%=dataBundle.getString("header_manageAccount")%></a></li>
               <li><a href="changePassword.jsp"><%=dataBundle.getString("header_changePassword")%></a></li>
               <li><a href="Servlet?action=logout"><%=dataBundle.getString("header_logout")%></a></li>

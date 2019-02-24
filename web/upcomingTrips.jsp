@@ -4,6 +4,9 @@
     Author     : pauls
 --%>
 
+<%@page import="Validation.Validation"%>
+<%@page import="Dtos.Flight"%>
+<%@page import="Daos.FlightDao"%>
 <%@page import="Dtos.User_Flight"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Daos.User_FlightDao"%>
@@ -19,45 +22,86 @@
     <body>
         <%
             User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
+            FlightDao fDao = new FlightDao(Dao.getDatabaseName());
+            Validation v = new Validation();
             
             if (loggedInUser != null) {
                 ArrayList<User_Flight> distinctUser_Flights = ufDao.getDistinctUser_FlightsByUserId(loggedInUser.getUserId());
                 if (distinctUser_Flights != null && !distinctUser_Flights.isEmpty()) {
-                    ArrayList<User_Flight> user_flights = new ArrayList<User_Flight>();
                     for (User_Flight distinctUser_Flight : distinctUser_Flights) {
-                        
+                        Flight flight = fDao.getFlightById(distinctUser_Flight.getFlightId());
+                        ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserId(distinctUser_Flight.getFlightId(), loggedInUser.getUserId());
+                        int numPassengers = user_flights.size();
         %>
         
         <div class="row">
+            <div class="col-4"></div>
             <div class="col-4 text-center border-top border-bottom border-primary rounded">
-                <h1 class="float-left"><%=departureTime%></h1>
-                <h1 class="float-right"><%=arrivalTime%></h1>
+                <h1 class="float-left"><%=v.changeMinutesToHours(flight.getDepartureTime())%></h1>
+                <h1 class="float-right"><%=v.changeMinutesToHours(flight.getArrivalTime())%></h1>
                 
-                <h2 class="text-center"><%=duration%></h2>
+                <h2 class="text-center"><%=flight.getArrivalAirport()%></h2>
                 </br>
-                <h3 class="float-left"><%=f.getDepartureAirportAbbreviation()%></h3>
-                <h3 class="float-right"><%=f.getArrivalAirportAbbreviation()%></h3>
+                <h3 class="float-left"><%=flight.getDepartureAirportAbbreviation()%></h3>
+                <h3 class="float-right"><%=flight.getArrivalAirportAbbreviation()%></h3>
                 
-                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseFares<%=f.getId()%>" aria-expanded="false" aria-controls="collapseFares<%=f.getId()%>">From <%=currencyFormatter.format(standardPrice)%></button>
-                
-                </br></br>
-                <a class="float-left" data-toggle="collapse" href="#collapseFlightDetails<%=f.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=f.getId()%>">Flight Details</a>
-                <p href="#" class="float-right"><%=f.getFlightNumber()%></p>
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#manageBooking<%=flight.getId()%>" aria-expanded="false" aria-controls="manageBooking<%=flight.getId()%>">Manage Booking</button>
                 
                 </br></br>
-                <div class="collapse" id="collapseFares<%=f.getId()%>">
+                <a class="float-left" data-toggle="collapse" href="#collapseFlightDetails<%=flight.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=flight.getId()%>">Flight Details</a>
+                <p class="float-right">Passengers Booked: <%=numPassengers%></p>
+                
+                </br></br>
+                <div class="collapse" id="manageBooking<%=flight.getId()%>">
                     <div class="card card-body">
-                        
+                        <div class="row text-center">
+                            <%
+                                if (user_flights.get(0).getSeat() == null) {
+                                    if (user_flights.get(0).getTravelClass().equals("standard")) {
+                            %>
+                            <div class="col-4">
+                                <a href="seatSelectionStandard.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                            </div>
+                            <%
+                                    } else if (user_flights.get(0).getTravelClass().equals("business")) {
+                            %>
+                            <div class="col-4">
+                                <a href="seatSelectionBusiness.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                            </div>
+                            <%
+                                    } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
+                            %>
+                            <div class="col-4">
+                                <a href="seatSelectionFirstClass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+                            
+                            <%
+                                if (user_flights.get(0).getQueue().equals("non-priority")) {
+                            %>
+                            <div class="col-4">
+                                <a href="#" class="btn btn-success">Queue</a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            <div class="col-4">
+                                <a href="#" class="btn btn-success">Baggage</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 </br></br>
-                <div class="collapse" id="collapseFlightDetails<%=f.getId()%>">
+                <div class="collapse" id="collapseFlightDetails<%=flight.getId()%>">
                     <div class="card card-body">
-                        <p>Flight Number: <%=f.getFlightNumber()%></p></br>
+                        <p>Flight Number: <%=flight.getFlightNumber()%></p></br>
                         <p>
-                            Flight will leave from <%=f.getDepartureAirport()%> (<%=f.getDepartureAirportAbbreviation()%>) at <%=v.changeMinutesToHours(f.getDepartureTime())%> on <%=dateFormatter.format(f.getDate())%>, 
-                            and arrive at <%=f.getArrivalAirport()%> (<%=f.getArrivalAirportAbbreviation()%>) at <%=v.changeMinutesToHours(f.getArrivalTime())%>.
+                            Flight will leave from <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) at <%=v.changeMinutesToHours(flight.getDepartureTime())%> on <%=dateFormatter.format(flight.getDate())%>, 
+                            and arrive at <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) at <%=v.changeMinutesToHours(flight.getArrivalTime())%>.
                         </p>
                         <p>
                             <span class="text-danger">WARNING:</span> If you book a standard OR business ticket, you will not be refunded for any 
@@ -66,9 +110,11 @@
                     </div>
                 </div>
             </div>
+            <div class="col-4"></div>
         </div>
         
         <%      
+                    }
                 } else {
         %>
         <div class="text-center">
