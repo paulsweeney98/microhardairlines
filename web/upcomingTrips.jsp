@@ -59,19 +59,19 @@
                                 if (user_flights.get(0).getSeat() == null) {
                                     if (user_flights.get(0).getTravelClass().equals("standard")) {
                             %>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <a href="seatSelectionStandard.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
                             </div>
                             <%
                                     } else if (user_flights.get(0).getTravelClass().equals("business")) {
                             %>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <a href="seatSelectionBusiness.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
                             </div>
                             <%
                                     } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
                             %>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <a href="seatSelectionFirstClass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
                             </div>
                             <%
@@ -82,14 +82,20 @@
                             <%
                                 if (user_flights.get(0).getQueue().equals("non-priority")) {
                             %>
-                            <div class="col-4">
-                                <a href="#" class="btn btn-success">Queue</a>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-success">Priority Boarding</a>
                             </div>
                             <%
                                 }
                             %>
-                            <div class="col-4">
-                                <a href="#" class="btn btn-success">Baggage</a>
+                        </div></br>
+                            
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <a href="Servlet?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success">Cancel Flight</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#" class="btn btn-success">Checked Baggage</a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +117,7 @@
                 </div>
             </div>
             <div class="col-4"></div>
-        </div>
+        </div></br>
         
         <%      
                     }
