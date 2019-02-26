@@ -92,7 +92,7 @@
                             
                         <div class="row text-center">
                             <div class="col-6">
-                                <a href="Servlet?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success">Cancel Flight</a>
+                                <a href="cancelFlight.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-danger">Cancel Flight</a>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="btn btn-success">Checked Baggage</a>
