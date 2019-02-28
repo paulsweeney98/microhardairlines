@@ -44,7 +44,7 @@
 
 <%
     NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(clientLocale);
-    DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, clientLocale);
+    DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM, clientLocale);
 %>
 
 <html lang="en">

@@ -593,13 +593,13 @@ public class FlightDao extends Dao implements FlightDaoInterface {
      * Update the seats available on the flight based on the seatType and the 
      * value to change it by.
      * 
-     * @param flight The flight to be updated.
+     * @param flightId The id of the flight to be updated.
      * @param seatType The type of seat (standard, business or first class).
      * @param changeBy The value to change the seats available by.
      * @return An int of the number of rows updated.
      */
     @Override
-    public int updateSeats(Flight flight, String seatType, int changeBy) {
+    public int updateSeats(int flightId, String seatType, int changeBy) {
         // DB interaction
         Connection con = null;
         PreparedStatement ps = null;
@@ -618,7 +618,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             ps.setString(1, seatType);
             ps.setString(2, seatType);
             ps.setInt(3, changeBy);
-            ps.setInt(4, flight.getId());
+            ps.setInt(4, flightId);
             // Execute SQL
             rowsUpdated = ps.executeUpdate();
 

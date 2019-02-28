@@ -85,11 +85,11 @@ public interface FlightDaoInterface {
      * Update the seats available on the flight based on the seatType and the 
      * value to change it by.
      * 
-     * @param flight The flight to be updated.
+     * @param flightId The id of the flight to be updated.
      * @param seatType The type of seat (standard, business or first class).
      * @param changeBy The value to change the seats available by.
      * @return An int of the number of rows updated.
      */
-    public int updateSeats(Flight flight, String seatType, int changeBy);
+    public int updateSeats(int flightId, String seatType, int changeBy);
     
 }

@@ -443,4 +443,50 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
         // Return results
         return user_flights;
     }
+
+    /**
+     * Removes a User_Flight by passing its id.
+     * 
+     * @param id The id of the User_Flight.
+     * @return An int containing the rows affected.
+     */
+    @Override
+    public int removeUser_Flight(int id) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        int rowsAffected = 0;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "DELETE FROM user_flight "
+                    + "WHERE id = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, id);
+            // Execute SQL
+            rowsAffected = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the user_flight table in the removeUser_Flight() method\n"
+                    + ex.getMessage());
+            rowsAffected = 0;
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        return rowsAffected;
+    }
 }
