@@ -33,6 +33,10 @@ public class CommandFactory {
                     // Do all logic for logging out user
                     c = new LogoutCommand();
                     break;
+                case "addSecurityQuestions":
+                    // Do all logic for adding security questions
+                    c = new AddSecurityQuestionsCommand();
+                    break;
                 case "changeLanguage":
                     // Do all logic for chaging the language
                     c = new ChangeLanguageCommand();

@@ -59,7 +59,7 @@ public class RegisterCommand implements Command{
                                 HttpSession session = request.getSession();
                                 session.setAttribute("loggedInUser", u1);
 
-                                forwardToJsp = "index.jsp";
+                                forwardToJsp = "securityQuestions.jsp";
                     }else{
                         // The user couldn't be added to the database
                         // Send the user to the error page and inform them of this
