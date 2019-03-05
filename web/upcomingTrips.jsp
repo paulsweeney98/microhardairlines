@@ -95,7 +95,7 @@
                                 <a href="cancelFlight.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-danger">Cancel Flight</a>
                             </div>
                             <div class="col-6">
-                                <a href="#" class="btn btn-success">Checked Baggage</a>
+                                <a href="addCheckedBaggage.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>&travelClass=<%=user_flights.get(0).getTravelClass()%>" class="btn btn-success">Checked Baggage</a>
                             </div>
                         </div>
                     </div>

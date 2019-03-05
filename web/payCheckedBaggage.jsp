@@ -46,45 +46,22 @@
                         }
                     }
 
-                    if (session.getAttribute("returnFlight") != null) {
-                        User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
-
-                        // Get return checked baggage prices
-                        double returnCheckedBaggagePrice = 0;
-                        if (session.getAttribute("returnFlightCheckedBaggage0") != null) {
-                            for (int i = 0; i < numPassengers; i++) {
-                                Checked_baggage checkedBaggage = (Checked_baggage) session.getAttribute("returnFlightCheckedBaggage" + i);
-                                returnCheckedBaggagePrice = returnCheckedBaggagePrice + checkedBaggage.getPricePaid();
-                            }
-                        }
-        %>
-
-        <h3>
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
-        </h3>
-        <hr></br></br>
-
-        <%
-        } else {
         %>
 
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right">Total: <%=currencyFormatter.format(departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
         <%
-            }
 
             if (numPassengers > 0) {
 
         %>
 
         <div class="row text-center">
-        <%
-                    for (int i = 0; i < numPassengers; i++) {
+            <%            for (int i = 0; i < numPassengers; i++) {
                     if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null) {
                         departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
                         Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
@@ -137,8 +114,8 @@
                         </div>
                     </div>
 
-                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("paymentDetails_bookFlight")%></button>
-                    <input type="hidden" name ="action" value="bookFlight" />
+                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("paymentDetails_payCheckedBaggage")%></button>
+                    <input type="hidden" name ="action" value="payCheckedBaggage" />
                 </form>
             </div>
             <div class="col-3"></div>
@@ -156,7 +133,7 @@
         %>
 
         <div class="text-center">
-            <h3>You must log in or register to complete the booking</h3></br>
+            <h3>You must log in or register to add checked baggage to your flight</h3></br>
             <a href="login.jsp" class="btn btn-success">Login</a>&nbsp;&nbsp;
             <a href="register.jsp" class="btn btn-success">Register</a>
         </div>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pauls
  */
-public class StoreCheckedBaggageCommand implements Command {
+public class AddCheckedBaggageCommand implements Command {
     
     //@Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -97,7 +97,7 @@ public class StoreCheckedBaggageCommand implements Command {
                         
                     }
                     
-                    forwardToJsp = "paymentDetails.jsp";
+                    forwardToJsp = "payCheckedBaggage.jsp";
                     
                 } else if (session.getAttribute("departureFlight0") != null) {
                     
@@ -145,7 +145,7 @@ public class StoreCheckedBaggageCommand implements Command {
                         
                     }
                     
-                    forwardToJsp = "paymentDetails.jsp";
+                    forwardToJsp = "payCheckedBaggage.jsp";
                     
                 } else {
                     String errorMessage = "Flights not found";

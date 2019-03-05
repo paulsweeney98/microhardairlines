@@ -61,6 +61,18 @@ public class CommandFactory {
                     // Do all logic to select seat
                     c = new SelectSeatCommand();
                     break;
+                case "addCheckedBaggage":
+                    // Do all logic to add checked baggage
+                    c = new AddCheckedBaggageCommand();
+                    break;
+                case "payCheckedBaggage":
+                    // Do all logic to pay for checked baggage
+                    c = new PayCheckedBaggageCommand();
+                    break;
+                case "addPriorityBoarding":
+                    // Do all logic to add priority boarding
+                    c = new AddPriorityBoardingCommand();
+                    break;
                 case "cancelFlight":
                     // Do all logic cancel a flight
                     c = new CancelFlightCommand();
