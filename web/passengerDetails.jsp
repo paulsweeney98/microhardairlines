@@ -147,7 +147,7 @@
                         for (int i = 0; i < numPassengers; i++) {
                     %>
                     </br></br>
-                    <h3 class=""><%=dataBundle.getString("passengerDetails_passenger")%> <%=i%></h3>
+                    <h3 class=""><%=dataBundle.getString("passengerDetails_passenger")%> <%=i+1%></h3>
                     <div class="form-row">
                       <div class="col">
                         <label for="title"><%=dataBundle.getString("passengerDetails_title")%></label>

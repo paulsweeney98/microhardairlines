@@ -28,19 +28,17 @@ public class Validation {
      * @return A boolean to show if the date is valid or not.
      */
     public boolean checkDate(Date date) {
-        int day = date.getDay();
-        day = day - 2;
-        int month = date.getMonth();
-        month = month + 1;
-        int year = date.getYear();
-        year = year + 1800;
+        LocalDate dateLD = date.toLocalDate();
+        int day = dateLD.getDayOfMonth();
+        int month = dateLD.getMonthValue();
+        int year = dateLD.getYear();
         
         boolean appropriateResponse = true;
         boolean leapYear = false;
         if (((2020 - year) % 4) == 0) {
             leapYear = true;
         }
-        if ((year < 1800) || (year > 2018)) {
+        if ((year < 1900) || (year > 2100)) {
             appropriateResponse = false;
         }
         if ((month < 1) || (month > 12)) {

@@ -599,7 +599,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
      * @return An int of the number of rows updated.
      */
     @Override
-    public int updateSeats(int flightId, String seatType, int changeBy) {
+    public int updateStandardSeats(int flightId, String seatType, int changeBy) {
         // DB interaction
         Connection con = null;
         PreparedStatement ps = null;
@@ -610,20 +610,102 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             con = getConnection();
             // Query
             String query = "UPDATE flight "
-                    + "SET ? = ? + (?) "
+                    + "SET standardSeatsAvailable = standardSeatsAvailable + (?) "
                     + "WHERE id = ?";
             // Compile into SQL
             ps = con.prepareStatement(query);
 
-            ps.setString(1, seatType);
-            ps.setString(2, seatType);
-            ps.setInt(3, changeBy);
-            ps.setInt(4, flightId);
+            ps.setInt(1, changeBy);
+            ps.setInt(2, flightId);
             // Execute SQL
             rowsUpdated = ps.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("An exception occurred while querying the flight table in the updateSeats() method\n"
+            System.out.println("An exception occurred while querying the flight table in the updateStandardSeats() method\n"
+                    + ex.getMessage());
+            rowsUpdated = -1;
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        return rowsUpdated;
+    }
+
+    @Override
+    public int updateBusinessSeats(int flightId, String seatType, int changeBy) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        int rowsUpdated = -1;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "UPDATE flight "
+                    + "SET businessSeatsAvailable = businessSeatsAvailable + (?) "
+                    + "WHERE id = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, changeBy);
+            ps.setInt(2, flightId);
+            // Execute SQL
+            rowsUpdated = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the updateBusinessSeats() method\n"
+                    + ex.getMessage());
+            rowsUpdated = -1;
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        return rowsUpdated;
+    }
+
+    @Override
+    public int updateFirstClassSeats(int flightId, String seatType, int changeBy) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        int rowsUpdated = -1;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "UPDATE flight "
+                    + "SET firstClassSeatsAvailable = firstClassSeatsAvailable + (?) "
+                    + "WHERE id = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, changeBy);
+            ps.setInt(2, flightId);
+            // Execute SQL
+            rowsUpdated = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the updateFirstClassSeats() method\n"
                     + ex.getMessage());
             rowsUpdated = -1;
         } // Close open components

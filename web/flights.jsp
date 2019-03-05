@@ -286,6 +286,8 @@
         </div></br>
         <% } } %>
         <%
+                int numPassengersInt = v.convertStringToInt(numPassengers);
+            
                 if (flights != null && !flights.isEmpty()) {
                     for (Flight f: flights) {
                         String departureTime = v.changeMinutesToHours(f.getDepartureTime());
@@ -348,43 +350,157 @@
                             if (bookingStage.equals("one_way")) {
                         %>
                         <div class="row text-center">
+                            <%
+                                if (f.getStandardSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a type="submit" class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a type="submit" class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if (f.getBusinessSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if (f.getFirstClassSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
                         </div>
                         <%
                             } else if (bookingStage.equals("return1")) {
                         %>
                         <div class="row text-center">
+                            <%
+                                if (f.getStandardSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a type="submit" class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a type="submit" class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if (f.getBusinessSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if (f.getFirstClassSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
                         </div>
                         <%
                             } else if (bookingStage.equals("return2")) {
                         %>
                         <div class="row text-center">
+                            <%
+                                if (f.getStandardSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a type="submit" class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=standard&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a type="submit" class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=standard&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if (f.getBusinessSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=business&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=business&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
+                            
+                            <%
+                                if (f.getFirstClassSeatsAvailable() >= numPassengersInt) {
+                            %>
                             <div class="col-4">
                                 <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=firstClass&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
                             </div>
+                            <%
+                                } else {
+                            %>
+                            <div class="col-4">
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=firstClass&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                            </div>
+                            <%
+                                }
+                            %>
                         </div>
                         <%
                             }
