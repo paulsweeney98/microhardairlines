@@ -24,6 +24,7 @@
     
         <script>
             $(document).ready(function(){
+                // Tabs
                 $("#one_way_content").hide();
                 
                 $("#return_trip").click(function(){
@@ -41,9 +42,20 @@
                   document.getElementById("return_trip").className = "nav-link";
                 });
                 
+                // Flights dropdown
                 $("input").click(function(){
                     $(this).next().show();
                     $(this).next().hide();
+                });
+                
+                // Set min for return date
+                $("#returnDate").click(function(){
+                    document.getElementById("returnDate").min = document.getElementById("departureDate").value;
+                });
+                
+                 // Set max for departure date
+                $("#departureDate").click(function(){
+                    document.getElementById("departureDate").max = document.getElementById("returnDate").value;
                 });
             });
         </script>
@@ -129,7 +141,6 @@
                                         if (departureAirports != null && !departureAirports.isEmpty()){
                                             for (Flight f: departureAirports){
                                     %>
-                                        <!--Problem: Only want all of the departure airports, we're getting all of the flights--> 
                                         <option value="<%=f.getDepartureAirport()%>"><%=f.getDepartureAirportAbbreviation()%></option>
                                     <%
                                             }
@@ -150,7 +161,6 @@
                                         if (arrivalAirports != null && !arrivalAirports.isEmpty()){
                                             for (Flight f: arrivalAirports){
                                     %>
-                                        <!--Problem: Only want all of the departure airports, we're getting all of the flights--> 
                                         <option value="<%=f.getArrivalAirport()%>"><%=f.getArrivalAirportAbbreviation()%></option>
                                     <%
                                             }
@@ -162,7 +172,7 @@
 
                                 </br></br>
                                 <label><%=dataBundle.getString("index_returnDate")%></label>
-                                <input name="returnDate" required type="date" min="document.getElementById('departureDate').value" />
+                                <input name="returnDate" onfocusin="updateDate()" id="returnDate" required type="date" min="" />
                             </div>
                         </div>
                         
@@ -191,7 +201,6 @@
                                         if (departureAirports != null && !departureAirports.isEmpty()){
                                             for (Flight f: departureAirports){
                                     %>
-                                        <!--Problem: Only want all of the departure airports, we're getting all of the flights--> 
                                         <option value="<%=f.getDepartureAirport()%>"><%=f.getDepartureAirportAbbreviation()%></option>
                                     <%
                                             }
@@ -211,7 +220,6 @@
                                         if (arrivalAirports != null && !arrivalAirports.isEmpty()){
                                             for (Flight f: arrivalAirports){
                                     %>
-                                        <!--Problem: Only want all of the departure airports, we're getting all of the flights--> 
                                         <option value="<%=f.getArrivalAirport()%>"><%=f.getArrivalAirportAbbreviation()%></option>
                                     <%
                                             }

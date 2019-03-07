@@ -63,7 +63,13 @@ public class AddSecurityQuestionsCommand implements Command {
                     usqDao.addUser_Security_Question(usq);
                 }
 
-                forwardToJsp = "index.jsp";
+                if (loggedInUser.getPrivileges() == 1) {
+                    forwardToJsp = "index.jsp";
+                } else if (loggedInUser.getPrivileges() == 2) {
+                    forwardToJsp = "adminIndex.jsp";
+                } else {
+                    forwardToJsp = "error.jsp";
+                }
             } else {
                 // One or more fields were missing
                 // Send the user to the error page and inform them of this

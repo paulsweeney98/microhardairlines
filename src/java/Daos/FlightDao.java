@@ -59,6 +59,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // While loop through rows returned from query
             while (rs.next()) {
                 int id = rs.getInt("id");
+                int planeInventoryId = rs.getInt("planeInventoryId");
                 String flightNumber = rs.getString("flightNumber");
                 double price = rs.getDouble("price");
                 int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
@@ -75,7 +76,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
                 String departureTerminal = rs.getString("departureTerminal");
                 String arrivalTerminal = rs.getString("arrivalTerminal");
 
-                Flight flight = new Flight(id, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+                Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
                 // Store each book in the ArrayList
                 flights.add(flight);
@@ -135,6 +136,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // While loop through rows returned from query
             while (rs.next()) {
                 int id = -1;
+                int planeInverntoryId = -1;
                 String flightNumber = "";
                 double price = -1;
                 int standardSeatsAvailable = -1;
@@ -151,7 +153,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
                 String departureTerminal = "";
                 String arrivalTerminal = "";
 
-                Flight flight = new Flight(id, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+                Flight flight = new Flight(id, planeInverntoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
                 // Store each book in the ArrayList
                 flights.add(flight);
@@ -211,6 +213,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // While loop through rows returned from query
             while (rs.next()) {
                 int id = -1;
+                int planeInventoryId = -1;
                 String flightNumber = "";
                 double price = -1;
                 int standardSeatsAvailable = -1;
@@ -227,7 +230,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
                 String departureTerminal = "";
                 String arrivalTerminal = "";
 
-                Flight flight = new Flight(id, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+                Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
                 // Store each book in the ArrayList
                 flights.add(flight);
@@ -296,6 +299,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // While loop through rows returned from query
             while (rs.next()) {
                 int id = rs.getInt("id");
+                int planeInventoryId = rs.getInt("planeInventoryId");
                 String flightNumber = rs.getString("flightNumber");
                 double price = rs.getDouble("price");
                 int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
@@ -312,7 +316,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
                 String departureTerminal = rs.getString("departureTerminal");
                 String arrivalTerminal = rs.getString("arrivalTerminal");
 
-                Flight flight = new Flight(id, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+                Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
                 // Store each book in the ArrayList
                 flights.add(flight);
@@ -374,6 +378,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // While loop through rows returned from query
             while (rs.next()) {
                 id = rs.getInt("id");
+                int planeInventoryId = rs.getInt("planeInventoryId");
                 String flightNumber = rs.getString("flightNumber");
                 double price = rs.getDouble("price");
                 int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
@@ -390,7 +395,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
                 String departureTerminal = rs.getString("departureTerminal");
                 String arrivalTerminal = rs.getString("arrivalTerminal");
 
-                flight = new Flight(id, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+                flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
             }
         } catch (SQLException ex) {
             System.out.println("An exception occurred while querying the flight table in the getFlightById() method\n"
@@ -487,26 +492,27 @@ public class FlightDao extends Dao implements FlightDaoInterface {
         try {
             con = getConnection();
             // Query
-            String query = "INSERT INTO flight (flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO flight (planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             // Compile into SQL
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setString(1, flight.getFlightNumber());
-            ps.setDouble(2, flight.getPrice());
-            ps.setInt(3, flight.getStandardSeatsAvailable());
-            ps.setInt(4, flight.getBusinessSeatsAvailable());
-            ps.setInt(5, flight.getFirstClassSeatsAvailable());
-            ps.setDate(6, flight.getDate());
-            ps.setInt(7, flight.getDepartureTime());
-            ps.setInt(8, flight.getArrivalTime());
-            ps.setInt(5, flight.getDuration());
-            ps.setString(9, flight.getDepartureAirport());
-            ps.setString(10, flight.getDepartureAirportAbbreviation());
-            ps.setString(11, flight.getArrivalAirport());
-            ps.setString(12, flight.getArrivalAirportAbbreviation());
-            ps.setString(13, flight.getDepartureTerminal());
-            ps.setString(14, flight.getArrivalTerminal());
+            ps.setInt(1, flight.getPlaneInventoryId());
+            ps.setString(2, flight.getFlightNumber());
+            ps.setDouble(3, flight.getPrice());
+            ps.setInt(4, flight.getStandardSeatsAvailable());
+            ps.setInt(5, flight.getBusinessSeatsAvailable());
+            ps.setInt(6, flight.getFirstClassSeatsAvailable());
+            ps.setDate(7, flight.getDate());
+            ps.setInt(8, flight.getDepartureTime());
+            ps.setInt(9, flight.getArrivalTime());
+            ps.setInt(10, flight.getDuration());
+            ps.setString(11, flight.getDepartureAirport());
+            ps.setString(12, flight.getDepartureAirportAbbreviation());
+            ps.setString(13, flight.getArrivalAirport());
+            ps.setString(14, flight.getArrivalAirportAbbreviation());
+            ps.setString(15, flight.getDepartureTerminal());
+            ps.setString(16, flight.getArrivalTerminal());
             // Execute SQL
             ps.execute();
 
@@ -546,11 +552,11 @@ public class FlightDao extends Dao implements FlightDaoInterface {
     /**
      * Removes a <code>Flight</code> from the database.
      * 
-     * @param flight The <code>Flight</code> to be removed.
+     * @param id The id of the <code>Flight</code> to be removed.
      * @return An int of the number of rows affected.
      */
     @Override
-    public int removeFlight(Flight flight) {
+    public int removeFlight(int id) {
         // DB interaction
         Connection con = null;
         PreparedStatement ps = null;
@@ -565,7 +571,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // Compile into SQL
             ps = con.prepareStatement(query);
 
-            ps.setInt(1, flight.getId());
+            ps.setInt(1, id);
             // Execute SQL
             rowsAffected = ps.executeUpdate();
 

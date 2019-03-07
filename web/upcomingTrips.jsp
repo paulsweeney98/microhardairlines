@@ -56,7 +56,15 @@
                     <div class="card card-body">
                         <div class="row text-center">
                             <%
-                                if (user_flights.get(0).getSeat() == null) {
+                                // For loop needed to check all passenger seats
+                                boolean allCheckedIn = true;
+                                for (User_Flight user_flight : user_flights) {
+                                    if (user_flight.getSeat() == null) {
+                                        allCheckedIn = false;
+                                    }
+                                }
+                                
+                                if (allCheckedIn == false) {
                                     if (user_flights.get(0).getTravelClass().equals("standard")) {
                             %>
                             <div class="col-6">

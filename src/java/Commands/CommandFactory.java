@@ -77,6 +77,14 @@ public class CommandFactory {
                     // Do all logic cancel a flight
                     c = new CancelFlightCommand();
                     break;
+                case "adminAddFlight":
+                    // Do all logic cancel a flight
+                    c = new AdminAddFlightCommand();
+                    break;
+                case "adminRemoveFlight":
+                    // Do all logic cancel a flight
+                    c = new AdminRemoveFlightCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();

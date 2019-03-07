@@ -16,6 +16,7 @@ import java.sql.Date;
  */
 public class Flight {
     private int id;
+    private int planeInventoryId;
     private String flightNumber;
     private double price;
     private int standardSeatsAvailable;
@@ -36,8 +37,9 @@ public class Flight {
         this.id = -1;
     }
     
-    public Flight(String flightNumber, double price, int standardSeatsAvailable, int businessSeatsAvailable, int firstClassSeatsAvailable, Date date, int departureTime, int arrivalTime, int duration, String departureAirport, String departureAirportAbbreviation, String arrivalAirport, String arrivalAirportAbbreviation, String departureTerminal, String arrivalTerminal) {
+    public Flight(int planeInventoryId, String flightNumber, double price, int standardSeatsAvailable, int businessSeatsAvailable, int firstClassSeatsAvailable, Date date, int departureTime, int arrivalTime, int duration, String departureAirport, String departureAirportAbbreviation, String arrivalAirport, String arrivalAirportAbbreviation, String departureTerminal, String arrivalTerminal) {
         this.id = -1;
+        this.planeInventoryId = planeInventoryId;
         this.flightNumber = flightNumber;
         this.price = price;
         this.standardSeatsAvailable = standardSeatsAvailable;
@@ -55,8 +57,9 @@ public class Flight {
         this.arrivalTerminal = arrivalTerminal;
     }
     
-    public Flight(int id, String flightNumber, double price, int standardSeatsAvailable, int businessSeatsAvailable, int firstClassSeatsAvailable, Date date, int departureTime, int arrivalTime, int duration, String departureAirport, String departureAirportAbbreviation, String arrivalAirport, String arrivalAirportAbbreviation, String departureTerminal, String arrivalTerminal) {
+    public Flight(int id, int planeInventoryId, String flightNumber, double price, int standardSeatsAvailable, int businessSeatsAvailable, int firstClassSeatsAvailable, Date date, int departureTime, int arrivalTime, int duration, String departureAirport, String departureAirportAbbreviation, String arrivalAirport, String arrivalAirportAbbreviation, String departureTerminal, String arrivalTerminal) {
         this.id = id;
+        this.planeInventoryId = planeInventoryId;
         this.flightNumber = flightNumber;
         this.price = price;
         this.standardSeatsAvailable = standardSeatsAvailable;
@@ -80,6 +83,14 @@ public class Flight {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getPlaneInventoryId() {
+        return planeInventoryId;
+    }
+
+    public void setPlaneInventoryId(int planeInventoryId) {
+        this.planeInventoryId = planeInventoryId;
     }
 
     public String getFlightNumber() {
@@ -204,13 +215,13 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight{" + "id=" + id + ", flightNumber=" + flightNumber + ", price=" + price + ", standardSeatsAvailable=" + standardSeatsAvailable + ", businessSeatsAvailable=" + businessSeatsAvailable + ", firstClassSeatsAvailable=" + firstClassSeatsAvailable + ", date=" + date + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", duration=" + duration + ", departureAirport=" + departureAirport + ", departureAirportAbbreviation=" + departureAirportAbbreviation + ", arrivalAirport=" + arrivalAirport + ", arrivalAirportAbbreviation=" + arrivalAirportAbbreviation + ", departureTerminal=" + departureTerminal + ", arrivalTerminal=" + arrivalTerminal + '}';
+        return "Flight{" + "id=" + id + ", planeInventoryId=" + planeInventoryId + ", flightNumber=" + flightNumber + ", price=" + price + ", standardSeatsAvailable=" + standardSeatsAvailable + ", businessSeatsAvailable=" + businessSeatsAvailable + ", firstClassSeatsAvailable=" + firstClassSeatsAvailable + ", date=" + date + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", duration=" + duration + ", departureAirport=" + departureAirport + ", departureAirportAbbreviation=" + departureAirportAbbreviation + ", arrivalAirport=" + arrivalAirport + ", arrivalAirportAbbreviation=" + arrivalAirportAbbreviation + ", departureTerminal=" + departureTerminal + ", arrivalTerminal=" + arrivalTerminal + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + this.id;
+        hash = 37 * hash + this.id;
         return hash;
     }
 

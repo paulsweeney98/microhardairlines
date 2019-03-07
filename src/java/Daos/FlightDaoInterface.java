@@ -76,10 +76,10 @@ public interface FlightDaoInterface {
     /**
      * Removes a <code>Flight</code> from the database.
      * 
-     * @param flight The <code>Flight</code> to be removed.
+     * @param id The id of the <code>Flight</code> to be removed.
      * @return An int of the number of rows affected.
      */
-    public int removeFlight(Flight flight);
+    public int removeFlight(int id);
     
     /**
      * Update the standard seats available on the flight based on the seatType and the 

@@ -49,7 +49,13 @@ public class LoginCommand implements Command{
                 // if it's not, then they haven't)
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInUser", u);
-                forwardToJsp = "index.jsp";
+                if (u.getPrivileges() == 1) {
+                    forwardToJsp = "index.jsp";
+                } else if (u.getPrivileges() == 2) {
+                    forwardToJsp = "adminIndex.jsp";
+                } else {
+                    forwardToJsp = "error.jsp";
+                }
             }
             else{
                 // The username and/or password didn't match someone in the database

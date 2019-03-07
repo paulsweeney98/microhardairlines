@@ -69,9 +69,23 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <%
+            User loggedInUser = (User)session.getAttribute("loggedInUser");
+            
+            if (loggedInUser != null && loggedInUser.getPrivileges() == 2) {
+        %>
+        <a class="navbar-brand" href="adminIndex.jsp">
+            <h1 class="text-center text-light"><img src="images/logo1.png" alt="Microhard Airlines" width="35">&nbsp;&nbsp;<%=dataBundle.getString("header_microhardAirlines")%></h1>
+        </a>
+        <%
+            } else {
+        %>
         <a class="navbar-brand" href="index.jsp">
             <h1 class="text-center text-light"><img src="images/logo1.png" alt="Microhard Airlines" width="35">&nbsp;&nbsp;<%=dataBundle.getString("header_microhardAirlines")%></h1>
         </a>
+        <%
+            }
+        %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -80,7 +94,6 @@
             <a class="nav-item nav-link active text-light" href="index.jsp"><%=dataBundle.getString("header_searchFlights")%></a>
             <a class="nav-item nav-link text-light" href="#"><%=dataBundle.getString("header_manageTrips")%></a>
             <%
-                User loggedInUser = (User)session.getAttribute("loggedInUser");
                 if(loggedInUser != null){
             %>
             <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%>
