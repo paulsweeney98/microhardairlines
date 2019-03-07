@@ -48,15 +48,14 @@ public class Checked_baggageDao extends Dao implements Checked_baggageDaoInterfa
         try {
             con = getConnection();
             // Query
-            String query = "INSERT INTO checked_baggage (weight, pricePaid, userId, flightId) "
-                    + "VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO checked_baggage (weight, pricePaid, user_flightId) "
+                    + "VALUES (?, ?, ?)";
             // Compile into SQL
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ps.setDouble(1, checked_baggage.getWeight());
             ps.setDouble(2, checked_baggage.getPricePaid());
-            ps.setInt(3, checked_baggage.getUserId());
-            ps.setInt(4, checked_baggage.getFlightId());
+            ps.setInt(3, checked_baggage.getUser_flightId());
             // Execute SQL
             ps.execute();
 
@@ -94,32 +93,28 @@ public class Checked_baggageDao extends Dao implements Checked_baggageDaoInterfa
     }
 
     /**
-     * Gets all checked_baggage by userId and flightId.
+     * Gets all checked_baggage by user_flightId.
      * 
-     * @param userId The id the user the checked_baggage belongs to.
-     * @param flightId The id of the flight the checked_baggage will be on.
+     * @param user_flightId The id of the user_flight of the checked_baggage.
      * @return An ArrayList of checked_baggage.
      */
     @Override
-    public ArrayList<Checked_baggage> getChecked_baggageByUserIdAndFlightId(int userId, int flightId) {
+    public ArrayList<Checked_baggage> getChecked_baggageByUser_flightId(int user_flightId) {
         // DB interaction
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        // ArrayList to store results
-        ArrayList<Checked_baggage> checked_baggages = new ArrayList();
-
+        ArrayList<Checked_baggage> checked_baggage = new ArrayList<Checked_baggage>();
+        
         try {
             con = getConnection();
             // Query
             String query = "SELECT * FROM checked_baggage "
-                        + "WHERE userId = ? "
-                        + "AND flightId = ? ";
+                        + "WHERE user_flightId = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);
-            ps.setInt(1, userId);
-            ps.setInt(2, flightId);
+            ps.setInt(1, user_flightId);
             // Execute SQL
             rs = ps.executeQuery();
 
@@ -128,16 +123,14 @@ public class Checked_baggageDao extends Dao implements Checked_baggageDaoInterfa
                 int id = rs.getInt("id");
                 double weight = rs.getDouble("weight");
                 double pricePaid = rs.getDouble("pricePaid");
-                userId = rs.getInt("userId");
-                flightId = rs.getInt("flightId");
+                user_flightId = rs.getInt("user_flightId");
 
-                Checked_baggage cb = new Checked_baggage(id, weight, userId, flightId);
-
-                // Store each book in the ArrayList
-                checked_baggages.add(cb);
+                Checked_baggage cb = new Checked_baggage(id, weight, pricePaid, user_flightId);
+                
+                checked_baggage.add(cb);
             }
         } catch (SQLException ex) {
-            System.out.println("An exception occurred while querying the checked_baggage table in the getChecked_baggageByUserIdAndFlightId() method\n"
+            System.out.println("An exception occurred while querying the checked_baggage table in the getChecked_baggageByUser_flightId() method\n"
                     + ex.getMessage());
         } // Close open components
         finally {
@@ -160,7 +153,7 @@ public class Checked_baggageDao extends Dao implements Checked_baggageDaoInterfa
             }
         }
         // Return results
-        return checked_baggages;
+        return checked_baggage;
     }
 
     /**

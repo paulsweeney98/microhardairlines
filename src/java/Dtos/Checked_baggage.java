@@ -13,27 +13,24 @@ public class Checked_baggage {
     private int id;
     private double weight;
     private double pricePaid;
-    private int userId;
-    private int flightId;
+    private int user_flightId;
 
     public Checked_baggage() {
         this.id = -1;
     }
-
-    public Checked_baggage(double weight, double pricePaid, int userId, int flightId) {
+    
+    public Checked_baggage(double weight, double pricePaid, int user_flightId) {
         this.id = -1;
         this.weight = weight;
         this.pricePaid = pricePaid;
-        this.userId = userId;
-        this.flightId = flightId;
+        this.user_flightId = user_flightId;
     }
     
-    public Checked_baggage(int id, double weight, double pricePaid, int userId, int flightId) {
+    public Checked_baggage(int id, double weight, double pricePaid, int user_flightId) {
         this.id = id;
         this.weight = weight;
         this.pricePaid = pricePaid;
-        this.userId = userId;
-        this.flightId = flightId;
+        this.user_flightId = user_flightId;
     }
 
     public int getId() {
@@ -60,31 +57,23 @@ public class Checked_baggage {
         this.pricePaid = pricePaid;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_flightId() {
+        return user_flightId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getFlightId() {
-        return flightId;
-    }
-
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
+    public void setUser_flightId(int user_flightId) {
+        this.user_flightId = user_flightId;
     }
 
     @Override
     public String toString() {
-        return "Checked_baggage{" + "id=" + id + ", weight=" + weight + ", pricePaid=" + pricePaid + ", userId=" + userId + ", flightId=" + flightId + '}';
+        return "Checked_baggage{" + "id=" + id + ", weight=" + weight + ", pricePaid=" + pricePaid + ", user_flightId=" + user_flightId + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + this.id;
+        hash = 13 * hash + this.id;
         return hash;
     }
 

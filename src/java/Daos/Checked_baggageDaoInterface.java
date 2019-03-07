@@ -24,13 +24,12 @@ public interface Checked_baggageDaoInterface {
     public int addChecked_baggage(Checked_baggage checked_baggage);
     
     /**
-     * Gets all checked_baggage by userId and flightId.
+     * Gets all checked_baggage by user_flightId.
      * 
-     * @param userId The id the user the checked_baggage belongs to.
-     * @param flightId The id of the flight the checked_baggage will be on.
+     * @param user_flightId The id of the user_flight of the checked_baggage.
      * @return An ArrayList of checked_baggage.
      */
-    public ArrayList<Checked_baggage> getChecked_baggageByUserIdAndFlightId(int userId, int flightId);
+    public ArrayList<Checked_baggage> getChecked_baggageByUser_flightId(int user_flightId);
     
     /**
      * Removes a check_baggage item by its id.

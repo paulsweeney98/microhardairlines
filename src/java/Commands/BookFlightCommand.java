@@ -121,12 +121,17 @@ public class BookFlightCommand implements Command {
                                         newDepartureChecked_baggageId = 1;
                                         newReturnChecked_baggageId = 1;
                                     } else {
-                                        // Set the userId incase it wasn't set before
-                                        departureFlightCheckedBaggage.setUserId(loggedInUser.getUserId());
-                                        returnFlightCheckedBaggage.setUserId(loggedInUser.getUserId());
-
-                                        newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
-                                        newReturnChecked_baggageId = cbDao.addChecked_baggage(returnFlightCheckedBaggage);
+                                        if ((newDepartureUser_FlightId > -1) && (newReturnUser_FlightId > -1)) {
+                                            // Adding the user_flight to checked_baggage
+                                            departureFlightCheckedBaggage.setUser_flightId(newDepartureUser_FlightId);
+                                            returnFlightCheckedBaggage.setUser_flightId(newReturnUser_FlightId);
+                                            
+                                            newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
+                                            newReturnChecked_baggageId = cbDao.addChecked_baggage(returnFlightCheckedBaggage);
+                                        } else {
+                                            newDepartureChecked_baggageId = -1;
+                                            newReturnChecked_baggageId = -1;
+                                        }
                                     }
 
                                     // Incase of failure
@@ -204,9 +209,14 @@ public class BookFlightCommand implements Command {
                                     if (departureFlightCheckedBaggage.getWeight() == 0) {
                                         newDepartureChecked_baggageId = 1;
                                     } else {
-                                        // Set the userId incase it wasn't set before
-                                        departureFlightCheckedBaggage.setUserId(loggedInUser.getUserId());
-                                        newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
+                                        if (newDepartureUser_FlightId > -1) {
+                                            // Adding the user_flight to checked_baggage
+                                            departureFlightCheckedBaggage.setUser_flightId(newDepartureUser_FlightId);
+                                            
+                                            newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
+                                        } else {
+                                            newDepartureChecked_baggageId = -1;
+                                        }
                                     }
 
                                     // Incase of failure

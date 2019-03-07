@@ -58,7 +58,7 @@
                 </br><p>You are about to cancel this flight, if you haven't booked a first class ticket then you will not be refunded.</p>
                 <div class='text-center'>
                     <a href='upcomingTrips.jsp' class='btn btn-success'>Go Back</a>
-                    <a href='Servlet?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
+                    <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
                 </div></br>
             </div>
             <div class="col-4"></div>
@@ -72,7 +72,7 @@
                 </br><p>You are about to cancel this flight, you will be refunded for your first class booking(s).</p>
                 <div class='text-center'>
                     <a href='upcomingTrips.jsp' class='btn btn-success'>Go Back</a>
-                    <a href='Servlet?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
+                    <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
                 </div></br>
             </div>
             <div class="col-4"></div>

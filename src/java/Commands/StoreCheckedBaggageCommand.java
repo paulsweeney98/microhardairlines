@@ -49,100 +49,48 @@ public class StoreCheckedBaggageCommand implements Command {
                 
                 if (session.getAttribute("departureFlight0") != null && session.getAttribute("returnFlight0") != null) {
                     
-                    if (loggedInUser != null) {
-                    
-                        for (int i = 0; i < numPassengers; i++) {
-                            double pricePaid = -1;
-                            if (Double.parseDouble(checkedBaggage.get(i)) == 0) {
-                                pricePaid = 0;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 15) {
-                                pricePaid = 20;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 20) {
-                                pricePaid = 25;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 25) {
-                                pricePaid = 30;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 40) {
-                                pricePaid = 65;
-                            }
-                            
-                            Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, loggedInUser.getUserId(), departureFlight.getFlightId());
-                            Checked_baggage returnFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, loggedInUser.getUserId(), departureFlight.getFlightId());
-
-                            session.setAttribute("departureFlightCheckedBaggage" + i, departureFlightCheckedBaggage);
-                            session.setAttribute("returnFlightCheckedBaggage" + i, returnFlightCheckedBaggage);
+                    for (int i = 0; i < numPassengers; i++) {
+                        double pricePaid = -1;
+                        if (Double.parseDouble(checkedBaggage.get(i)) == 0) {
+                            pricePaid = 0;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 15) {
+                            pricePaid = 20;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 20) {
+                            pricePaid = 25;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 25) {
+                            pricePaid = 30;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 40) {
+                            pricePaid = 65;
                         }
-                    
-                    } else {
-                        
-                        for (int i = 0; i < numPassengers; i++) {
-                            double pricePaid = -1;
-                            if (Double.parseDouble(checkedBaggage.get(i)) == 0) {
-                                pricePaid = 0;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 15) {
-                                pricePaid = 20;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 20) {
-                                pricePaid = 25;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 25) {
-                                pricePaid = 30;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 40) {
-                                pricePaid = 65;
-                            }
-                            
-                            Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, -1, departureFlight.getFlightId());
-                            Checked_baggage returnFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, -1, departureFlight.getFlightId());
 
-                            session.setAttribute("departureFlightCheckedBaggage" + i, departureFlightCheckedBaggage);
-                            session.setAttribute("returnFlightCheckedBaggage" + i, returnFlightCheckedBaggage);
-                        }
-                        
+                        Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, departureFlight.getId());
+                        Checked_baggage returnFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, departureFlight.getId());
+
+                        session.setAttribute("departureFlightCheckedBaggage" + i, departureFlightCheckedBaggage);
+                        session.setAttribute("returnFlightCheckedBaggage" + i, returnFlightCheckedBaggage);
                     }
                     
                     forwardToJsp = "paymentDetails.jsp";
                     
                 } else if (session.getAttribute("departureFlight0") != null) {
                     
-                    if (loggedInUser != null) {
-                    
-                        for (int i = 0; i < numPassengers; i++) {
-                            double pricePaid = -1;
-                            if (Double.parseDouble(checkedBaggage.get(i)) == 0) {
-                                pricePaid = 0;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 15) {
-                                pricePaid = 20;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 20) {
-                                pricePaid = 25;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 25) {
-                                pricePaid = 30;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 40) {
-                                pricePaid = 65;
-                            }
-                            
-                            Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, loggedInUser.getUserId(), departureFlight.getFlightId());
-                            
-                            session.setAttribute("departureFlightCheckedBaggage" + i, departureFlightCheckedBaggage);
+                    for (int i = 0; i < numPassengers; i++) {
+                        double pricePaid = -1;
+                        if (Double.parseDouble(checkedBaggage.get(i)) == 0) {
+                            pricePaid = 0;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 15) {
+                            pricePaid = 20;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 20) {
+                            pricePaid = 25;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 25) {
+                            pricePaid = 30;
+                        } else if (Double.parseDouble(checkedBaggage.get(i)) == 40) {
+                            pricePaid = 65;
                         }
-                    
-                    } else {
-                        
-                        for (int i = 0; i < numPassengers; i++) {
-                            double pricePaid = -1;
-                            if (Double.parseDouble(checkedBaggage.get(i)) == 0) {
-                                pricePaid = 0;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 15) {
-                                pricePaid = 20;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 20) {
-                                pricePaid = 25;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 25) {
-                                pricePaid = 30;
-                            } else if (Double.parseDouble(checkedBaggage.get(i)) == 40) {
-                                pricePaid = 65;
-                            }
-                            
-                            Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, -1, departureFlight.getFlightId());
-                            
-                            session.setAttribute("departureFlightCheckedBaggage" + i, departureFlightCheckedBaggage);
-                        }
-                        
+
+                        Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, departureFlight.getId());
+
+                        session.setAttribute("departureFlightCheckedBaggage" + i, departureFlightCheckedBaggage);
                     }
                     
                     forwardToJsp = "paymentDetails.jsp";
