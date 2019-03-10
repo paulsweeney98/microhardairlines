@@ -489,4 +489,51 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
         }
         return rowsAffected;
     }
+
+    /**
+     * Adds Priority Boarding to a standard flight.
+     * 
+     * @param User_FlightId The id of the User_Flight
+     * @return An int containing the rows affected.
+     */
+    @Override
+    public int addPriorityBoarding(int id) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        
+        int rowsUpdated = -1;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "UPDATE user_flight "
+                    + "SET queue = 'priority' "
+                    + "WHERE id = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+
+            ps.setInt(1, id);
+            // Execute SQL
+            rowsUpdated = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the user_flight table in the addPriorityBoarding() method\n"
+                    + ex.getMessage());
+            rowsUpdated = -1;
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        return rowsUpdated;
+    }
 }

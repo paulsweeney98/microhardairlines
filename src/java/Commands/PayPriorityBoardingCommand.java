@@ -5,11 +5,10 @@
  */
 package Commands;
 
-import Daos.Checked_baggageDao;
 import Daos.Dao;
 import Daos.User_FlightDao;
-import Dtos.Checked_baggage;
 import Dtos.User;
+import Dtos.User_Flight;
 import Validation.Validation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,31 +19,30 @@ import javax.servlet.http.HttpSession;
  * 
  * The author of this class is Gerard Hoey
  */
-public class PayCheckedBaggageCommand implements Command {
+public class PayPriorityBoardingCommand implements Command {
 
     //@Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = null;
         Validation v = new Validation();
         User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
-        Checked_baggageDao cbDao = new Checked_baggageDao(Dao.getDatabaseName());
         HttpSession session = request.getSession();
-        
+
         String type = request.getParameter("type");
         String number = request.getParameter("number");
         String expiryMonth = request.getParameter("expiryMonth");
         String expiryYear = request.getParameter("expiryYear");
         String cvv = request.getParameter("cvv");
-        
+
         if (type != null && !type.equals("") && number != null && !number.equals("") && expiryMonth != null && !expiryMonth.equals("") && expiryYear != null && !expiryYear.equals("") && cvv != null && !cvv.equals("")) {
-            
+
             boolean validCard = v.checkCard(type, number, expiryMonth, expiryYear, cvv);
-            
+
             if (validCard) {
 
                 // Get number of passengers
                 int numPassengers = 0;
-                numPassengers = (Integer)session.getAttribute("numPassengers");
+                numPassengers = (Integer) session.getAttribute("numPassengers");
 
                 // Get the logged in user
                 User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -53,25 +51,22 @@ public class PayCheckedBaggageCommand implements Command {
 
                     if (loggedInUser != null) {
 
-                        boolean Checked_baggageAdded = true;
+                        int amountOfFails = 0;
 
-                        if (session.getAttribute("departureFlight0") != null && session.getAttribute("departureFlightCheckedBaggage0") != null) {
-
+                        if (session.getAttribute("departureFlight0") != null && session.getAttribute("departureFlightPriorityBoarding0") != null) {
+                            
                             for (int i = 0; i < numPassengers; i++) {
-                                // Adding Checked_baggage
-                                Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
-                                
-                                int newDepartureChecked_baggageId = -1;
-                                if (departureFlightCheckedBaggage.getWeight() == 0) {
-                                        newDepartureChecked_baggageId = 1;
-                                    } else {
-                                        newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
-                                    }
+                                // Adding Priority Boarding
+                                User_Flight priorityBoarding = (User_Flight) session.getAttribute("departureFlightPriorityBoarding" + i);
+
+                                int rowsUpdated = -1;
+                                if (priorityBoarding.getQueue().equals("priority")) {
+                                    rowsUpdated = ufDao.addPriorityBoarding(priorityBoarding.getId());
+                                }
 
                                 // Incase of failure
-                                if (newDepartureChecked_baggageId < 0) {
-                                    i = numPassengers;
-                                    Checked_baggageAdded = false;
+                                if (rowsUpdated < 0) {
+                                    amountOfFails++;
                                 }
                             }
 
@@ -81,8 +76,8 @@ public class PayCheckedBaggageCommand implements Command {
                             forwardToJsp = "error.jsp";
                         }
 
-                        if (Checked_baggageAdded == false) {
-                            String errorMessage = "Checked_baggage not added";
+                        if (amountOfFails == numPassengers) {
+                            String errorMessage = "Priority Boarding not added";
                             session.setAttribute("errorMessage", errorMessage);
                             forwardToJsp = "error.jsp";
                         } else {
@@ -98,24 +93,24 @@ public class PayCheckedBaggageCommand implements Command {
                     }
 
                 } else {
-                    String errorMessage = "Invalid details for the number of passengers, passenger details or checked baggage";
+                    String errorMessage = "Invalid details for the number of passengers or passenger details";
                     session.setAttribute("errorMessage", errorMessage);
                     forwardToJsp = "error.jsp";
                 }
-        
+
             } else {
                 String errorMessage = "Invalid card. Payment not processed.";
                 session.setAttribute("errorMessage", errorMessage);
                 forwardToJsp = "error.jsp";
             }
-            
+
         } else {
             String errorMessage = "Invalid card details passed";
             session.setAttribute("errorMessage", errorMessage);
             forwardToJsp = "error.jsp";
         }
-        
+
         return forwardToJsp;
     }
-    
+
 }

@@ -91,7 +91,7 @@
                                 if (user_flights.get(0).getQueue().equals("non-priority")) {
                             %>
                             <div class="col-6">
-                                <a href="#" class="btn btn-success">Priority Boarding</a>
+                                <a href="addPriorityBoarding.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success">Priority Boarding</a>
                             </div>
                             <%
                                 }

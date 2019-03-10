@@ -73,6 +73,10 @@ public class CommandFactory {
                     // Do all logic to add priority boarding
                     c = new AddPriorityBoardingCommand();
                     break;
+                case "payPriorityBoarding":
+                    // Do all logic to pay for priority boarding
+                    c = new PayPriorityBoardingCommand();
+                    break;
                 case "cancelFlight":
                     // Do all logic cancel a flight
                     c = new CancelFlightCommand();

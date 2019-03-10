@@ -1,7 +1,7 @@
 <%-- 
-    Document   : checkedBaggage
-    Created on : 07-Feb-2019, 14:59:37
-    Author     : D00191889
+    Document   : addCheckedBaggage
+    Created on : 25-Feb-2019, 17:24:20
+    Author     : D00194995
 --%>
 
 <%@page import="Daos.User_FlightDao"%>

@@ -1,10 +1,9 @@
 <%-- 
-    Document   : payCheckedBaggage
-    Created on : 25-Feb-2019, 12:15:47
+    Document   : payPriorityBoarding
+    Created on : 08-Mar-2019, 15:21:00
     Author     : Gerard
 --%>
 
-<%@page import="Dtos.Checked_baggage"%>
 <%@page import="Dtos.User_Flight"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Dtos.Flight"%>
@@ -37,12 +36,14 @@
 
                     Flight flight = fDao.getFlightById(departureFlightId);
 
-                    // Get departure checked baggage prices
-                    double departureCheckedBaggagePrice = 0;
-                    if (session.getAttribute("departureFlightCheckedBaggage0") != null) {
+                    // Get Priority Boarding price
+                    double priorityBoardingPrice = 0;
+                    if (session.getAttribute("departureFlightPriorityBoarding0") != null) {
                         for (int i = 0; i < numPassengers; i++) {
-                            Checked_baggage checkedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
-                            departureCheckedBaggagePrice = departureCheckedBaggagePrice + checkedBaggage.getPricePaid();
+                            User_Flight priorityBoarding = (User_Flight) session.getAttribute("departureFlightPriorityBoarding" + i);
+                            if (priorityBoarding.getQueue().equals("priority")) {
+                                priorityBoardingPrice += 50.00;
+                            }
                         }
                     }
 
@@ -50,7 +51,7 @@
 
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right">Total: <%=currencyFormatter.format(priorityBoardingPrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
@@ -62,17 +63,28 @@
 
         <div class="row text-center">
             <%            for (int i = 0; i < numPassengers; i++) {
-                    if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null) {
+                    if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightPriorityBoarding" + i) != null) {
                         departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
-                        Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
+                        User_Flight priorityBoarding = (User_Flight) session.getAttribute("departureFlightPriorityBoarding" + i);
+                        if (priorityBoarding.getQueue().equals("priority")) {
             %>
 
             <div class="col border border-primary rounded">
                 <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
-                </br><%=dataBundle.getString("paymentDetails_checkedBaggage")%>: <%=departureFlightCheckedBaggage.getWeight()%> kg
+                </br><%=dataBundle.getString("paymentDetails_priorityBoarding")%>: Yes
             </div>
 
             <%
+            } else {
+            %>
+
+            <div class="col border border-primary rounded">
+                <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
+                </br><%=dataBundle.getString("paymentDetails_priorityBoarding")%>: No
+            </div>
+
+            <%
+                        }
                     }
                 }
             %>
@@ -114,8 +126,8 @@
                         </div>
                     </div>
 
-                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("paymentDetails_payCheckedBaggage")%></button>
-                    <input type="hidden" name ="action" value="payCheckedBaggage" />
+                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("paymentDetails_payPriorityBoarding")%></button>
+                    <input type="hidden" name ="action" value="payPriorityBoarding" />
                 </form>
             </div>
             <div class="col-3"></div>
@@ -123,7 +135,7 @@
 
         <%
                 } else {
-                    out.println("Invalid number of passengers, passenger details or checked baggage");
+                    out.println("Invalid number of passengers or passenger details");
                 }
             } else {
                 out.println("No flight found.");
@@ -133,7 +145,7 @@
         %>
 
         <div class="text-center">
-            <h3>You must log in or register to add checked baggage to your flight</h3></br>
+            <h3>You must log in or register to add priority boarding to your flight</h3></br>
             <a href="login.jsp" class="btn btn-success">Login</a>&nbsp;&nbsp;
             <a href="register.jsp" class="btn btn-success">Register</a>
         </div>
