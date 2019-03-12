@@ -9,7 +9,7 @@ package Dtos;
  *
  * @author Dean Farrelly
  */
-public class User_Security_Question {
+public class User_Security_Question { 
     private int userId;
     private int securityQuestionId;
     private String answer;
