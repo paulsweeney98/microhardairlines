@@ -21,7 +21,7 @@ public class LogoutCommand implements Command{
         String forwardToJsp = "index.jsp";
         HttpSession session = request.getSession();
         // To log a user out, wipe their session clear
-        session.invalidate();
+        session.removeAttribute("loggedInUser");
         return forwardToJsp;
     }
     

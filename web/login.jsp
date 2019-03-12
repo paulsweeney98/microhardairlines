@@ -13,77 +13,66 @@
         <title><%=dataBundle.getString("login_title")%></title>
     </head>
     <body>
+        <%
+            String booking = request.getParameter("booking");
+            
+            String emailCookie = "";
+            String passwordCookie = "";
+
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null && cookies.length != 0) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("emailStored")) {
+                        emailCookie = cookie.getValue();
+                    }
+                }
+            }
+        %>
+        
+        <%
+            if (session.getAttribute("errorMessage") != null) {
+        %>
+        <h3 class="text-center text-danger"><%=session.getAttribute("errorMessage")%></h3>
+        <%
+            }
+        %>
+        
         <div class="row mt-3">
             <div class="col-3"></div>
             <div class="col-6">
-                <div id="demo" class="carousel slide" data-ride="carousel">
+                <div class="border border-primary">
+                    <form action="Servlet" method="post" class="px-4 py-3">
+                      <div class="form-group">
+                        <label for="exampleDropdownFormEmail1">Email address</label>
+                        <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" value="<%=emailCookie%>">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleDropdownFormPassword1">Password</label>
+                        <input name="password" type="password" class="form-control" id="exampleDropdownFormPassword1" value="<%=passwordCookie%>">
+                      </div>
+                      <div class="form-check">
+                        <input name="rememberMe" type="checkbox" class="form-check-input" id="dropdownCheck">
+                        <label class="form-check-label" for="dropdownCheck">
+                          Remember me
+                        </label>
+                      </div></br>
+                      <button type="submit" class="btn btn-primary">Login</button>
 
-                  <!-- Indicators -->
-                  <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                  </ul>
-
-                  <!-- The slideshow -->
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="images/books.jpg" alt="Books" width="1100">
-                    </div>
-                    <div class="carousel-item">
-                      <img src="images/library.jpg" alt="Library" width="1100">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/library_heads.jpg" alt="Library Heads" width="1100">
-                    </div>
-                  </div>
-
-                  <!-- Left and right controls -->
-                  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                  </a>
-                  <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                  </a>
+                      <%
+                          if (booking != null) {
+                      %>
+                      <input type="hidden" name ="booking" value="<%=booking%>" />
+                      <%
+                          }
+                      %>
+                      <input type="hidden" name ="action" value="login" />
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="register.jsp">New around here? Register</a>
+                    <a class="dropdown-item" href="#">Forgot password?</a>
                 </div>
             </div>
             <div class="col-3"></div>
         </div>
-        
-        <div class="row mt-3">
-            <div class="col-4"></div>
-            <%
-                // Check if they have landed here because their session expired
-                String sessionExpired = (String) session.getAttribute("sessionExpired");
-                // If so, then display the session expired message to the user
-                if(sessionExpired != null){
-                    // Display the error message to the user
-                    out.println("<b>" + sessionExpired + "</b>");
-                    // Remove the message from the session as it's no longer useful
-                    session.removeAttribute("sessionExpired");
-                }
-            %>
-            <div class="col-4 border border-primary text-center">
-                <h1><%=dataBundle.getString("login_login")%></h1>
-                <form action="Servlet" method="post">
-                    <table>
-                        <tr>
-                            <td><%=dataBundle.getString("login_username")%></td><td> <input name="username" required size=40 type="text" /> </td> 
-                        </tr>
-                        <tr>
-                            <td><%=dataBundle.getString("login_password")%></td><td> <input name="password" required size=40 type="password" /> </td> 
-                        </tr>
-                    </table>
-                    <a href="register.jsp"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a></br>
-                    <input type="submit" value="Login" />
-                    <!-- Include a hidden field to identify what the user wants to do -->
-                    <input type="hidden" name ="action" value="login" />
-                </form>
-            </div>
-            <div class="col-4"></div>
-        </div>
-        
-        <!-- Include a footer so that there is always a link back to the home page! -->
-        <%@ include file = "footer.jsp" %>
     </body>
 </html>

@@ -104,16 +104,7 @@
         <div class="row mt-3">
             <div class="col-2"></div>
             <div class="col-8 text-center">
-                <ul class="nav nav-tabs">
-                    <% if (searchedDateLD.minusDays(4).isAfter(LocalDate.now())) { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.minusDays(4))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.minusDays(4)))%></a>
-                    </li>
-                    <% } else {%>
-                    <li class="nav-item">
-                      <a class="nav-link disabled" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.minusDays(4))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.minusDays(4)))%></a>
-                    </li>
-                    <% } %>
+                <ul class="nav nav-tabs nav-justified">
                     <% if (searchedDateLD.minusDays(3).isAfter(LocalDate.now())) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.minusDays(3))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.minusDays(3)))%></a>
@@ -132,7 +123,7 @@
                       <a class="nav-link disabled" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.minusDays(2))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.minusDays(2)))%></a>
                     </li>
                     <% } %>
-                    <% if (searchedDateLD.minusDays(1).isAfter(LocalDate.now())) { %>
+                    <% if (searchedDateLD.minusDays(1).isAfter(LocalDate.now()) || searchedDateLD.minusDays(1).isEqual(LocalDate.now())) { %>
                     <li class="nav-item">
                       <a class="nav-link" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.minusDays(1))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.minusDays(1)))%></a>
                     </li>
@@ -152,9 +143,6 @@
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.plusDays(3))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.plusDays(3)))%></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="Servlet?action=searchFlight&departureAirport=<%=flight.getDepartureAirport()%>&destinationAirport=<%=flight.getArrivalAirport()%>&numPassengers=<%=numPassengers%>&departureDate=<%=java.sql.Date.valueOf(searchedDateLD.plusDays(4))%>" ><%=dateFormatter.format(java.sql.Date.valueOf(searchedDateLD.plusDays(4)))%></a>
                     </li>
                 </ul>
             </div>

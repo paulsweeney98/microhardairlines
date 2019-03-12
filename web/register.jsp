@@ -13,6 +13,16 @@
         <title><%=dataBundle.getString("register_register")%></title>
     </head>
     <body>
+        <%
+            String booking = request.getParameter("booking");
+            
+            if (session.getAttribute("errorMessage") != null) {
+        %>
+        <h3 class="text-center text-danger"><%=session.getAttribute("errorMessage")%></h3>
+        <%
+            }
+        %>
+        
         <div class="row mt-3">
             <div class="col-3"></div>
             <div class="col-6">
@@ -83,6 +93,13 @@
                         </tr>
                     </table></br>
                     <input type="submit" value="Register" />
+                    <%
+                        if (booking != null) {
+                    %>
+                    <input type="hidden" name ="booking" value="<%=booking%>" />
+                    <%
+                        }
+                    %>
                     <!-- Include a hidden field to identify what the user wants to do -->
                     <input type="hidden" name ="action" value="register" />
                 </form>

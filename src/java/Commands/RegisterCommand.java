@@ -40,6 +40,9 @@ public class RegisterCommand implements Command{
         String county = request.getParameter("county");
         String country = request.getParameter("country");
         
+        // If user registered during booking they will be sent back to their page
+        String booking = request.getParameter("booking");
+        
         
         if(email != null && !email.equals("") && password != null && !password.equals("") && confirmPassword != null && !confirmPassword.equals("") && firstName != null && !firstName.equals("") && lastName != null && !lastName.equals("") && dateOfBirth != null && !dateOfBirth.equals("") && phoneNumber != null && !phoneNumber.equals("") && addressLine1 != null && !addressLine1.equals("") && addressLine2 != null && !addressLine2.equals("") && cityOrTown != null && !cityOrTown.equals("") && postalCode != null && !postalCode.equals("") && county != null && !county.equals("") && country != null && !country.equals("")){
             Validation v = new Validation();
@@ -59,29 +62,45 @@ public class RegisterCommand implements Command{
                                 HttpSession session = request.getSession();
                                 session.setAttribute("loggedInUser", u1);
 
-                                forwardToJsp = "securityQuestions.jsp";
-                    }else{
+                                if (booking != null) {
+                                    forwardToJsp = "paymentDetails.jsp";
+                                } else {
+                                    forwardToJsp = "securityQuestions.jsp";
+                                }
+                    } else{
                         // The user couldn't be added to the database
                         // Send the user to the error page and inform them of this
                         String errorMessage = "User couldn't be added to the database at this time"
                                 + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different email!";
                         HttpSession session = request.getSession();
                         session.setAttribute("errorMessage", errorMessage);
-                        forwardToJsp = "error.jsp";
+                        if (booking != null) {
+                            forwardToJsp = "register.jsp?booking=" + booking;
+                        } else {
+                            forwardToJsp = "register.jsp";
+                        }
                     }         
                     } else {
                         String errorMessage = "Email already taken"
                                 + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different email!";
                         HttpSession session = request.getSession();
                         session.setAttribute("errorMessage", errorMessage);
-                        forwardToJsp = "error.jsp";    
+                        if (booking != null) {
+                            forwardToJsp = "register.jsp?booking=" + booking;
+                        } else {
+                            forwardToJsp = "register.jsp";
+                        }
                     }
                 } else {
                     String errorMessage = "Passwords did not match"
                                 + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try confirming password again!";
                         HttpSession session = request.getSession();
                         session.setAttribute("errorMessage", errorMessage);
-                        forwardToJsp = "error.jsp";    
+                        if (booking != null) {
+                            forwardToJsp = "register.jsp?booking=" + booking;
+                        } else {
+                            forwardToJsp = "register.jsp";
+                        }
                 }
             } else {
                     // The user couldn't be added to the database
@@ -90,7 +109,11 @@ public class RegisterCommand implements Command{
                                 + " Please <a href='register.jsp'>go back</a> and try again.<br/>Problem with date of birth!";
                         HttpSession session = request.getSession();
                         session.setAttribute("errorMessage", errorMessage);
-                        forwardToJsp = "error.jsp";
+                        if (booking != null) {
+                            forwardToJsp = "register.jsp?booking=" + booking;
+                        } else {
+                            forwardToJsp = "register.jsp";
+                        }
                 }
             }else{
                 // One or more fields were missing
@@ -98,7 +121,7 @@ public class RegisterCommand implements Command{
                 String errorMessage = "One or more fields were missing. Please <a href='register.jsp'>go back</a> and try again.";
                 HttpSession session = request.getSession();
                 session.setAttribute("errorMessage", errorMessage);
-                forwardToJsp = "error.jsp";
+                forwardToJsp = "register.jsp";
             }
             return forwardToJsp;
         }

@@ -30,6 +30,9 @@ public class LoginCommand implements Command{
         String password = request.getParameter("password");
         String rememberMe = request.getParameter("rememberMe");
         
+        // If user logged in during booking they will be sent back to their page
+        String booking = request.getParameter("booking");
+        
         if(email != null && password != null && !email.equals("") && !password.equals(""))
         {
             UserDao uDao = new UserDao(Dao.getDatabaseName());
@@ -43,14 +46,21 @@ public class LoginCommand implements Command{
                     response.addCookie(emailStored);
                 }
                 
+                // Remove error message from previous potential failed login attempts
+                HttpSession session = request.getSession();
+                session.removeAttribute("errorMessage");
+                
                 // Put the user in the session 
                 // (we can use this to track if the user has logged in -
-                // if it's there, they they have completed this process
+                // if it's there, then they have completed this process
                 // if it's not, then they haven't)
-                HttpSession session = request.getSession();
                 session.setAttribute("loggedInUser", u);
                 if (u.getPrivileges() == 1) {
-                    forwardToJsp = "index.jsp";
+                    if (booking != null) {
+                        forwardToJsp = "paymentDetails.jsp";
+                    } else {
+                        forwardToJsp = "index.jsp";
+                    }
                 } else if (u.getPrivileges() == 2) {
                     forwardToJsp = "adminIndex.jsp";
                 } else {
@@ -58,13 +68,17 @@ public class LoginCommand implements Command{
                 }
             }
             else{
+                HttpSession session = request.getSession();
                 // The username and/or password didn't match someone in the database
                 // Send the user to the error page and inform them of this
                 String errorMessage = "No user found matching those details."
                         + " Please try again.";
-                HttpSession session = request.getSession();
                 session.setAttribute("errorMessage", errorMessage);
-                forwardToJsp = "error.jsp";
+                if (booking != null) {
+                    forwardToJsp = "login.jsp?booking=" + booking;
+                } else {
+                    forwardToJsp = "login.jsp";
+                }
             }
         }
         else{
@@ -73,7 +87,7 @@ public class LoginCommand implements Command{
             String errorMessage = "Your username and/or password was missing. Please try again.";
             HttpSession session = request.getSession();
             session.setAttribute("errorMessage", errorMessage);
-            forwardToJsp = "error.jsp";
+            forwardToJsp = "login.jsp";
         }
         return forwardToJsp;
     }

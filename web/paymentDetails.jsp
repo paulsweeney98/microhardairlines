@@ -137,7 +137,8 @@
                         </div>
                     </div>
 
-                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("paymentDetails_bookFlight")%></button>
+                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left">Start Again</a>
+                    <button type="submit" class="btn btn-success float-right"><%=dataBundle.getString("paymentDetails_bookFlight")%></button>
                     <input type="hidden" name ="action" value="bookFlight" />
                 </form>
             </div>
@@ -157,8 +158,8 @@
 
         <div class="text-center">
             <h3>You must log in or register to complete the booking</h3></br>
-            <a href="login.jsp" class="btn btn-success">Login</a>&nbsp;&nbsp;
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <a href="login.jsp?booking=true" class="btn btn-success">Login</a>&nbsp;&nbsp;
+            <a href="register.jsp?booking=true" class="btn btn-success">Register</a>
         </div>
 
         <%

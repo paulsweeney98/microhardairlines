@@ -114,7 +114,8 @@
                             }
                         }
                     %>
-                    </br><button type="submit" class="btn btn-success">Submit</button>
+                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left">Start Again</a>
+                    <button type="submit" class="btn btn-success float-right">Submit</button>
                     <input type="hidden" name ="action" value="storeCheckedBaggage" />
                 </form>
             </div>

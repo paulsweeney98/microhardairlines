@@ -25,7 +25,19 @@ public class SearchFlightCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";
+        HttpSession session = request.getSession();
 
+        // Remove all attributes for flights from session before searching for a new one
+        session.removeAttribute("numPassengers");
+        session.removeAttribute("departureFlight");
+        session.removeAttribute("returnFlight");
+        for (int i = 0; i <= 10; i++) {
+            session.removeAttribute("departureFlight" + i);
+            session.removeAttribute("returnFlight" + i);
+            session.removeAttribute("departureFlightCheckedBaggage" + i);
+            session.removeAttribute("returnFlightCheckedBaggage" + i);
+        }
+        
         String departureAirport = request.getParameter("departureAirport");
         String destinationAirport = request.getParameter("destinationAirport");
         String departureDateString = request.getParameter("departureDate");
@@ -60,7 +72,6 @@ public class SearchFlightCommand implements Command {
                     FlightDao fDao = new FlightDao(Dao.getDatabaseName());
                     ArrayList<Flight> flights = flights = fDao.getFlightsByLocationsDepartureDatePassengerNum(departureAirport, destinationAirport, (java.sql.Date) departureDate, numPassengers);
 
-                    HttpSession session = request.getSession();
                     // Store the book in the session
                     session.setAttribute("flights", flights);
 
@@ -78,23 +89,17 @@ public class SearchFlightCommand implements Command {
                 } else {
                     forwardToJsp = "error.jsp";
 
-                    HttpSession session = request.getSession();
-
                     session.setAttribute("errorMessage", "Invalid dates supplied.");
                 }
                 
             } else {
                 forwardToJsp = "error.jsp";
 
-                HttpSession session = request.getSession();
-
                 session.setAttribute("errorMessage", "You must book for at least one passenger.");
             }
 
         } else {
             forwardToJsp = "error.jsp";
-
-            HttpSession session = request.getSession();
 
             session.setAttribute("errorMessage", "A required parameter was missing");
         }
