@@ -21,6 +21,10 @@ public class Dao {
         return "microhard_airlines";
     }
     
+    public static String getTestDatabaseName() {
+        return "microhard_airlines_test";
+    }
+    
     public Dao(String databaseName) {
         this.dbName = databaseName;
     }

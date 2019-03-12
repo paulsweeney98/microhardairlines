@@ -142,7 +142,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             // Make query
             String query = " UPDATE user "
                     + " SET suspended = ? "
-                    + " WHERE userId = ? ";
+                    + " WHERE id = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
@@ -198,7 +198,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             // Make query
             String query = " UPDATE user "
                     + " SET suspended = ? "
-                    + " WHERE userId = ? ";
+                    + " WHERE id = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
@@ -421,7 +421,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             con = getConnection();
             // Make query
             String query = "SELECT * FROM user "
-                    + " WHERE userId = ? ";
+                    + " WHERE id = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);
             ps.setInt(1, userId);
@@ -429,7 +429,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             rs = ps.executeQuery();
             //     public Order(int orderNumber, Date orderDate, Date requiredDate, Date shippedDate, String status, String comments, int customerNumber)
             while(rs.next()) {
-                u.setUserId(rs.getInt("user_id"));
+                u.setUserId(rs.getInt("id"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
                 u.setFirstName(rs.getString("firstName"));
@@ -494,7 +494,7 @@ public class UserDao extends Dao implements UserDaoInterface {
         try {
             con = this.getConnection();
 
-            String query = "DELETE FROM user WHERE userId = ?";
+            String query = "DELETE FROM user WHERE id = ?";
             ps = con.prepareStatement(query);
             ps.setInt(1, userId);
 
@@ -524,149 +524,6 @@ public class UserDao extends Dao implements UserDaoInterface {
                 System.err.println("A problem occured when closing down the removeUserById() method:\n" + e.getMessage());
             }
         }
-        return rowsAffected;
-    }
-    
-    /**
-     * For User admin.
-     * 
-     * If the information entered by the user to update matches the
-     * requirements for an admin than admin is true and if not it is false.
-     * 
-     * @param user The user being passed through.
-     * @param email The username of the user.
-     * 
-     * @return Boolean true or false for isAdmin.
-     */
-    @Override
-    public boolean isAdmin(String username) {
-        // Required for DB interation
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        // Required for data/result storage
-        boolean isAdmin = false;
-        
-        User u = new User();
-        
-        try {
-            con = getConnection();
-            // Make query
-            String query = "SELECT * FROM user "
-                    + " WHERE userId = ? ";
-            // Compile into SQL
-            ps = con.prepareStatement(query);
-            ps.setString(1, username);
-            //Execute the SQL
-            rs = ps.executeQuery();
-            //     public Order(int orderNumber, Date orderDate, Date requiredDate, Date shippedDate, String status, String comments, int customerNumber)
-            while(rs.next()) {
-                u.setUserId(rs.getInt("user_id"));
-                u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
-                u.setFirstName(rs.getString("firstName"));
-                u.setLastName(rs.getString("lastName"));
-                u.setDateOfBirth(rs.getDate("dateOfBirth"));
-                u.setPhoneNumber(rs.getString("phoneNumber"));
-                u.setAddressLine1(rs.getString("addressLine1"));
-                u.setAddressLine2(rs.getString("addressLine2"));
-                u.setCityOrTown(rs.getString("cityOrTown"));
-                u.setPostalCode(rs.getString("postalCode"));
-                u.setCounty(rs.getString("county"));
-                u.setCountry(rs.getString("country"));
-                u.setPrivileges(rs.getInt("privileges"));
-                u.setSuspended(rs.getInt("suspended"));
-            }
-        } catch(SQLException ex) {
-            System.out.println("An exception occured when querying the users table in the getUserByUsername() method\n" + ex.getMessage());
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                    System.out.println("SQL Exception with rs\n" + ex.getMessage());
-                }
-            }
-            if (ps != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
-                }
-            }
-            if (con != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                    System.out.println("SQL Exception with con\n" + ex.getMessage());
-                }
-            }
-        }
-        
-        if (u.getPrivileges() == User.ADMIN) {
-            isAdmin = true;
-        }
-        
-        return isAdmin;
-    }
-
-    /**
-     * Updates a User's Username.
-     * 
-     * If the information entered by the user to update there username
-     * is correct then the username is updated and if not an error is displayed.
-     * 
-     * @param user The user being passed through.
-     * @param username The username of the user.
-     * 
-     * @return An int containing how many rows in the database were affected. Should
-     * contain 1 if a row was removed, and 0 if not.
-     */
-    @Override
-    public int updateUserUsername(User user, String username) {
-        // Required for DB interation
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet generatedKeys = null;
-        
-        int rowsAffected = 0;
-        
-        try {
-            con = getConnection();
-            // Make query
-            String query = " UPDATE user "
-                    + " SET username = ? "
-                    + " WHERE userId = ? ";
-            // Compile into SQL
-            ps = con.prepareStatement(query);
-            // Setting the name variable for the statement
-            ps.setString(1, username);
-            ps.setInt(2, user.getUserId());
-            //Execute the SQL
-            rowsAffected = ps.executeUpdate();
-            
-        } catch(SQLException ex) {
-            System.out.println("An exception occured when querying the users table in the updateUserUsername() method\n" + ex.getMessage());
-            System.out.println("\t"+ex.getMessage());
-            rowsAffected = 0;
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException ex) {
-                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
-                }
-            }
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    System.out.println("SQL Exception with con\n" + ex.getMessage());
-                }
-            }
-        }
-        
         return rowsAffected;
     }
     

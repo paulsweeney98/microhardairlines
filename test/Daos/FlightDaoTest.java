@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class FlightDaoTest {
     
     // Setting up to use the FlightDao class' methods.
-    FlightDao fDao = new FlightDao("microhard_airlines_test");
+    FlightDao fDao = new FlightDao(Dao.getTestDatabaseName());
     
     /**
      * Test of getFlights method, of class FlightDao.
@@ -30,12 +30,10 @@ public class FlightDaoTest {
     @Test
     public void testGetFlights() {
         System.out.println("getFlights");
-        FlightDao instance = null;
-        ArrayList<Flight> expResult = null;
-        ArrayList<Flight> result = instance.getFlights();
+        int expResult = 1050;
+        ArrayList<Flight> flights = fDao.getFlights();
+        int result = flights.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -44,12 +42,10 @@ public class FlightDaoTest {
     @Test
     public void testGetDepartureAirports() {
         System.out.println("getDepartureAirports");
-        FlightDao instance = null;
-        ArrayList<Flight> expResult = null;
-        ArrayList<Flight> result = instance.getDepartureAirports();
+        int expResult = 4;
+        ArrayList<Flight> departureAirports = fDao.getDepartureAirports();
+        int result = departureAirports.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,12 +54,10 @@ public class FlightDaoTest {
     @Test
     public void testGetArrivalAirports() {
         System.out.println("getArrivalAirports");
-        FlightDao instance = null;
-        ArrayList<Flight> expResult = null;
-        ArrayList<Flight> result = instance.getArrivalAirports();
+        int expResult = 4;
+        ArrayList<Flight> arrivalAirports = fDao.getArrivalAirports();
+        int result = arrivalAirports.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,16 +66,14 @@ public class FlightDaoTest {
     @Test
     public void testGetFlightsByLocationsDepartureDatePassengerNum() {
         System.out.println("getFlightsByLocationsDepartureDatePassengerNum");
-        String departureAirport = "";
-        String destinationAirport = "";
-        Date date = null;
-        int numPassengers = 0;
-        FlightDao instance = null;
-        ArrayList<Flight> expResult = null;
-        ArrayList<Flight> result = instance.getFlightsByLocationsDepartureDatePassengerNum(departureAirport, destinationAirport, date, numPassengers);
+        String departureAirport = "Dublin";
+        String destinationAirport = "Paris";
+        Date date = java.sql.Date.valueOf("2019-03-12");
+        int numPassengers = 1;
+        int expResult = 4;
+        ArrayList<Flight> flights = fDao.getFlightsByLocationsDepartureDatePassengerNum(departureAirport, destinationAirport, date, numPassengers);
+        int result = flights.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -90,13 +82,11 @@ public class FlightDaoTest {
     @Test
     public void testGetFlightById() {
         System.out.println("getFlightById");
-        int id = 0;
-        FlightDao instance = null;
-        Flight expResult = null;
-        Flight result = instance.getFlightById(id);
+        int id = 2108;
+        String expResult = "London Heathrow";
+        Flight flight = fDao.getFlightById(id);
+        String result = flight.getArrivalAirport();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -105,14 +95,14 @@ public class FlightDaoTest {
     @Test
     public void testUpdatePrice() {
         System.out.println("updatePrice");
-        Flight flight = null;
-        double newPrice = 0.0;
-        FlightDao instance = null;
-        int expResult = 0;
-        int result = instance.updatePrice(flight, newPrice);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Flight flight = fDao.getFlightById(2108);
+        int result = fDao.updatePrice(flight, 120);
+        
+        if (result > 0) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to undo what was added");
+            int rowsUpdated = fDao.updatePrice(flight, 49.99);
+            assertEquals(1, rowsUpdated);
+        }
     }
 
     /**
@@ -121,13 +111,14 @@ public class FlightDaoTest {
     @Test
     public void testAddFlight() {
         System.out.println("addFlight");
-        Flight flight = null;
-        FlightDao instance = null;
-        int expResult = 0;
-        int result = instance.addFlight(flight);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Flight flight = new Flight(3, "MA-999", 100, 180, 30, 16, java.sql.Date.valueOf("2019-03-12"), 360, 420, 60, "Dublin Test", "DUB", "London Heathrow Test", "LHR", "T2", "T2");
+        int result = fDao.addFlight(flight);
+        
+        if (result > 0) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
+            int rowsDeleted = fDao.removeFlight(result);
+            assertEquals(1, rowsDeleted);
+        }
     }
 
     /**
@@ -136,13 +127,14 @@ public class FlightDaoTest {
     @Test
     public void testRemoveFlight() {
         System.out.println("removeFlight");
-        int id = 0;
-        FlightDao instance = null;
-        int expResult = 0;
-        int result = instance.removeFlight(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Flight flight = new Flight(3, "MA-999", 100, 180, 30, 16, java.sql.Date.valueOf("2019-03-12"), 360, 420, 60, "Dublin Test", "DUB", "London Heathrow Test", "LHR", "T2", "T2");
+        int result = fDao.addFlight(flight);
+        
+        if (result > 0) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
+            int rowsDeleted = fDao.removeFlight(result);
+            assertEquals(1, rowsDeleted);
+        }
     }
 
     /**
@@ -151,15 +143,13 @@ public class FlightDaoTest {
     @Test
     public void testUpdateStandardSeats() {
         System.out.println("updateStandardSeats");
-        int flightId = 0;
-        String seatType = "";
-        int changeBy = 0;
-        FlightDao instance = null;
-        int expResult = 0;
-        int result = instance.updateStandardSeats(flightId, seatType, changeBy);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = fDao.updateStandardSeats(2108, "standardSeatsAvailable", -1);
+        
+        if (result > 0) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to undo what was added");
+            int rowsUpdated = fDao.updateStandardSeats(2108, "standardSeatsAvailable", 1);
+            assertEquals(1, rowsUpdated);
+        }
     }
 
     /**
@@ -168,15 +158,13 @@ public class FlightDaoTest {
     @Test
     public void testUpdateBusinessSeats() {
         System.out.println("updateBusinessSeats");
-        int flightId = 0;
-        String seatType = "";
-        int changeBy = 0;
-        FlightDao instance = null;
-        int expResult = 0;
-        int result = instance.updateBusinessSeats(flightId, seatType, changeBy);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = fDao.updateBusinessSeats(2108, "businessSeatsAvailable", -1);
+        
+        if (result > 0) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to undo what was added");
+            int rowsUpdated = fDao.updateBusinessSeats(2108, "businessSeatsAvailable", 1);
+            assertEquals(1, rowsUpdated);
+        }
     }
 
     /**
@@ -185,15 +173,13 @@ public class FlightDaoTest {
     @Test
     public void testUpdateFirstClassSeats() {
         System.out.println("updateFirstClassSeats");
-        int flightId = 0;
-        String seatType = "";
-        int changeBy = 0;
-        FlightDao instance = null;
-        int expResult = 0;
-        int result = instance.updateFirstClassSeats(flightId, seatType, changeBy);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = fDao.updateFirstClassSeats(2108, "firstClassSeatsAvailable", -1);
+        
+        if (result > 0) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to undo what was added");
+            int rowsUpdated = fDao.updateFirstClassSeats(2108, "firstClassSeatsAvailable", 1);
+            assertEquals(1, rowsUpdated);
+        }
     }
     
 }

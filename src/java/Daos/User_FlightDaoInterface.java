@@ -77,10 +77,18 @@ public interface User_FlightDaoInterface {
     public int removeUser_Flight(int id);
     
     /**
-     * Adds Priority Boarding to a standard flight.
+     * Adds Priority Boarding to a standard user_flight.
      * 
-     * @param User_FlightId The id of the User_Flight
+     * @param id The id of the User_Flight
      * @return An int containing the rows affected.
      */
     public int addPriorityBoarding(int id);
+    
+    /**
+     * Removes Priority Boarding from a standard user_flight.
+     * 
+     * @param id The id of the User_Flight
+     * @return An int containing the rows affected.
+     */
+    public int removePriorityBoarding(int id);
 }

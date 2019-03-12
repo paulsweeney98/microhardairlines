@@ -96,33 +96,6 @@ public interface UserDaoInterface {
     public int removeUserById(int userId);
     
     /**
-     * For User is admin.
-     * 
-     * If the information entered by the user to update matches the
-     * requirements for an admin than admin is true and if not it is false.
-     * 
-     * @param user The user being passed through.
-     * @param email The username of the user.
-     * 
-     * @return Boolean true or false for isAdmin.
-     */
-    public boolean isAdmin(String username);
-    
-    /**
-     * Updates a User's Username.
-     * 
-     * If the information entered by the user to update there username
-     * is correct then the username is updated and if not an error is displayed.
-     * 
-     * @param user The user being passed through.
-     * @param username The username of the user.
-     * 
-     * @return An int containing how many rows in the database were affected. Should
-     * contain 1 if a row was removed, and 0 if not.
-     */
-    public int updateUserUsername(User user, String username);
-    
-    /**
      * Updates a User's Email.
      * 
      * If the information entered by the user to update there email
