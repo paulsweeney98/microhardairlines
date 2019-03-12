@@ -696,7 +696,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             // Make query
             String query = " UPDATE user "
                     + " SET email = ? "
-                    + " WHERE userId = ? ";
+                    + " WHERE id = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
@@ -707,6 +707,65 @@ public class UserDao extends Dao implements UserDaoInterface {
             
         } catch(SQLException ex) {
             System.out.println("An exception occured when querying the users table in the updateUserEmail() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+    
+     /**
+     * Updates a User's Phone Number.
+     * 
+     * If the information entered by the user to update there phone number
+     * is correct then the phone number is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param addressLine1 The username of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
+    @Override
+    public int updateUserAddressLine1(User user, String addressLine1) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET addressLine1 = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, addressLine1);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
             System.out.println("\t"+ex.getMessage());
             rowsAffected = 0;
         } finally {
@@ -755,7 +814,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             // Make query
             String query = " UPDATE user "
                     + " SET phoneNumber = ? "
-                    + " WHERE userId = ? ";
+                    + " WHERE id = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
@@ -787,7 +846,7 @@ public class UserDao extends Dao implements UserDaoInterface {
         
         return rowsAffected;
     }
-
+    
     @Override
     public User getUserByEmail(String email) {
         // Required for DB interation
@@ -853,5 +912,381 @@ public class UserDao extends Dao implements UserDaoInterface {
         }
         
         return u;
+    }
+
+    @Override
+    public int updateUserAddressLine2(User user, String addressLine2) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET addressLine2 = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, addressLine2);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updateCityOrTown(User user, String cityOrTown) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET cityOrTown = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, cityOrTown);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updatePostalCode(User user, String postalCode) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET postalCode = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, postalCode);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updateCounty(User user, String county) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET county = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, county);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updateCountry(User user, String country) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET country = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, country);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updateFirstName(User user, String firstName) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET firstName = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, firstName);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updateLastName(User user, String lastName) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET lastName = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, lastName);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
+    }
+
+    @Override
+    public int updateUserPassword(User user, String password) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        
+        int rowsAffected = 0;
+        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        try {
+            con = getConnection();
+            // Make query
+            String query = " UPDATE user "
+                    + " SET password = ? "
+                    + " WHERE id = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Setting the name variable for the statement
+            ps.setString(1, hashedPassword);
+            ps.setInt(2, user.getUserId());
+            //Execute the SQL
+            rowsAffected = ps.executeUpdate();
+            
+        } catch(SQLException ex) {
+            System.out.println("An exception occured when querying the users table in the updateUserAddressLine1() method\n" + ex.getMessage());
+            System.out.println("\t"+ex.getMessage());
+            rowsAffected = 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+        
+        return rowsAffected;
     }
 }

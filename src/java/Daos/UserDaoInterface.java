@@ -149,4 +149,22 @@ public interface UserDaoInterface {
      * contain 1 if a row was removed, and 0 if not.
      */
     public int updateUserPhone(User user, String phoneNumber);
+    
+    public int updateUserAddressLine1(User user, String addressLine1);
+    
+    public int updateUserAddressLine2(User user, String addressLine2);
+    
+    public int updateCityOrTown(User user, String cityOrTown);
+    
+    public int updatePostalCode(User user, String postalCode);
+    
+    public int updateCounty(User user, String county);
+    
+    public int updateCountry(User user, String country);
+    
+    public int updateFirstName(User user, String firstName);
+    
+    public int updateLastName(User user, String lastName);
+    
+    public int updateUserPassword(User user, String password);
 }
