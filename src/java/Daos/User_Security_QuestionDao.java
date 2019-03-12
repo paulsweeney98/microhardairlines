@@ -29,12 +29,14 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
     }
     
     @Override
-    public boolean AddUser_Security_Question(User_Security_Question u) {
+    public boolean addUser_Security_Question(User_Security_Question u) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
         
         boolean added = true;
+        
+        String hashedAnswer = BCrypt.hashpw(u.getAnswer(), BCrypt.gensalt());
         
         try {
             con = getConnection();
@@ -46,12 +48,12 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             // Setting the name variable for the statement
             ps.setInt(1, u.getUserId());
             ps.setInt(2, u.getSecurityQuestionId());
-            ps.setString(3, u.getAnswer());
+            ps.setString(3, hashedAnswer);
             //Execute the SQL
             ps.executeUpdate();
             
         } catch(SQLException ex) {
-            System.out.println("An exception occured when querying the loan table in the borrowBook() method\n" + ex.getMessage());
+            System.out.println("An exception occured when querying the user_security_question table in the addUser_Security_Question() method\n" + ex.getMessage());
             System.out.println("\t"+ex.getMessage());
             added = false;
         } finally {
@@ -101,11 +103,11 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
 
                 User_Security_Question u = new User_Security_Question(userId, securityQuestionId, answer);
 
-                // Store each book in the ArrayList
+                // Store each user_security_question in the ArrayList
                 usq.add(u);
             }
         } catch (SQLException ex) {
-            System.out.println("An exception occurred while querying the flight table in the getFlights() method\n"
+            System.out.println("An exception occurred while querying the user_security_question table in the getUser_Security_Question() method\n"
                     + ex.getMessage());
         } // Close open components
         finally {
@@ -151,7 +153,7 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             ps.setInt(1, userId);
             //Execute the SQL
             rs = ps.executeQuery();
-            //     public Order(int orderNumber, Date orderDate, Date requiredDate, Date shippedDate, String status, String comments, int customerNumber)
+
             while(rs.next()) {
                 userId = rs.getInt("userId");
                 int securityQuestionId = rs.getInt("securityQuestionId");
@@ -159,11 +161,11 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
                 
                 User_Security_Question u = new User_Security_Question(userId, securityQuestionId, answer);
                 
+                // Store each user_security_question in the ArrayList
                 usq.add(u);
-                
             }
         } catch(SQLException ex) {
-            System.out.println("An exception occured when querying the users table in the getUserById() method\n" + ex.getMessage());
+            System.out.println("An exception occured when querying the user_security_question table in the getUser_Security_QuestionById() method\n" + ex.getMessage());
         } finally {
             if (rs != null) {
                 try {
@@ -174,14 +176,14 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             }
             if (ps != null) {
                 try {
-                    rs.close();
+                    ps.close();
                 } catch (SQLException ex) {
                     System.out.println("SQL Exception with ps\n" + ex.getMessage());
                 }
             }
             if (con != null) {
                 try {
-                    rs.close();
+                    con.close();
                 } catch (SQLException ex) {
                     System.out.println("SQL Exception with con\n" + ex.getMessage());
                 }
@@ -236,7 +238,7 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             }
             
         } catch(SQLException ex) {
-            System.out.println("An exception occured when querying the users table in the getCurrentUser() method\n" + ex.getMessage());
+            System.out.println("An exception occured when querying the user_security_question table in the checkUser_Security_Answer() method\n" + ex.getMessage());
         } finally {
             if (rs != null) {
                 try {
@@ -247,14 +249,14 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             }
             if (ps != null) {
                 try {
-                    rs.close();
+                    ps.close();
                 } catch (SQLException ex) {
                     System.out.println("SQL Exception with ps\n" + ex.getMessage());
                 }
             }
             if (con != null) {
                 try {
-                    rs.close();
+                    con.close();
                 } catch (SQLException ex) {
                     System.out.println("SQL Exception with con\n" + ex.getMessage());
                 }
@@ -264,5 +266,40 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
         return u;
     }
 
-   
+    @Override   
+    public void removeUser_Security_QuestionById(int userId) {
+        // Required for DB interation
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+            // Make query
+            String query = "DELETE FROM user_security_question "
+                    + " WHERE userId = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+            //Execute the SQL
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("An exception occured when querying the user_security_question table in the removeUser_Security_QuestionById() method\n" + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with ps\n" + ex.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println("SQL Exception with con\n" + ex.getMessage());
+                }
+            }
+        }
+    }
+
 }

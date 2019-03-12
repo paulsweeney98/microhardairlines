@@ -88,7 +88,16 @@
                             %>
                             
                             <%
-                                if (user_flights.get(0).getQueue().equals("non-priority")) {
+                                // For loop to check priority status
+                                boolean allPriority = true;
+                                
+                                for (User_Flight user_flight : user_flights) {
+                                    if (user_flight.getQueue().equals("non-priority")) {
+                                        allPriority = false;
+                                    }
+                                }
+                                
+                                if (allPriority == false) {
                             %>
                             <div class="col-6">
                                 <a href="addPriorityBoarding.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success">Priority Boarding</a>
