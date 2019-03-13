@@ -106,26 +106,26 @@
                 <div class="float-right">
                     <%
                         for (int i = 1; i <= 3; i++) {
-                            if (takenSeats.contains(i + "a")) {
+                            if (takenSeats.contains(i + "d")) {
                                 colourD = "red";
                                 classD = "disabled";
                             } else {
                                 colourD = "limegreen";
                                 classD = "";
                             }
-                            if (takenSeats.contains(i + "b")) {
-                                colourB = "red";
-                                classB = "disabled";
+                            if (takenSeats.contains(i + "e")) {
+                                colourE = "red";
+                                classE = "disabled";
                             } else {
-                                colourB = "limegreen";
-                                classB = "";
+                                colourE = "limegreen";
+                                classE = "";
                             }
-                            if (takenSeats.contains(i + "c")) {
-                                colourC = "red";
-                                classC = "disabled";
+                            if (takenSeats.contains(i + "f")) {
+                                colourF = "red";
+                                classF = "disabled";
                             } else {
-                                colourC = "limegreen";
-                                classC = "";
+                                colourF = "limegreen";
+                                classF = "";
                             }
                     %>
                     <a href="#" id="<%=i%>d" class="<%=classD%>" style="font-size: 30px; color: <%=colourD%>;"><i class="fas fa-user"></i></a>
