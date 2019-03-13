@@ -17,7 +17,7 @@
     </head>
     <body>
         <%
-            DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, clientLocale);
+            
             if (loggedInUser != null) {
         %>
         <div class="row mt-3">

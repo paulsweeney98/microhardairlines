@@ -103,6 +103,7 @@
             <ul class="dropdown-menu text-center">
               <li><a href="manageAccount.jsp"><%=dataBundle.getString("header_manageAccount")%></a></li>
               <li><a href="changePassword.jsp"><%=dataBundle.getString("header_changePassword")%></a></li>
+              <li><a href="editAccountDetails.jsp"><%=dataBundle.getString("editUserProfile_profile")%></a></li>
               <li><a href="Servlet?action=logout"><%=dataBundle.getString("header_logout")%></a></li>
             </ul>
             <%
