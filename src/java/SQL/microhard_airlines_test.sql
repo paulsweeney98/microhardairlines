@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2019 at 06:13 PM
+-- Generation Time: Mar 12, 2019 at 06:48 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `microhard_airlines`
+-- Database: `microhard_airlines_test`
 --
 
 DELIMITER $$
@@ -1425,7 +1425,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `firstName`, `lastName`, `dateOfBirth`, `phoneNumber`, `addressLine1`, `addressLine2`, `cityOrTown`, `postalCode`, `county`, `country`, `privileges`, `suspended`) VALUES
 (1, 'john.doe@microhard.com', 'John', 'John', 'Doe', '1995-06-14', '086-055-7880', 'Red Lane', '', 'Dundalk', '434-RRF', 'Co. Louth', 'Ireland', 1, 0),
-(2, 'joe.bloggs@microhard.com', 'Joe', 'Joe', 'Bloggs', '1991-10-05', '086-765-2453', 'Green Lane', 'Big Estate', 'Dundalk', '5TF-8K99', 'Co. Louth', 'Ireland', 1, 0),
+(2, 'joe.bloggs@microhard.com', 'Joe', 'Joe', 'Bloggs', '1991-10-05', '086-765-2453', 'Green Lane', 'Big Estate', 'Dundalk', '5TF-8K99', 'Co. Louth', 'Ireland', 1, 1),
 (3, 'andy.anderson@microhard.com', 'Andy', 'Andy', 'Anderson', '1998-06-16', '083-567-8766', 'Blue Lane', '', 'Dundalk', 'DFA-8788', 'Co. Louth', 'Ireland', 1, 0),
 (4, 'dave.franco@microhard.com', 'Dave', 'Dave', 'Franco', '1985-06-12', '087-989-9090', '3500 West Olive Suite', 'Suite 1470', 'Burbank', '91505', 'California', 'USA', 1, 0),
 (5, 'celine.dion@microhard.com', 'Celine', 'Celine', 'Dion', '1968-04-30', '085-343', 'Purple Road', '', 'Quebec City', '534-1212', 'Quebec', 'Canada', 1, 0),
@@ -1577,12 +1577,12 @@ ALTER TABLE `user_security_question`
 -- AUTO_INCREMENT for table `checked_baggage`
 --
 ALTER TABLE `checked_baggage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3158;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3169;
 --
 -- AUTO_INCREMENT for table `plane`
 --
@@ -1607,12 +1607,12 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `user_flight`
 --
 ALTER TABLE `user_flight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- Constraints for dumped tables
 --

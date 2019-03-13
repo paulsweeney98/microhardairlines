@@ -95,7 +95,7 @@ public class SecurityQuestionDao extends Dao implements SecurityQuestionDaoInter
         try {
             con = getConnection();
             // Query
-            String query = "SELECT * FROM flight "
+            String query = "SELECT * FROM security_question "
                     + "WHERE id = ? ";
             // Compile into SQL
             ps = con.prepareStatement(query);

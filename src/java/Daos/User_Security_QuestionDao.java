@@ -29,12 +29,12 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
     }
     
     @Override
-    public boolean addUser_Security_Question(User_Security_Question u) {
+    public int addUser_Security_Question(User_Security_Question u) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
         
-        boolean added = true;
+        int newId = -1;
         
         String hashedAnswer = BCrypt.hashpw(u.getAnswer(), BCrypt.gensalt());
         
@@ -50,12 +50,12 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             ps.setInt(2, u.getSecurityQuestionId());
             ps.setString(3, hashedAnswer);
             //Execute the SQL
-            ps.executeUpdate();
+            newId = ps.executeUpdate();
             
         } catch(SQLException ex) {
             System.out.println("An exception occured when querying the user_security_question table in the addUser_Security_Question() method\n" + ex.getMessage());
             System.out.println("\t"+ex.getMessage());
-            added = false;
+            newId = -1;
         } finally {
             if (ps != null) {
                 try {
@@ -73,7 +73,7 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             }
         }
         
-        return added;
+        return newId;
     }
     
     @Override
@@ -267,11 +267,13 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
     }
 
     @Override   
-    public void removeUser_Security_QuestionById(int userId) {
+    public int removeUser_Security_QuestionById(int userId) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
 
+        int rowsDeleted = -1;
+        
         try {
             con = getConnection();
             // Make query
@@ -281,9 +283,10 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             ps = con.prepareStatement(query);
             ps.setInt(1, userId);
             //Execute the SQL
-            ps.executeUpdate();
+            rowsDeleted = ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("An exception occured when querying the user_security_question table in the removeUser_Security_QuestionById() method\n" + ex.getMessage());
+            rowsDeleted = -1;
         } finally {
             if (ps != null) {
                 try {
@@ -300,6 +303,7 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
                 }
             }
         }
+        return rowsDeleted;
     }
 
 }
