@@ -29,12 +29,12 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
     }
     
     @Override
-    public int addUser_Security_Question(User_Security_Question u) {
+    public boolean addUser_Security_Question(User_Security_Question u) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
         
-        int newId = -1;
+        boolean added = true;
         
         String hashedAnswer = BCrypt.hashpw(u.getAnswer(), BCrypt.gensalt());
         
@@ -50,12 +50,12 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             ps.setInt(2, u.getSecurityQuestionId());
             ps.setString(3, hashedAnswer);
             //Execute the SQL
-            newId = ps.executeUpdate();
+            ps.executeUpdate();
             
         } catch(SQLException ex) {
             System.out.println("An exception occured when querying the user_security_question table in the addUser_Security_Question() method\n" + ex.getMessage());
             System.out.println("\t"+ex.getMessage());
-            newId = -1;
+            added = false;
         } finally {
             if (ps != null) {
                 try {
@@ -73,7 +73,7 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             }
         }
         
-        return newId;
+        return added;
     }
     
     @Override
@@ -267,7 +267,7 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
     }
 
     @Override   
-    public int removeUser_Security_QuestionById(int userId) {
+    public int removeUser_Security_QuestionById(int userId, int securityQuestionId) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
@@ -278,10 +278,12 @@ public class User_Security_QuestionDao extends Dao implements User_Security_Ques
             con = getConnection();
             // Make query
             String query = "DELETE FROM user_security_question "
-                    + " WHERE userId = ? ";
+                    + " WHERE userId = ? "
+                    + " AND securityQuestionId = ?";
             // Compile into SQL
             ps = con.prepareStatement(query);
             ps.setInt(1, userId);
+            ps.setInt(2, securityQuestionId);
             //Execute the SQL
             rowsDeleted = ps.executeUpdate();
         } catch (SQLException ex) {

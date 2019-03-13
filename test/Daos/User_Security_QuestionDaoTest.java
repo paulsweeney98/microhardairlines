@@ -29,12 +29,12 @@ public class User_Security_QuestionDaoTest {
     @Test
     public void testAddUser_Security_Question() {
         System.out.println("addUser_Security_Question");
-        User_Security_Question u = new User_Security_Question(6, 1, "Dundalk");
-        int result = usqDao.addUser_Security_Question(u);
+        User_Security_Question u = new User_Security_Question(2, 1, "Dundalk");
+        boolean result = usqDao.addUser_Security_Question(u);
         
-        if (result > 0) {
+        if (result) {
             System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
-            int rowsDeleted = usqDao.removeUser_Security_QuestionById(result);
+            int rowsDeleted = usqDao.removeUser_Security_QuestionById(2, 1);
             assertEquals(1, rowsDeleted);
         }
     }
@@ -51,49 +51,44 @@ public class User_Security_QuestionDaoTest {
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Test of getUser_Security_QuestionById method, of class User_Security_QuestionDao.
-//     */
-//    @Test
-//    public void testGetUser_Security_QuestionById() {
-//        System.out.println("getUser_Security_QuestionById");
-//        int userId = 0;
-//        User_Security_QuestionDao instance = null;
-//        ArrayList<User_Security_Question> expResult = null;
-//        ArrayList<User_Security_Question> result = instance.getUser_Security_QuestionById(userId);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of checkUser_Security_Answer method, of class User_Security_QuestionDao.
-//     */
-//    @Test
-//    public void testCheckUser_Security_Answer() {
-//        System.out.println("checkUser_Security_Answer");
-//        int userId = 0;
-//        int securityQuestionId = 0;
-//        String answer = "";
-//        User_Security_QuestionDao instance = null;
-//        User_Security_Question expResult = null;
-//        User_Security_Question result = instance.checkUser_Security_Answer(userId, securityQuestionId, answer);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of removeUser_Security_QuestionById method, of class User_Security_QuestionDao.
-//     */
-//    @Test
-//    public void testRemoveUser_Security_QuestionById() {
-//        System.out.println("removeUser_Security_QuestionById");
-//        int userId = 0;
-//        User_Security_QuestionDao instance = null;
-//        instance.removeUser_Security_QuestionById(userId);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getUser_Security_QuestionById method, of class User_Security_QuestionDao.
+     */
+    @Test
+    public void testGetUser_Security_QuestionById() {
+        System.out.println("getUser_Security_QuestionById");
+        int expResult = 1;
+        ArrayList<User_Security_Question> user_security_question = usqDao.getUser_Security_QuestionById(3);
+        int result = user_security_question.size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of checkUser_Security_Answer method, of class User_Security_QuestionDao.
+     */
+    @Test
+    public void testCheckUser_Security_Answer() {
+        System.out.println("checkUser_Security_Answer");
+        int expResult = 1;
+        User_Security_Question user_security_answer = usqDao.checkUser_Security_Answer(3, 1, "Dundalk");
+        int result = user_security_answer.getSecurityQuestionId();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of removeUser_Security_QuestionById method, of class User_Security_QuestionDao.
+     */
+    @Test
+    public void testRemoveUser_Security_QuestionById() {
+        System.out.println("removeUser_Security_QuestionById");
+        User_Security_Question u = new User_Security_Question(2, 1, "Dundalk");
+        boolean result = usqDao.addUser_Security_Question(u);
+        
+        if (result) {
+            System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
+            int rowsDeleted = usqDao.removeUser_Security_QuestionById(2, 1);
+            assertEquals(1, rowsDeleted);
+        }
+    }
     
 }

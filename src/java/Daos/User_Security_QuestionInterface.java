@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public interface User_Security_QuestionInterface {
     
-    public int addUser_Security_Question(User_Security_Question u);
+    public boolean addUser_Security_Question(User_Security_Question u);
     public ArrayList<User_Security_Question> getUser_Security_Question();
     public ArrayList<User_Security_Question> getUser_Security_QuestionById(int userId);
     public User_Security_Question checkUser_Security_Answer(int userId, int securityQuestionId, String answer);
-    public int removeUser_Security_QuestionById(int userId);
+    public int removeUser_Security_QuestionById(int userId, int securityQuestionId);
 }
