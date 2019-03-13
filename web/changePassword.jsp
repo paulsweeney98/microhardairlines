@@ -30,8 +30,8 @@
                             <label for="oldPassword"><%=dataBundle.getString("changePassword_OldPassword")%></label></br>
                             <input name="oldPassword" id="oldPassword" type="password" required>
                         </div>
-                    </div></br>
-                    <div class="form-row">
+                    </br>
+                    
                         <div class="col">
                             <label for="newPassword"><%=dataBundle.getString("changePassword_NewPassword")%></label>
                             <input name="newPassword" id="newPassword" type="password" required>

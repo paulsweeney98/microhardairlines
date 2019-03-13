@@ -533,20 +533,19 @@ public class UserDao extends Dao implements UserDaoInterface {
      * If the information entered by the user to update there email
      * is correct then the email is updated and if not an error is displayed.
      * 
-     * @param user The user being passed through.
+     * @param userId The id of the user.
      * @param email The username of the user.
      * 
      * @return An int containing how many rows in the database were affected. Should
      * contain 1 if a row was removed, and 0 if not.
      */
     @Override
-    public int updateUserEmail(User user, String email) {
+    public int updateUserEmail(int userId, String email) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet generatedKeys = null;
         
-        int rowsAffected = 0;
+        int rowsAffected = -1;
         
         try {
             con = getConnection();
@@ -557,15 +556,15 @@ public class UserDao extends Dao implements UserDaoInterface {
             // Compile into SQL
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
-            ps.setString(1, email);
-            ps.setInt(2, user.getUserId());
+            ps.setString(1, ""+email+"");
+            ps.setInt(2, userId);
             //Execute the SQL
             rowsAffected = ps.executeUpdate();
             
         } catch(SQLException ex) {
             System.out.println("An exception occured when querying the users table in the updateUserEmail() method\n" + ex.getMessage());
             System.out.println("\t"+ex.getMessage());
-            rowsAffected = 0;
+            rowsAffected = -1;
         } finally {
             if (ps != null) {
                 try {
@@ -1108,7 +1107,7 @@ public class UserDao extends Dao implements UserDaoInterface {
         ResultSet generatedKeys = null;
         
         int rowsAffected = 0;
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         try {
             con = getConnection();
             // Make query

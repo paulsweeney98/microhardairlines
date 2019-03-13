@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2019 at 06:13 PM
+-- Generation Time: Mar 13, 2019 at 01:04 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -187,8 +187,16 @@ CREATE TABLE `checked_baggage` (
 --
 
 INSERT INTO `checked_baggage` (`id`, `weight`, `pricePaid`, `user_flightId`) VALUES
-(1, 20.00, 25.00, 21),
-(2, 20.00, 25.00, 22);
+(5, 15.00, 20.00, 25),
+(6, 15.00, 20.00, 26),
+(7, 20.00, 25.00, 27),
+(8, 20.00, 25.00, 28),
+(9, 15.00, 20.00, 29),
+(10, 15.00, 20.00, 30),
+(11, 15.00, 20.00, 31),
+(12, 15.00, 20.00, 32),
+(13, 40.00, 65.00, 33),
+(14, 40.00, 65.00, 34);
 
 -- --------------------------------------------------------
 
@@ -1081,7 +1089,7 @@ INSERT INTO `flight` (`id`, `planeInventoryId`, `flightNumber`, `price`, `standa
 (2963, 3, 'MA-1006', 49.99, 164, 40, 16, '2019-03-19', 1080, 1150, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
 (2964, 3, 'MA-1007', 49.99, 164, 40, 16, '2019-03-19', 1200, 1270, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
 (2965, 3, 'MA-1008', 49.99, 164, 40, 16, '2019-03-19', 1320, 1390, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
-(2966, 3, 'MA-1000', 49.99, 164, 40, 16, '2019-03-20', 360, 430, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
+(2966, 3, 'MA-1000', 49.99, 158, 40, 16, '2019-03-20', 360, 430, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
 (2967, 3, 'MA-1001', 49.99, 164, 40, 16, '2019-03-20', 480, 550, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
 (2968, 3, 'MA-1002', 49.99, 164, 40, 16, '2019-03-20', 600, 670, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
 (2969, 3, 'MA-1003', 49.99, 164, 40, 16, '2019-03-20', 720, 790, 70, 'Dublin', 'DUB', 'London Heathrow', 'LHR', 'T2', 'T4'),
@@ -1162,7 +1170,7 @@ INSERT INTO `flight` (`id`, `planeInventoryId`, `flightNumber`, `price`, `standa
 (3044, 3, 'MA-1016', 69.99, 164, 40, 16, '2019-03-21', 1140, 1210, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
 (3045, 3, 'MA-1017', 69.99, 164, 40, 16, '2019-03-21', 1260, 1330, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
 (3046, 3, 'MA-1018', 69.99, 164, 40, 16, '2019-03-21', 1380, 1450, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
-(3047, 3, 'MA-1010', 69.99, 164, 40, 16, '2019-03-22', 420, 490, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
+(3047, 3, 'MA-1010', 69.99, 158, 40, 16, '2019-03-22', 420, 490, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
 (3048, 3, 'MA-1011', 69.99, 164, 40, 16, '2019-03-22', 540, 610, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
 (3049, 3, 'MA-1012', 69.99, 164, 40, 16, '2019-03-22', 660, 730, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
 (3050, 3, 'MA-1013', 69.99, 164, 40, 16, '2019-03-22', 780, 850, 70, 'London Heathrow', 'LHR', 'Dublin', 'DUB', 'T4', 'T2'),
@@ -1429,7 +1437,9 @@ INSERT INTO `user` (`id`, `email`, `password`, `firstName`, `lastName`, `dateOfB
 (3, 'andy.anderson@microhard.com', 'Andy', 'Andy', 'Anderson', '1998-06-16', '083-567-8766', 'Blue Lane', '', 'Dundalk', 'DFA-8788', 'Co. Louth', 'Ireland', 1, 0),
 (4, 'dave.franco@microhard.com', 'Dave', 'Dave', 'Franco', '1985-06-12', '087-989-9090', '3500 West Olive Suite', 'Suite 1470', 'Burbank', '91505', 'California', 'USA', 1, 0),
 (5, 'celine.dion@microhard.com', 'Celine', 'Celine', 'Dion', '1968-04-30', '085-343', 'Purple Road', '', 'Quebec City', '534-1212', 'Quebec', 'Canada', 1, 0),
-(6, 'pauls@gmail.com', '$2a$10$svVze2X1B0adCPJnEQh36OlLFrNWnXkaaBOUwRoymn6K.bgVAHG0i', 'Paul', 'Sweeney', '1998-06-06', '0877777777', 'Village', 'Louth', 'Dundalk', '0000', 'Louth', 'Ireland', 1, 0);
+(6, 'pauls@gmail.com', '$2a$10$svVze2X1B0adCPJnEQh36OlLFrNWnXkaaBOUwRoymn6K.bgVAHG0i', 'Paul', 'Sweeney', '1998-06-06', '0877777777', 'Village', 'Louth', 'Dundalk', '0000', 'Louth', 'Ireland', 1, 0),
+(7, 'deanf@gmail.com', '$2a$10$lgrTo48Ud.vlaFPikb4cju89s/8xi1sSh2FfdenU6nA9Y7DCPk3tG', 'Dean', 'Farrelly', '1998-05-06', '0876666666', 'Street', 'Meath Place', 'Kingscourt', '0000', 'Meath', 'Ireland', 1, 0),
+(8, 'gerardh@gmail.com', '$2a$10$jq8xmcBMIpTle5gYyQZuLu2NuKl2gnXih0p27BEwvSHMO.PiDt.gK', 'Gerard', 'Hoey', '1998-06-05', '0878888888', 'Dundalk1', 'Dundalk2', 'Dundalk3', '00000', 'Louth', 'Ireland', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1456,28 +1466,16 @@ CREATE TABLE `user_flight` (
 --
 
 INSERT INTO `user_flight` (`id`, `userId`, `flightId`, `passengerFirstName`, `passengerLastName`, `travelClass`, `queue`, `seat`, `boardingDoor`, `specialAssistanceRequired`, `pricePaid`) VALUES
-(1, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', '3a', 'front', 0, 499.99),
-(2, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
-(3, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', '3b', 'front', 0, 499.99),
-(4, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
-(5, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', '3c', 'front', 0, 599.99),
-(6, 6, 2938, 'Paul', 'Sweeney', 'business', 'priority', NULL, NULL, 0, 811.99),
-(7, 6, 2922, 'Paul', 'Sweeney', 'business', 'priority', NULL, NULL, 0, 909.98),
-(8, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
-(9, 6, 2922, 'Paul', 'Sweeney', 'firstClass', 'priority', NULL, NULL, 0, 1949.96),
-(10, 6, 2938, 'Paul', 'Sweeney', 'firstClass', 'priority', NULL, NULL, 0, 1739.97),
-(11, 6, 2922, 'Paul', 'Sweeney', 'firstClass', 'priority', NULL, NULL, 0, 1949.96),
-(12, 6, 2938, 'Paul', 'Sweeney', 'firstClass', 'priority', NULL, NULL, 0, 1739.97),
-(13, 6, 2922, 'Paul', 'Sweeney', 'firstClass', 'priority', NULL, NULL, 0, 1949.96),
-(14, 6, 2938, 'Paul', 'Sweeney', 'firstClass', 'priority', NULL, NULL, 0, 1739.97),
-(15, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 649.99),
-(16, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
-(17, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 649.99),
-(18, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
-(19, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 649.99),
-(20, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
-(21, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 649.99),
-(22, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99);
+(25, 7, 2966, 'Dean', 'Farrelly', 'standard', 'non-priority', '5e', 'front', 0, 64.99),
+(26, 7, 3047, 'Dean', 'Farrelly', 'standard', 'non-priority', NULL, NULL, 0, 69.99),
+(27, 7, 2966, 'John', 'Doe', 'standard', 'non-priority', '5f', 'front', 0, 64.99),
+(28, 7, 3047, 'John', 'Doe', 'standard', 'non-priority', NULL, NULL, 0, 69.99),
+(29, 8, 2966, 'Gerard', 'Hoey', 'standard', 'non-priority', '7a', 'front', 0, 64.99),
+(30, 8, 3047, 'Gerard', 'Hoey', 'standard', 'non-priority', NULL, NULL, 0, 69.99),
+(31, 8, 2966, 'Micheal', 'McArdle', 'standard', 'non-priority', '7b', 'front', 0, 64.99),
+(32, 8, 3047, 'Micheal', 'McArdle', 'standard', 'non-priority', NULL, NULL, 0, 69.99),
+(33, 8, 2966, 'Jenny', 'Smith', 'standard', 'non-priority', '8a', 'front', 0, 64.99),
+(34, 8, 3047, 'Jenny', 'Smith', 'standard', 'non-priority', NULL, NULL, 0, 69.99);
 
 -- --------------------------------------------------------
 
@@ -1496,7 +1494,8 @@ CREATE TABLE `user_security_question` (
 --
 
 INSERT INTO `user_security_question` (`userId`, `securityQuestionId`, `answer`) VALUES
-(1, 1, 'Doeville');
+(1, 1, 'Doeville'),
+(7, 1, '$2a$10$tWCB.BMsBLi9tLktdLv2bevogFURkDva3Fo8hMcl2J.ICiCXXCyui');
 
 --
 -- Indexes for dumped tables
@@ -1577,7 +1576,7 @@ ALTER TABLE `user_security_question`
 -- AUTO_INCREMENT for table `checked_baggage`
 --
 ALTER TABLE `checked_baggage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `flight`
 --
@@ -1607,12 +1606,12 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `user_flight`
 --
 ALTER TABLE `user_flight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- Constraints for dumped tables
 --

@@ -493,7 +493,7 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
     /**
      * Adds Priority Boarding to a standard user_flight.
      * 
-     * @param User_FlightId The id of the User_Flight
+     * @param id The id of the User_Flight
      * @return An int containing the rows affected.
      */
     @Override
@@ -508,7 +508,7 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
             con = getConnection();
             // Query
             String query = "UPDATE user_flight "
-                    + "SET queue = 'priority' "
+                    + "SET queue = 'priority', pricePaid = pricePaid + 50.00 "
                     + "WHERE id = ?";
             // Compile into SQL
             ps = con.prepareStatement(query);

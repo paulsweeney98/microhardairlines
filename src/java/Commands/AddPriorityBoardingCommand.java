@@ -60,9 +60,7 @@ public class AddPriorityBoardingCommand implements Command {
                             } else {
                                 departureFlightPriorityBoarding.setQueue("non-priority");
                             }
-
-//                            Checked_baggage departureFlightCheckedBaggage = new Checked_baggage(Double.parseDouble(checkedBaggage.get(i)), pricePaid, departureFlight.getId());
-//                            
+            
                             departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
                             
                             departureFlightPriorityBoarding.setId(departureFlight.getId());

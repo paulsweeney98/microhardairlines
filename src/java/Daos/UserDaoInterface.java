@@ -101,13 +101,13 @@ public interface UserDaoInterface {
      * If the information entered by the user to update there email
      * is correct then the email is updated and if not an error is displayed.
      * 
-     * @param user The user being passed through.
+     * @param userId The id of the user.
      * @param email The username of the user.
      * 
      * @return An int containing how many rows in the database were affected. Should
      * contain 1 if a row was removed, and 0 if not.
      */
-    public int updateUserEmail(User user, String email);
+    public int updateUserEmail(int userId, String email);
     
     /**
      * Updates a User's Phone Number.

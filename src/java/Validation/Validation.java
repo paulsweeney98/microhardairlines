@@ -10,6 +10,8 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import javax.servlet.http.HttpSession;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
 
 /**
  * Microhard - Paul Sweeney, Dean Farrelly and Gerard Hoey
@@ -224,4 +226,18 @@ public class Validation {
         
         return valid;
     }
+    
+    public boolean checkEmail(String email) {
+        boolean valid = true;
+        
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$"; 
+                              
+        Pattern pat = Pattern.compile(emailRegex); 
+        if (email == null) 
+            return false; 
+        return pat.matcher(email).matches(); 
+    } 
 }

@@ -118,13 +118,13 @@ public class UserDaoTest {
     @Test
     public void testUpdateUserEmail() {
         System.out.println("updateUserEmail");
-        User user = uDao.getUserById(6);
+        int userId = 6;
         int expResult = 0;
-        int result = uDao.updateUserEmail(user, "test@test.com");
+        int result = uDao.updateUserEmail(userId, "test@test.com");
         
         if (result > 0) {
             System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
-            int rowsUpdated = uDao.updateUserEmail(user, "pauls@gmail.com");
+            int rowsUpdated = uDao.updateUserEmail(userId, "pauls@gmail.com");
             assertEquals(1, rowsUpdated);
         }
     }
