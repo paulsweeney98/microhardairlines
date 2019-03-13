@@ -49,9 +49,11 @@ public class AddSecurityQuestionsCommand implements Command {
                 ArrayList<User_Security_Question> usqs = usqDao.getUser_Security_QuestionById(loggedInUser.getUserId());
                 if (!usqs.isEmpty()) {
                     // Remove this user's previous security questions
-                    usqDao.removeUser_Security_QuestionById(userId);
+                    for (User_Security_Question usq : usqs) {
+                        usqDao.removeUser_Security_QuestionById(userId, usq.getSecurityQuestionId());
+                    }
                 }
-                
+
                 // Add this user's new security questions & hashed answers to the user_security_question table
                 usqs = new ArrayList();
 
