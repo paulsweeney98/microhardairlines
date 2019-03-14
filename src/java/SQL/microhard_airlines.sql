@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2019 at 10:25 AM
+-- Generation Time: Mar 14, 2019 at 10:48 AM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -3327,11 +3327,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `firstName`, `lastName`, `dateOfBirth`, `phoneNumber`, `addressLine1`, `addressLine2`, `cityOrTown`, `postalCode`, `county`, `country`, `privileges`, `suspended`) VALUES
-(1, 'john.doe@microhard.com', 'John', 'John', 'Doe', '1995-06-14', '086-055-7880', 'Red Lane', '', 'Dundalk', '434-RRF', 'Co. Louth', 'Ireland', 1, 0),
-(2, 'joe.bloggs@microhard.com', 'Joe', 'Joe', 'Bloggs', '1991-10-05', '086-765-2453', 'Green Lane', 'Big Estate', 'Dundalk', '5TF-8K99', 'Co. Louth', 'Ireland', 1, 0),
-(3, 'andy.anderson@microhard.com', 'Andy', 'Andy', 'Anderson', '1998-06-16', '083-567-8766', 'Blue Lane', '', 'Dundalk', 'DFA-8788', 'Co. Louth', 'Ireland', 1, 0),
-(4, 'dave.franco@microhard.com', 'Dave', 'Dave', 'Franco', '1985-06-12', '087-989-9090', '3500 West Olive Suite', 'Suite 1470', 'Burbank', '91505', 'California', 'USA', 1, 0),
-(5, 'celine.dion@microhard.com', 'Celine', 'Celine', 'Dion', '1968-04-30', '085-343', 'Purple Road', '', 'Quebec City', '534-1212', 'Quebec', 'Canada', 1, 0),
 (6, 'pauls@gmail.com', '$2a$10$svVze2X1B0adCPJnEQh36OlLFrNWnXkaaBOUwRoymn6K.bgVAHG0i', 'Paul', 'Sweeney', '1998-06-06', '0877777777', 'Village', 'Louth', 'Dundalk', '0000', 'Louth', 'Ireland', 1, 0),
 (7, 'deanf@gmail.com', '$2a$10$lgrTo48Ud.vlaFPikb4cju89s/8xi1sSh2FfdenU6nA9Y7DCPk3tG', 'Dean', 'Farrelly', '1998-05-06', '0876666666', 'Street', 'Meath Place', 'Kingscourt', '0000', 'Meath', 'Ireland', 1, 0),
 (8, 'gerardh@gmail.com', '$2a$10$jq8xmcBMIpTle5gYyQZuLu2NuKl2gnXih0p27BEwvSHMO.PiDt.gK', 'Gerard', 'Hoey', '1998-06-05', '0878888888', 'Dundalk1', 'Dundalk2', 'Dundalk3', '00000', 'Louth', 'Ireland', 1, 0);
@@ -3389,7 +3384,6 @@ CREATE TABLE `user_security_question` (
 --
 
 INSERT INTO `user_security_question` (`userId`, `securityQuestionId`, `answer`) VALUES
-(1, 1, 'Doeville'),
 (7, 1, '$2a$10$tWCB.BMsBLi9tLktdLv2bevogFURkDva3Fo8hMcl2J.ICiCXXCyui');
 
 --
