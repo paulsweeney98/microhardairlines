@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2019 at 06:48 PM
+-- Generation Time: Mar 14, 2019 at 09:43 AM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -1457,7 +1457,7 @@ CREATE TABLE `user_flight` (
 
 INSERT INTO `user_flight` (`id`, `userId`, `flightId`, `passengerFirstName`, `passengerLastName`, `travelClass`, `queue`, `seat`, `boardingDoor`, `specialAssistanceRequired`, `pricePaid`) VALUES
 (1, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', '3a', 'front', 0, 499.99),
-(2, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
+(2, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 629.99),
 (3, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', '3b', 'front', 0, 499.99),
 (4, 6, 2938, 'Paul', 'Sweeney', 'standard', 'non-priority', NULL, NULL, 0, 579.99),
 (5, 6, 2922, 'Paul', 'Sweeney', 'standard', 'non-priority', '3c', 'front', 0, 599.99),
@@ -1496,7 +1496,7 @@ CREATE TABLE `user_security_question` (
 --
 
 INSERT INTO `user_security_question` (`userId`, `securityQuestionId`, `answer`) VALUES
-(1, 1, 'Doeville');
+(3, 1, '$2a$10$kJu39.f2z6d6k4U1rd6N/.cCEmq7bBg.YJJ5FFZQ0cfX06OLPFju.');
 
 --
 -- Indexes for dumped tables
@@ -1577,12 +1577,12 @@ ALTER TABLE `user_security_question`
 -- AUTO_INCREMENT for table `checked_baggage`
 --
 ALTER TABLE `checked_baggage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3169;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3171;
 --
 -- AUTO_INCREMENT for table `plane`
 --
@@ -1607,12 +1607,12 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `user_flight`
 --
 ALTER TABLE `user_flight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- Constraints for dumped tables
 --
