@@ -90,7 +90,7 @@
                 <p><b><%=dataBundle.getString("editUserProfile_lastName")%> </b><%=loggedInUser.getLastName()%>
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_email")%> </b></label>
-                    <input name="email" required size=15 type="text" value="<%=loggedInUser.getEmail()%>" />
+                    <input name="email" required size=15 type="email" value="<%=loggedInUser.getEmail()%>" />
                     <input type="submit" value="Edit" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />

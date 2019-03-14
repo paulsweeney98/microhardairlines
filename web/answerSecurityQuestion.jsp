@@ -63,10 +63,10 @@
                         </div></br>
                         
                         <div class="form-row">
-                            <input name="newPassword" type="text" placeholder="New Password" required>
+                            <input name="newPassword" type="password" placeholder="New Password" required>
                         </div>
                         <div class="form-row">
-                            <input name="confirmNewPassword" type="text" placeholder="Confirm Password" required>
+                            <input name="confirmNewPassword" type="password" placeholder="Confirm Password" required>
                         </div></br>
                             
                         <div class="form-row">

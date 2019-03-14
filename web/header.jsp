@@ -148,7 +148,7 @@
                 </form>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="register.jsp">New around here? Register</a>
-                <a class="dropdown-item" href="#">Forgot password?</a>
+                <a class="dropdown-item" href="answerSecurityQuestion.jsp">Forgot password?</a>
             </div>
             <%
                 }
