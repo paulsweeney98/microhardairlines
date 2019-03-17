@@ -84,6 +84,12 @@
                             </div>
                             <%
                                     }
+                                } else {
+                            %>
+                            <div class="col-6">
+                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Boarding Pass</a>
+                            </div>
+                            <%
                                 }
                             %>
                             
