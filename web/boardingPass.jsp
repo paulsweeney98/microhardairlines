@@ -66,7 +66,7 @@
                         int counter = 0;
                         for (User_Flight user_flight : user_flights) {
                             // Generating QR code
-                            qrGenerator.generateQRCodeImage("ID: " + user_flight.getId() + "\nPassenger: " + user_flight.getPassengerFirstName() + " " + user_flight.getPassengerLastName() + "\nGoing From: " + flight.getDepartureAirport() + "\nTo: " + flight.getArrivalAirport(), 350, 350, "MyQRCode" + user_flight.getPassengerLastName() + ".png");
+                            qrGenerator.generateQRCodeImage("ID: " + user_flight.getId() + "\nPassenger: " + user_flight.getPassengerFirstName() + " " + user_flight.getPassengerLastName() + "\nGoing From: " + flight.getDepartureAirport() + "\nTo: " + flight.getArrivalAirport(), 350, 350, "MyQRCode" + user_flight.getPassengerLastName() + user_flight.getId() + ".png");
                             
                             if (counter == 0) {
                     %>
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         
-                        <img src="QRCodeImages/MyQRCode<%=user_flight.getPassengerLastName()%>.png" alt="QR Code" width="350">
+                        <img src="QRCodeImages/MyQRCode<%=user_flight.getPassengerLastName()%><%=user_flight.getId()%>.png" alt="QR Code" width="350">
                     </div>
                     <% 
                             } else {
@@ -195,7 +195,7 @@
                             </div>
                         </div>
                         
-                        <img src="QRCodeImages/MyQRCode<%=user_flight.getPassengerLastName()%>.png" alt="QR Code" width="350">
+                        <img src="QRCodeImages/MyQRCode<%=user_flight.getPassengerLastName()%><%=user_flight.getId()%>.png" alt="QR Code" width="350">
                     </div>
                     <%
                             }

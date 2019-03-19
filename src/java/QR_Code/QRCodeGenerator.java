@@ -19,18 +19,10 @@ import java.nio.file.Path;
  *
  * @author D00191889
  */
-//    public byte[] getQRCodeImage(String text, int width, int height) throws WriterException, IOException {
-//        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-//        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
-//
-//        ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
-//        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
-//        byte[] pngData = pngOutputStream.toByteArray(); 
-//        return pngData;
-//    }
     
 public class QRCodeGenerator {
-    private static final String QR_CODE_IMAGE_PATH = "E:\\College\\Year 3\\Semester 2\\Software Project\\new\\microhard_airlines\\web\\QRCodeImages/";
+//    private static final String QR_CODE_IMAGE_PATH = "C:\\College\\Year 3\\Semester 2\\Software Project\\microhard_airlines\\web\\QRCodeImages/";
+    private static final String QR_CODE_IMAGE_PATH = "E:\\College\\Year 3\\Semester 2\\Software Project\\test\\microhard_airlines\\web\\QRCodeImages/";
 
     public void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
