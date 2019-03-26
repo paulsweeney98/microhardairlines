@@ -78,31 +78,43 @@ public class CommandFactory {
                     c = new PayPriorityBoardingCommand();
                     break;
                 case "cancelFlight":
-                    // Do all logic cancel a flight
+                    // Do all logic to cancel a flight
                     c = new CancelFlightCommand();
                     break;
                 case "adminAddFlight":
-                    // Do all logic cancel a flight
+                    // Do all logic to add a flight
                     c = new AdminAddFlightCommand();
                     break;
+                case "adminEditFlight":
+                    // Do all logic to edit a flight
+                    c = new AdminEditFlightCommand();
+                    break;
                 case "adminRemoveFlight":
-                    // Do all logic cancel a flight
+                    // Do all logic to remove a flight
                     c = new AdminRemoveFlightCommand();
                     break;
+                case "adminSuspendUser": 
+                    // Do all logic to suspend a user
+                    c = new AdminSuspendUserCommand();
+                    break;
+                case "adminUnsuspendUser": 
+                    // Do all logic to unsuspend a user
+                    c = new AdminUnsuspendUserCommand();
+                    break;
                 case "cancelBooking":
-                    // Do all logic cancel a flight
+                    // Do all logic cancel a booking
                     c = new CancelBookingCommand();
                     break;
                 case "editAccountDetails":
-                    // Do all logic for searching for a flight
+                    // Do all logic for editing account details
                     c = new EditAccountDetailsCommand();
                     break;
                 case "answerSecurityQuestion":
-                    // Do all logic for searching for a flight
+                    // Do all logic for answering security questions
                     c = new AnswerSecurityQuestionCommand();
                     break;
                 case "changePassword":
-                    // Do all logic for searching for a flight
+                    // Do all logic for changing password
                     c = new ChangePasswordCommand();
                     break;
                 default:

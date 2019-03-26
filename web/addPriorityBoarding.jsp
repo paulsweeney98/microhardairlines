@@ -112,7 +112,7 @@
                             <h3><%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%></h3>
                         </div>
                         <div class="col">
-                            <input type="checkbox" name="priorityBoarding<%=i%>" value="Yes" class="form-control">
+                            <input type="checkbox" name="priorityBoarding<%=i%>" value="<%=dataBundle.getString("priorityBoarding_yes")%>" class="form-control">
                         </div>
                     </div>
                     <%
@@ -131,7 +131,7 @@
                             }
                         }
                     %>
-                    </br><button type="submit" class="btn btn-success">Submit</button>
+                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("priorityBoarding_submit")%></button>
                     <input type="hidden" name ="action" value="addPriorityBoarding"/>
                 </form>
             </div>

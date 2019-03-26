@@ -550,6 +550,132 @@ public class FlightDao extends Dao implements FlightDaoInterface {
     }
 
     /**
+     * Edit a <code>Flight</code> in the database.
+     * 
+     * @param flight The <code>Flight</code> to be edited.
+     * @return <code>int</code> indicating the number of rows affected by the update, should 
+     * be 1 if successful and -1 if not.
+     */
+    @Override
+    public int editFlightById(Flight flight) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        int rowsUpdated = -1;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "UPDATE flight "
+                    + " SET planeInventoryId = ?, price = ?, standardSeatsAvailable = ?, businessSeatsAvailable = ?, firstClassSeatsAvailable = ?, date = ?, departureTime = ?, arrivalTime = ?, duration = ?, departureAirport = ?, departureAirportAbbreviation = ?, arrivalAirport = ?, arrivalAirportAbbreviation = ?, departureTerminal = ?, arrivalTerminal = ?"
+                    + " WHERE id = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, flight.getPlaneInventoryId());
+            ps.setDouble(2, flight.getPrice());
+            ps.setInt(3, flight.getStandardSeatsAvailable());
+            ps.setInt(4, flight.getBusinessSeatsAvailable());
+            ps.setInt(5, flight.getFirstClassSeatsAvailable());
+            ps.setDate(6, flight.getDate());
+            ps.setInt(7, flight.getDepartureTime());
+            ps.setInt(8, flight.getArrivalTime());
+            ps.setInt(9, flight.getDuration());
+            ps.setString(10, flight.getDepartureAirport());
+            ps.setString(11, flight.getDepartureAirportAbbreviation());
+            ps.setString(12, flight.getArrivalAirport());
+            ps.setString(13, flight.getArrivalAirportAbbreviation());
+            ps.setString(14, flight.getDepartureTerminal());
+            ps.setString(15, flight.getArrivalTerminal());
+            ps.setInt(16, flight.getId());
+            // Execute SQL
+            rowsUpdated = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the editFlightById() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return id
+        return rowsUpdated;
+    }
+    
+    /**
+     * Edit <code>Flights</code> in the database with the same flightNumber.
+     * 
+     * @param flight The <code>Flight</code> to be edited.
+     * @return <code>int</code> indicating the number of rows affected by the update, should 
+     * be 1 or more if successful and -1 if not.
+     */
+    @Override
+    public int editFlightByFlightNumber(Flight flight) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        int rowsUpdated = -1;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "UPDATE flight "
+                    + " SET planeInventoryId = ?, price = ?, standardSeatsAvailable = ?, businessSeatsAvailable = ?, firstClassSeatsAvailable = ?, date = ?, departureTime = ?, arrivalTime = ?, duration = ?, departureAirport = ?, departureAirportAbbreviation = ?, arrivalAirport = ?, arrivalAirportAbbreviation = ?, departureTerminal = ?, arrivalTerminal = ?"
+                    + " WHERE flightNumber = ?";
+            // Compile into SQL
+            ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, flight.getPlaneInventoryId());
+            ps.setDouble(2, flight.getPrice());
+            ps.setInt(3, flight.getStandardSeatsAvailable());
+            ps.setInt(4, flight.getBusinessSeatsAvailable());
+            ps.setInt(5, flight.getFirstClassSeatsAvailable());
+            ps.setDate(6, flight.getDate());
+            ps.setInt(7, flight.getDepartureTime());
+            ps.setInt(8, flight.getArrivalTime());
+            ps.setInt(9, flight.getDuration());
+            ps.setString(10, flight.getDepartureAirport());
+            ps.setString(11, flight.getDepartureAirportAbbreviation());
+            ps.setString(12, flight.getArrivalAirport());
+            ps.setString(13, flight.getArrivalAirportAbbreviation());
+            ps.setString(14, flight.getDepartureTerminal());
+            ps.setString(15, flight.getArrivalTerminal());
+            ps.setString(16, flight.getFlightNumber());
+            // Execute SQL
+            rowsUpdated = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the editFlightNumber() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return id
+        return rowsUpdated;
+    }
+    
+    /**
      * Removes a <code>Flight</code> from the database.
      * 
      * @param id The id of the <code>Flight</code> to be removed.
@@ -646,6 +772,15 @@ public class FlightDao extends Dao implements FlightDaoInterface {
         return rowsUpdated;
     }
 
+    /**
+     * Update the business seats available on the flight based on the seatType and the 
+     * value to change it by.
+     * 
+     * @param flightId The id of the flight to be updated.
+     * @param seatType The type of seat (standard, business or first class).
+     * @param changeBy The value to change the seats available by.
+     * @return An int of the number of rows updated.
+     */
     @Override
     public int updateBusinessSeats(int flightId, String seatType, int changeBy) {
         // DB interaction
@@ -688,6 +823,15 @@ public class FlightDao extends Dao implements FlightDaoInterface {
         return rowsUpdated;
     }
 
+    /**
+     * Update the first class seats available on the flight based on the seatType and the 
+     * value to change it by.
+     * 
+     * @param flightId The id of the flight to be updated.
+     * @param seatType The type of seat (standard, business or first class).
+     * @param changeBy The value to change the seats available by.
+     * @return An int of the number of rows updated.
+     */
     @Override
     public int updateFirstClassSeats(int flightId, String seatType, int changeBy) {
         // DB interaction

@@ -6,6 +6,7 @@
 package Daos;
 
 import Dtos.User;
+import java.util.ArrayList;
 
 /**
  * Microhard - Paul Sweeney, Dean Farrelly and Gerard Hoey
@@ -27,24 +28,24 @@ public interface UserDaoInterface {
     /**
      * Disables a member.
      * 
-     * This method allows an admin to disable a standard user by passing that user as an
+     * This method allows an admin to disable a standard user by passing that user's id as an
      * argument.
      * 
-     * @param u The user that will be disabled.
+     * @param id The id of the user that will be disabled.
      * @return An int containing the amount of rows affected in the table.
      */
-    public int disableMember(User u);
+    public int disableMember(int id);
     
     /**
      * Enables a member.
      * 
-     * This method allows an admin to enable a standard user that is disabled by passing that user as an
+     * This method allows an admin to enable a standard user that is disabled by passing that user's id as an
      * argument.
      * 
-     * @param u The user that will be enabled.
+     * @param id The id of the user that will be enabled.
      * @return An int containing the amount of rows affected in the table.
      */
-    public int enableMember(User u);
+    public int enableMember(int id);
     
     /**
      * Gets a user by their username and password.
@@ -140,4 +141,6 @@ public interface UserDaoInterface {
     public int updateLastName(User user, String lastName);
     
     public int updateUserPassword(User user, String password);
+    
+    public ArrayList<User> getUsers();
 }

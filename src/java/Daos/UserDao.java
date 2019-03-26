@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -122,14 +124,14 @@ public class UserDao extends Dao implements UserDaoInterface {
     /**
      * Disables a member.
      * 
-     * This method allows an admin to disable a standard user by passing that user as an
+     * This method allows an admin to disable a standard user by passing that user's id as an
      * argument.
      * 
-     * @param u The user that will be disabled.
+     * @param id The id of the user that will be disabled.
      * @return An int containing the amount of rows affected in the table.
      */
     @Override
-    public int disableMember(User u) {
+    public int disableMember(int id) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
@@ -147,7 +149,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
             ps.setInt(1, User.DISABLED);
-            ps.setInt(2, u.getUserId());
+            ps.setInt(2, id);
             //Execute the SQL
             rowsAffected = ps.executeUpdate();
             
@@ -178,14 +180,14 @@ public class UserDao extends Dao implements UserDaoInterface {
     /**
      * Enables a member.
      * 
-     * This method allows an admin to enable a standard user that is disabled by passing that user as an
+     * This method allows an admin to enable a standard user that is disabled by passing that user's id as an
      * argument.
      * 
-     * @param u The user that will be enabled.
+     * @param id The id of the user that will be enabled.
      * @return An int containing the amount of rows affected in the table.
      */
     @Override
-    public int enableMember(User u) {
+    public int enableMember(int id) {
         // Required for DB interation
         Connection con = null;
         PreparedStatement ps = null;
@@ -203,7 +205,7 @@ public class UserDao extends Dao implements UserDaoInterface {
             ps = con.prepareStatement(query);
             // Setting the name variable for the statement
             ps.setInt(1, User.ENABLED);
-            ps.setInt(2, u.getUserId());
+            ps.setInt(2, id);
             //Execute the SQL
             rowsAffected = ps.executeUpdate();
             
@@ -1144,5 +1146,74 @@ public class UserDao extends Dao implements UserDaoInterface {
         }
         
         return rowsAffected;
+    }
+
+    @Override
+    public ArrayList<User> getUsers() {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        // ArrayList to store results
+        ArrayList<User> users = new ArrayList();
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT * FROM user";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            // Execute SQL
+            rs = ps.executeQuery();
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String firstName =rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                Date dateOfBirth = rs.getDate("dateOfBirth");
+                String phoneNumber = rs.getString("phoneNumber");
+                String addressLine1 = rs.getString("addressLine1");
+                String addressLine2 = rs.getString("addressLine2");
+                String cityOrTown = rs.getString("cityOrTown");
+                String postalCode = rs.getString("postalCode");
+                String county = rs.getString("county");
+                String country = rs.getString("country");
+                int privileges = rs.getInt("privileges");
+                int suspended = rs.getInt("suspended");
+
+                User u = new User(id, email, password, firstName, lastName, dateOfBirth, phoneNumber, addressLine1, addressLine2, cityOrTown, postalCode, county, country, privileges, suspended);
+
+                // Store each book in the ArrayList
+                users.add(u);
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the user table in the getUsers() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return users;
     }
 }

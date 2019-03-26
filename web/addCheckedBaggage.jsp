@@ -135,9 +135,9 @@
                             <h3><%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%></h3>
                         </div>
                         <div class="col">
-                            <label for="weight">Weight</label>
+                            <label for="weight"><%=dataBundle.getString("checkedBaggage_weight")%></label>
                             <select name="weight<%=i%>" id="weight" class="form-control">
-                                <option value="0">No Bag</option>
+                                <option value="0"><%=dataBundle.getString("checkedBaggage_noBag")%></option>
                                 <option value="15">15kg - <%=currencyFormatter.format(20)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
                                 <option value="20">20kg - <%=currencyFormatter.format(25)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
                                 <option value="25">25kg - <%=currencyFormatter.format(30)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
@@ -149,7 +149,7 @@
                             }
                         }
                     %>
-                    </br><button type="submit" class="btn btn-success">Submit</button>
+                    </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("checkedBaggage_submit")%></button>
                     <input type="hidden" name ="action" value="addCheckedBaggage" />
                 </form>
             </div>
@@ -158,10 +158,10 @@
 
         <%
                 } else {
-                    out.println("You must book for at least one passenger");
+                    out.println(dataBundle.getString("checkedBaggage_youMustBookForAtLeastOnePassenger"));
                 }
             } else {
-                out.println("No flights found");
+                out.println(dataBundle.getString("checkedBaggage_noFlightsFound"));
             }
         %>
     </body>

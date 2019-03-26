@@ -1,5 +1,5 @@
 <%-- 
-    Document   : searchRemoveFlights
+    Document   : adminSearchFlightResults
     Created on : 07-Mar-2019, 15:52:08
     Author     : D00191889
 --%>
@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><%=dataBundle.getString("adminSearchFlightResults_title")%></title>
     </head>
     <body>
         <%
@@ -48,7 +48,8 @@
                 <h3 class="float-left"><%=f.getDepartureAirportAbbreviation()%></h3>
                 <h3 class="float-right"><%=f.getArrivalAirportAbbreviation()%></h3>
                 
-                <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRemove<%=f.getId()%>" aria-expanded="false" aria-controls="collapseRemove<%=f.getId()%>">Remove Flight</button>
+                <a href="adminEditFlight.jsp?flightId=<%=f.getId()%>" class="btn btn-success"><%=dataBundle.getString("adminSearchFlightResults_editFlight")%></a>
+                <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRemove<%=f.getId()%>" aria-expanded="false" aria-controls="collapseRemove<%=f.getId()%>"><%=dataBundle.getString("adminSearchFlightResults_removeFlight")%></button>
                 
                 </br></br>
                 <p href="#" class="float-right"><%=f.getFlightNumber()%></p>
@@ -56,8 +57,8 @@
                 </br></br>
                 <div class="collapse" id="collapseRemove<%=f.getId()%>">
                     <div class="card card-body">
-                        <p>Are you sure you want to remove this flight?</p>
-                        <a href="Servlet?action=adminRemoveFlight&flightId=<%=f.getId()%>" class="btn btn-danger">Remove Flight</a>
+                        <p><%=dataBundle.getString("adminSearchFlightResults_areYouSure")%></p>
+                        <a href="Servlet?action=adminRemoveFlight&flightId=<%=f.getId()%>" class="btn btn-danger"><%=dataBundle.getString("adminSearchFlightResults_removeFlight")%></a>
                     </div>
                 </div>
             </div>
@@ -68,19 +69,19 @@
                     } else {
         %>
         <div class="text-center">
-            <h3>No flights found for your search.</h3>
-            <a href="adminRemoveFlight.jsp" class="btn btn-success">Back to Search</a>
+            <h3><%=dataBundle.getString("adminSearchFlightResults_noFlightsFound")%></h3>
+            <a href="adminSearchFlight.jsp" class="btn btn-success"><%=dataBundle.getString("adminSearchFlightResults_backToSearch")%></a>
         </div>
         <%
                     }
                 } else {
-                    out.println("Invalid details passed.");
+                    out.println(dataBundle.getString("adminSearchFlightResults_invalidDetailsPassed"));
                 }
             } else {
         %>
         <div class="text-center">
-            <h3>You must be an admin to access this page</h3>
-            <a href="index.jsp" class="btn btn-success">Normal User Homepage</a>
+            <h3><%=dataBundle.getString("adminSearchFlightResults_mustBeAdmin")%></h3>
+            <a href="index.jsp" class="btn btn-success"><%=dataBundle.getString("adminSearchFlightResults_normalUserHomepage")%></a>
         </div>
         <%
             }

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : adminRemoveFlight
+    Document   : adminSearchFlight
     Created on : 07-Mar-2019, 15:41:01
     Author     : D00191889
 --%>
@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><%=dataBundle.getString("adminSearchFlight_title")%></title>
     </head>
     <body>
         <script>
@@ -34,20 +34,20 @@
         
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">Admin Page</h1>
-                <p class="lead">Welcome, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+                <h1 class="display-4"><%=dataBundle.getString("adminSearchFlight_adminPage")%></h1>
+                <p class="lead"><%=dataBundle.getString("adminSearchFlight_welcome")%>, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
             </div>
         </div>
             
-        <h3 class="text-center">Search for the flight you want to remove</h3>
+        <h3 class="text-center"><%=dataBundle.getString("adminSearchFlight_searchForTheFlight")%></h3>
            
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 border border-primary rounded"></br>
-                <form action="adminSearchRemoveFlight.jsp" method="post">
+                <form action="adminSearchFlightResults.jsp" method="post">
                     <div class="form-row">
                       <div class="col">
-                        <label for="departureAirport">Departure Airport</label>
+                        <label for="departureAirport"><%=dataBundle.getString("adminSearchFlight_departureAirport")%></label>
                         <input list="departureAirport" name="departureAirport" id="departureAirport" class="form-control" required >
                         <datalist id="departureAirport">
                             <%
@@ -64,14 +64,14 @@
                         </datalist>
                       </div>
                       <div class="col">
-                        <label for="destinationAirport">Destination Airport</label>
+                        <label for="destinationAirport"><%=dataBundle.getString("adminSearchFlight_destinationAirport")%></label>
                         <input name="destinationAirport" id="destinationAirport" type="text" class="form-control" required >
                       </div>
                     </div></br>
                     
                     <div class="form-row">
                       <div class="col">
-                        <label for="departureDate">Departure Date</label>
+                        <label for="departureDate"><%=dataBundle.getString("adminSearchFlight_departureDate")%></label>
                         <input list="departureDate" name="departureDate" id="departureDate" required type="date" min="<%=LocalDate.now()%>" class="form-control" required />
                         <datalist id="destinationAirport">
                             <%
@@ -92,8 +92,8 @@
                     
                     <div class="form-row text-center">
                       <div class="col">
-                          <input class="btn btn-success" type="submit" value="Search Flights" />&nbsp;&nbsp;
-                        <input class="btn btn-danger" type="reset">
+                          <input class="btn btn-success" type="submit" value="<%=dataBundle.getString("adminSearchFlight_searchFlights")%>" />&nbsp;&nbsp;
+                        <input class="btn btn-danger" type="reset" value="<%=dataBundle.getString("adminSearchFlight_reset")%>">
                       </div>
                     </div></br>
                 </form></br>
@@ -105,8 +105,8 @@
             } else {
         %>
         <div class="text-center">
-            <h3>You must be an admin to access this page</h3>
-            <a href="index.jsp" class="btn btn-success">Normal User Homepage</a>
+            <h3><%=dataBundle.getString("adminSearchFlight_mustBeAdmin")%></h3>
+            <a href="index.jsp" class="btn btn-success"><%=dataBundle.getString("adminSearchFlight_normalUserHomepage")%></a>
         </div>
         <%
             }

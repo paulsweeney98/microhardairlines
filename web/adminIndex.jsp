@@ -34,14 +34,14 @@
                         <a href="adminAddFlight.jsp" class="btn btn-success">Add Flight</a></br></br>
                     </div>
                     <div class="col border border-primary rounded"></br>
-                        <h3>Remove Flight</h3>
+                        <h3>Edit or Remove Flight</h3>
                         <p></p>
-                        <a href="adminRemoveFlight.jsp" class="btn btn-success">Remove Flight</a></br></br>
+                        <a href="adminSearchFlight.jsp" class="btn btn-success">Search</a></br></br>
                     </div>
                     <div class="col border border-primary rounded"></br>
-                        <h3>Edit Flight</h3>
+                        <h3>Disable or Enable Users</h3>
                         <p></p>
-                        <a href="#" class="btn btn-success">Edit Flight</a></br></br>
+                        <a href="adminViewUsers.jsp" class="btn btn-success">View</a></br></br>
                     </div>
                 </div>
             </div>

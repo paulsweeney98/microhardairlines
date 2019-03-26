@@ -45,12 +45,12 @@ public class UserDaoTest {
     @Test
     public void testDisableMember() {
         System.out.println("disableMember");
-        User u = uDao.getUserById(6);
-        int result = uDao.disableMember(u);
+        int id = 6;
+        int result = uDao.disableMember(id);
         
         if (result > 0) {
             System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
-            int rowsUpdated = uDao.enableMember(u);
+            int rowsUpdated = uDao.enableMember(id);
             assertEquals(1, rowsUpdated);
         }
     }
@@ -61,12 +61,12 @@ public class UserDaoTest {
     @Test
     public void testEnableMember() {
         System.out.println("enableMember");
-        User u = uDao.getUserById(2);
-        int result = uDao.enableMember(u);
+        int id = 2;
+        int result = uDao.enableMember(id);
         
         if (result > 0) {
             System.out.println("Method returned appropriately, confirming database changed by trying to remove what was added");
-            int rowsUpdated = uDao.disableMember(u);
+            int rowsUpdated = uDao.disableMember(id);
             assertEquals(1, rowsUpdated);
         }
     }

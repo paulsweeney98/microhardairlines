@@ -74,6 +74,24 @@ public interface FlightDaoInterface {
     public int addFlight(Flight flight);
     
     /**
+     * Edit a <code>Flight</code> in the database.
+     * 
+     * @param flight The <code>Flight</code> to be edited.
+     * @return <code>int</code> indicating the number of rows affected by the update, should 
+     * be 1 if successful and -1 if not.
+     */
+    public int editFlightById(Flight flight);
+    
+    /**
+     * Edit <code>Flights</code> in the database with the same flightNumber.
+     * 
+     * @param flight The <code>Flight</code> to be edited.
+     * @return <code>int</code> indicating the number of rows affected by the update, should 
+     * be 1 or more if successful and -1 if not.
+     */
+    public int editFlightByFlightNumber(Flight flight);
+    
+    /**
      * Removes a <code>Flight</code> from the database.
      * 
      * @param id The id of the <code>Flight</code> to be removed.
