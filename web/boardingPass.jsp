@@ -42,15 +42,14 @@
                     ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserId(flightId, loggedInUser.getUserId());
         %>
         
-        <div class="text-center">
-            <a href="printBoaringPass.jsp?flightId=<%=flightId%>" class="btn btn-success">Print Boarding Pass(es)</a>
+        <!--Should only display on desktops-->
+        <div class="d-none d-md-block text-md-center">
+            <a href="printBoardingPass.jsp?flightId=<%=flightId%>" class="btn btn-success">Print Boarding Pass(es)</a>
         </div>
         
-        <h1 class="text-center">OR</h1>
-        
-        <div class="row mt-3">
-            <div class="col-4"></div>
-            <div class="col-4">
+        <!--Should only display on mobile-->
+        <div class="d-xs-block d-md-none row mt-3">
+            <div class="col">
                 <div id="demo" class="carousel slide" data-ride="carousel">
 
                   <!-- Indicators -->
@@ -213,7 +212,6 @@
                   </a>
                 </div>
             </div>
-            <div class="col-4"></div>
         </div>
                   
         <%

@@ -36,9 +36,9 @@
                     User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
         %>
         
-        <h3>
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
-            <span class="float-right"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%>&nbsp;&nbsp;</span>
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
+            <span class="float-right mr-3"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%></span>
         </h3>
         <hr></br></br>
         
@@ -46,9 +46,9 @@
                 } else {
         %>
         
-        <h3>
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid())%>&nbsp;&nbsp;</span>
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
+            <span class="float-right mr-3"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid())%></span>
         </h3>
         <hr></br></br>
         
@@ -83,12 +83,10 @@
             
         %>
         
-<!--        Seat selection-->
-
         <!--Checked baggage-->
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
+            <div class="col-0 col-md-3"></div>
+            <div class="col-12 col-md-6 text-center">
                 <form action="Servlet" method="post">
                     <%
                         for (int i = 0; i < numPassengers; i++) {
@@ -99,7 +97,7 @@
                         <div class="col">
                             <h3><%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%></h3>
                         </div>
-                        <div class="col">
+                        <div class="col mr-3 mr-md-0">
                             <label for="weight"><%=dataBundle.getString("checkedBaggage_weight")%></label>
                             <select name="weight<%=i%>" id="weight" class="form-control">
                                 <option value="0"><%=dataBundle.getString("checkedBaggage_noBag")%></option>
@@ -114,12 +112,12 @@
                             }
                         }
                     %>
-                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left"><%=dataBundle.getString("checkedBaggage_startAgain")%></a>
-                    <button type="submit" class="btn btn-success float-right"><%=dataBundle.getString("checkedBaggage_submit")%></button>
+                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left ml-3 ml-md-0"><%=dataBundle.getString("checkedBaggage_startAgain")%></a>
+                    <button type="submit" class="btn btn-success float-right mr-3 mr-md-0"><%=dataBundle.getString("checkedBaggage_submit")%></button>
                     <input type="hidden" name ="action" value="storeCheckedBaggage" />
                 </form>
             </div>
-            <div class="col-3"></div>
+            <div class="col-0 col-md-3"></div>
         </div>
         
         <%     
