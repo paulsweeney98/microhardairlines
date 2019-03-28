@@ -61,7 +61,7 @@
 
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
@@ -71,7 +71,7 @@
 
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
@@ -137,7 +137,7 @@
                         </div>
                     </div>
 
-                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left">Start Again</a>
+                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left"><%=dataBundle.getString("paymentDetails_startAgain")%></a>
                     <button type="submit" class="btn btn-success float-right"><%=dataBundle.getString("paymentDetails_bookFlight")%></button>
                     <input type="hidden" name ="action" value="bookFlight" />
                 </form>
@@ -147,19 +147,19 @@
 
         <%
                 } else {
-                    out.println("Invalid number of passengers, passenger details or checked baggage");
+                    out.println(dataBundle.getString("paymentDetails_invalidNumber"));
                 }
             } else {
-                out.println("No flight found.");
+                out.println(dataBundle.getString("paymentDetails_noFlightFound"));
             }
 
         } else {
         %>
 
         <div class="text-center">
-            <h3>You must log in or register to complete the booking</h3></br>
-            <a href="login.jsp?booking=true" class="btn btn-success">Login</a>&nbsp;&nbsp;
-            <a href="register.jsp?booking=true" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("paymentDetails_youMustLoginOrRegister")%></h3></br>
+            <a href="login.jsp?booking=true" class="btn btn-success"><%=dataBundle.getString("login_login")%></a>&nbsp;&nbsp;
+            <a href="register.jsp?booking=true" class="btn btn-success"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
         </div>
 
         <%

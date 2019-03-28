@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><%=dataBundle.getString("register_register")%></title>
+        <title><%=dataBundle.getString("register_title")%></title>
     </head>
     <body>
         <%
@@ -69,7 +69,7 @@
                             <td><%=dataBundle.getString("register_country")%></td><td> <input name="country" required size=40 type="text" /> </td> 
                         </tr>
                     </table></br>
-                    <input type="submit" value="Register" />
+                    <input type="submit" value="<%=dataBundle.getString("register_register")%>" />
                     <%
                         if (booking != null) {
                     %>

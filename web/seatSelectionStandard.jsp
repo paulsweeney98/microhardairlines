@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Seat Selection</title>
+        <title><%=dataBundle.getString("seatSelection_title")%></title>
     </head>
     <body>
         <%
@@ -46,7 +46,7 @@
         
         <div class="row mt-3">
             <div class="col-5 text-center">
-                <h3>Please select <%=user_flights.size()%> seats for:</h3>
+                <h3><%=dataBundle.getString("seatSelection_pleaseSelect")%> <%=user_flights.size()%> <%=dataBundle.getString("seatSelection_seatsFor")%></h3>
                 <%
                     for (User_Flight user_flight : user_flights) {
                 %>
@@ -152,24 +152,24 @@
             <form action="Servlet" method="post">
                 
                 
-                </br><button type="submit" class="btn btn-success">Submit</button>
+                </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("seatSelection_submit")%></button>
                 <input type="hidden" name="seatsBookedJSON" id="seatsBookedJSON" value="" />
                 <input type="hidden" name ="action" value="selectSeat" />
             </form>
         </div>
             
         <%          } else {
-                        out.println("Problem retrieving taken seats and users booked for this flight.");
+                        out.println(dataBundle.getString("seatSelection_problemRetrievingTakenSeats"));
                     }
                 } else {
-                    out.println("Invalid flight.");
+                    out.println(dataBundle.getString("seatSelection_invalidFlight"));
                 }
             } else {
         %>
         <div class="text-center">
-            <h3>Please login</h3>
-            <a href="login.jsp" class="btn btn-success">Login</a>
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("seatSelection_pleaseLogin")%></h3>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("login_login")%></a>
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
         </div>
         <%
             }

@@ -51,7 +51,7 @@
 
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(priorityBoardingPrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(priorityBoardingPrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
@@ -71,7 +71,7 @@
 
             <div class="col border border-primary rounded">
                 <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
-                </br><%=dataBundle.getString("paymentDetails_priorityBoarding")%>: Yes
+                </br><%=dataBundle.getString("paymentDetails_priorityBoarding")%>: <%=dataBundle.getString("paymentDetails_yes")%>
             </div>
 
             <%
@@ -80,7 +80,7 @@
 
             <div class="col border border-primary rounded">
                 <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
-                </br><%=dataBundle.getString("paymentDetails_priorityBoarding")%>: No
+                </br><%=dataBundle.getString("paymentDetails_priorityBoarding")%>: <%=dataBundle.getString("paymentDetails_no")%>
             </div>
 
             <%
@@ -135,19 +135,19 @@
 
         <%
                 } else {
-                    out.println("Invalid number of passengers or passenger details");
+                    out.println(dataBundle.getString("paymentDetails_invalidNumberPriority"));
                 }
             } else {
-                out.println("No flight found.");
+                out.println(dataBundle.getString("paymentDetails_noFlightFound"));
             }
 
         } else {
         %>
 
         <div class="text-center">
-            <h3>You must log in or register to add priority boarding to your flight</h3></br>
-            <a href="login.jsp" class="btn btn-success">Login</a>&nbsp;&nbsp;
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("paymentDetails_youMustLoginOrRegister")%></h3></br>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("login_login")%></a>&nbsp;&nbsp;
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
         </div>
 
         <%

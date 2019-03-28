@@ -152,18 +152,18 @@
                       </div>
                       <div class="col">
                         <label for="firstName"><%=dataBundle.getString("passengerDetails_firstName")%></label>
-                        <input name="firstName<%=i%>" type="text" id="firstName" class="form-control" placeholder="First Name" required>
+                        <input name="firstName<%=i%>" type="text" id="firstName" class="form-control" placeholder="<%=dataBundle.getString("passengerDetails_firstNamePlaceholder")%>" required>
                       </div>
                       <div class="col">
                         <label for="lastName"><%=dataBundle.getString("passengerDetails_lastName")%></label>
-                        <input name="lastName<%=i%>" type="text" id="lastName" class="form-control mr-3 mr-md-0" placeholder="Last Name" required>
+                        <input name="lastName<%=i%>" type="text" id="lastName" class="form-control mr-3 mr-md-0" placeholder="<%=dataBundle.getString("passengerDetails_lastNamePlaceholder")%>" required>
                       </div>
                     </div>
                     <%
                         }
                     %>
-                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left ml-1 ml-md-0">Start Again</a>
-                    <button type="submit" class="btn btn-success float-right mr-3 mr-md-0">Next</button>
+                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left ml-1 ml-md-0"><%=dataBundle.getString("passengerDetails_startAgain")%></a>
+                    <button type="submit" class="btn btn-success float-right mr-3 mr-md-0"><%=dataBundle.getString("passengerDetails_next")%></button>
                     <input type="hidden" name ="action" value="storePassengerDetails" />
                 </form>
             </div>

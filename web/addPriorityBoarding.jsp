@@ -146,10 +146,10 @@
 
 
         <%                } else {
-                    out.println("You must book for at least one passenger");
+                    out.println(dataBundle.getString("priorityBoarding_youMustBookForAtLeastOnePassenger"));
                 }
             } else {
-                out.println("No flights found");
+                out.println(dataBundle.getString("priorityBoarding_noFlightsFound"));
             }
         %>
     </body>

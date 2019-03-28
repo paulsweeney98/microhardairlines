@@ -50,7 +50,7 @@
 
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right">Total: <%=currencyFormatter.format(departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
@@ -123,19 +123,19 @@
 
         <%
                 } else {
-                    out.println("Invalid number of passengers, passenger details or checked baggage");
+                    out.println(dataBundle.getString("paymentDetails_invalidNumber"));
                 }
             } else {
-                out.println("No flight found.");
+                out.println(dataBundle.getString("paymentDetails_noFlightFound"));
             }
 
         } else {
         %>
 
         <div class="text-center">
-            <h3>You must log in or register to add checked baggage to your flight</h3></br>
-            <a href="login.jsp" class="btn btn-success">Login</a>&nbsp;&nbsp;
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("paymentDetails_youMustLoginOrRegister")%></h3></br>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("login_login")%></a>&nbsp;&nbsp;
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
         </div>
 
         <%
