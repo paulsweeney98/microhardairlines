@@ -24,31 +24,8 @@
         %>
         
         <div class="row mt-3">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                  <!-- Indicators -->
-                  <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                  </ul>
-
-                  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                  </a>
-                  <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                  </a>
-                </div>
-            </div>
-            <div class="col-3"></div>
-        </div>
-        
-        <div class="row mt-3">
-            <div class="col-4"></div>
-            <div class="col-4 border border-primary text-center">
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4 border border-primary text-center">
                 <h1><%=dataBundle.getString("register_register")%></h1>
                 <form action="Servlet" method="post">
                     <table>
@@ -104,7 +81,7 @@
                     <input type="hidden" name ="action" value="register" />
                 </form>
             </div>
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
         </div>
         
         <!-- Include a footer so that there is always a link back to the home page! -->

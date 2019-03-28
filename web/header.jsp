@@ -156,8 +156,7 @@
           </div>
         </div>
     </nav>
-    
-    
+          
     <form action="Servlet" method="post">
         <!-- When the value of the drop down changes, 
         submit the form and send the value to the controller -->

@@ -102,8 +102,8 @@
         %>
         <% if (bookingStage.equals("one_way")) { %>
         <div class="row mt-3">
-            <div class="col-2"></div>
-            <div class="col-8 text-center">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8 text-center">
                 <ul class="nav nav-tabs nav-justified">
                     <% if (searchedDateLD.minusDays(3).isAfter(LocalDate.now())) { %>
                     <li class="nav-item">
@@ -146,12 +146,12 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-2"></div>
+            <div class="col-0 col-md-2"></div>
         </div></br>
         <% } else if (bookingStage.equals("return1")) { %>
         <div class="row mt-3">
-            <div class="col-2"></div>
-            <div class="col-8 text-center">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8 text-center">
                 <ul class="nav nav-tabs nav-justified">
                     <% if (searchedDateLD.minusDays(3).isAfter(LocalDate.now())) { %>
                     <li class="nav-item">
@@ -194,7 +194,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-2"></div>
+            <div class="col-0 col-md-2"></div>
         </div></br>
         <%
             } else if (bookingStage.equals("return2")) {
@@ -202,8 +202,8 @@
                     if (departureFlight != null) {
         %>
         <div class="row mt-3">
-            <div class="col-2"></div>
-            <div class="col-8 text-center">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8 text-center">
                 <ul class="nav nav-tabs nav-justified">
                     <% if (searchedDateLD.minusDays(3).isAfter(departureFlight.getDate().toLocalDate())) { %>
                     <li class="nav-item">
@@ -246,7 +246,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-2"></div>
+            <div class="col-0 col-md-2"></div>
         </div></br>
         <% } } %>
         <%
@@ -267,8 +267,8 @@
         %>
         
         <div class="row mt-3">
-            <div class="col-4"></div>
-            <div class="col-4 text-center border-top border-bottom border-primary rounded">
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4 text-center border-top border-bottom border-primary rounded">
                 <h1 class="float-left"><%=departureTime%></h1>
                 <h1 class="float-right"><%=arrivalTime%></h1>
                 
@@ -487,7 +487,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
         </div>
         <%
                     }

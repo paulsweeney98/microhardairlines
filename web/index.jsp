@@ -70,8 +70,8 @@
         %>
         
         <div class="row mt-3">
-            <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-0 col-md-1"></div>
+            <div class="col-12 col-md-10">
                 <div id="demo" class="carousel slide" data-ride="carousel">
 
                   <!-- Indicators -->
@@ -109,13 +109,13 @@
                   </a>
                 </div>
             </div>
-            <div class="col-1"></div>
+            <div class="col-0 col-md-1"></div>
         </div>
         
         </br></br>
         <div class="row mt-3">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8 text-center">
                 
                 <div>
                     <ul class="nav nav-tabs">
@@ -131,9 +131,10 @@
                 </br>
                 <div id="return_content">
                     <form action="Servlet" method="post">
-                        <div class="row">
-                            <div class="col-6">
-                                <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' size='40'>
+                        <div class="form-row">
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_departure")%></label>
+                                <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' class="form-control">
                                 <datalist id="departureAirport">
                                     <%
                                         FlightDao fDao = new FlightDao(Dao.getDatabaseName());
@@ -147,14 +148,11 @@
                                         }
                                     %>
                                 </datalist>
-
-                                </br></br>
-                                <label><%=dataBundle.getString("index_departureDate")%></label>
-                                <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" />
                             </div>
 
-                            <div class="col-6">
-                                <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' size='40'>
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_destination")%></label>
+                                <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' class="form-control">
                                 <datalist id="destinationAirport">
                                     <%
                                         ArrayList<Flight> arrivalAirports = fDao.getArrivalAirports();
@@ -169,33 +167,45 @@
                                         }
                                     %>
                                 </datalist>
+                            </div>
+                        </div><br/>
 
-                                </br></br>
+                        <div class="form-row">
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_departureDate")%></label>
+                                <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" class="form-control" />
+                            </div>
+
+                            <div class="col">
                                 <label><%=dataBundle.getString("index_returnDate")%></label>
-                                <input name="returnDate" onfocusin="updateDate()" id="returnDate" required type="date" min="" />
+                                <input name="returnDate" onfocusin="updateDate()" id="returnDate" required type="date" min="" class="form-control" />
                             </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-3"></div>
+                        </div><br/>
+
+                        <div class="form-row">
                             <div class="col-6">
-                                </br>
-                                <input name="numPassengers" required min="1" size="40" type="number" placeholder="<%=dataBundle.getString("index_numberOfPassengers")%>" />
-                                </br></br>
-                                <input type="submit" value="<%=dataBundle.getString("index_search")%>" />
+                                <label><%=dataBundle.getString("index_numberOfPassengers")%></label>
+                                <input name="numPassengers" required min="1" max="10" type="number" placeholder="<%=dataBundle.getString("index_max10")%>" class="form-control" />
                             </div>
-                            <div class="col-3"></div>
-                        </div>
+                        </div><br/>
+                            
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
+                            </div>
+                        </div><br/>
                                 
                         <!-- Include a hidden field to identify what the user wants to do -->
                         <input type="hidden" name ="action" value="searchFlight" />
                     </form>
                 </div>
+                            
                 <div id="one_way_content">
                     <form action="Servlet" method="post">
-                        <div class="row">
-                            <div class="col-6">
-                                <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' size='40'>
+                        <div class="form-row">
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_departure")%></label>
+                                <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' class="form-control">
                                 <datalist id="departureAirport">
                                     <%
                                         if (departureAirports != null && !departureAirports.isEmpty()){
@@ -207,14 +217,11 @@
                                         }
                                     %>
                                 </datalist>
-
-                                </br></br>
-                                <label><%=dataBundle.getString("index_departureDate")%></label>
-                                <input name="departureDate" required type="date" min="<%=todaysDate.toString()%>" />
                             </div>
 
-                            <div class="col-6">
-                                <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' size='40'>
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_destination")%></label>
+                                <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' class="form-control">
                                 <datalist id="destinationAirport">
                                     <%
                                         if (arrivalAirports != null && !arrivalAirports.isEmpty()){
@@ -229,25 +236,32 @@
                                     %>
                                 </datalist>
                             </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-6">
-                                </br>
-                                <input name="numPassengers" required min="1" size="40" type="number" placeholder="<%=dataBundle.getString("index_numberOfPassengers")%>" />
-                                </br></br>
-                                <input type="submit" value="<%=dataBundle.getString("index_search")%>" />
+                        </div><br/>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_departureDate")%></label>
+                                <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" class="form-control" />
                             </div>
-                            <div class="col-3"></div>
-                        </div>
+                            
+                            <div class="col">
+                                <label><%=dataBundle.getString("index_numberOfPassengers")%></label>
+                                <input name="numPassengers" required min="1" max="10" type="number" placeholder="<%=dataBundle.getString("index_max10")%>" class="form-control" />
+                            </div>
+                        </div><br/>
+                            
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
+                            </div>
+                        </div><br/>
                                 
                         <!-- Include a hidden field to identify what the user wants to do -->
                         <input type="hidden" name ="action" value="searchFlight" />
                     </form>
                 </div>
             </div>
-            <div class="col-3"></div>
+            <div class="col-0 col-md-2"></div>
         </div>
     
 </html>

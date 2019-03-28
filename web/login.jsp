@@ -38,8 +38,8 @@
         %>
         
         <div class="row mt-3">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-0 col-md-3"></div>
+            <div class="col-12 col-md-6">
                 <div class="border border-primary">
                     <form action="Servlet" method="post" class="px-4 py-3">
                       <div class="form-group">
@@ -72,7 +72,7 @@
                     <a class="dropdown-item" href="#">Forgot password?</a>
                 </div>
             </div>
-            <div class="col-3"></div>
+            <div class="col-0 col-md-3"></div>
         </div>
     </body>
 </html>

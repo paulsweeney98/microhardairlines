@@ -93,12 +93,8 @@
                         
                         
         %>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
-                <h1><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%></h1>
-            </div>
-            <div class="col-3"></div>
+        <div class="row text-center">
+            <h1><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%></h1>
         </div>
         <%
                     } else if (departureFlightIdString != null && !departureFlightIdString.equals("") && departureFlightPricePaidString != null && !departureFlightPricePaidString.equals("") && departureFlightTravelClass != null && !departureFlightTravelClass.equals("")) {
@@ -124,12 +120,8 @@
                         session.setAttribute("numPassengers", numPassengers);
                         session.setAttribute("departureFlight", departureFlight);
         %>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
-                <h1><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%></h1>
-            </div>
-            <div class="col-3"></div>
+        <div class="row text-center">
+            <h1><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%></h1>
         </div>
         <%
                     } else {
@@ -140,18 +132,18 @@
         
         </br>
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-0 col-md-3"></div>
+            <div class="col-12 col-md-6">
                 <form action="Servlet" method="post">
                     <%
                         for (int i = 0; i < numPassengers; i++) {
                     %>
                     </br></br>
-                    <h3 class=""><%=dataBundle.getString("passengerDetails_passenger")%> <%=i+1%></h3>
+                    <h3 class="ml-1 ml-md-0"><%=dataBundle.getString("passengerDetails_passenger")%> <%=i+1%></h3>
                     <div class="form-row">
                       <div class="col">
-                        <label for="title"><%=dataBundle.getString("passengerDetails_title")%></label>
-                        <select name="title<%=i%>" id="title" class="form-control">
+                        <label for="title" class="ml-1 ml-md-0"><%=dataBundle.getString("passengerDetails_title")%></label>
+                        <select name="title<%=i%>" id="title" class="form-control ml-1 ml-md-0">
                             <option value="Mr">Mr</option>
                             <option value="Mrs">Mrs</option>
                             <option value="Miss">Miss</option>
@@ -164,18 +156,18 @@
                       </div>
                       <div class="col">
                         <label for="lastName"><%=dataBundle.getString("passengerDetails_lastName")%></label>
-                        <input name="lastName<%=i%>" type="text" id="lastName" class="form-control" placeholder="Last Name" required>
+                        <input name="lastName<%=i%>" type="text" id="lastName" class="form-control mr-3 mr-md-0" placeholder="Last Name" required>
                       </div>
                     </div>
                     <%
                         }
                     %>
-                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left">Start Again</a>
-                    <button type="submit" class="btn btn-success float-right">Next</button>
+                    </br><a href="Servlet?action=cancelBooking" class="btn btn-light border float-left ml-1 ml-md-0">Start Again</a>
+                    <button type="submit" class="btn btn-success float-right mr-3 mr-md-0">Next</button>
                     <input type="hidden" name ="action" value="storePassengerDetails" />
                 </form>
             </div>
-            <div class="col-3"></div>
+            <div class="col-0 col-md-3"></div>
         </div>
             
         <%
