@@ -42,8 +42,8 @@
         <h3 class="text-center"><%=dataBundle.getString("adminSearchFlight_searchForTheFlight")%></h3>
            
         <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8 border border-primary rounded"></br>
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8 border border-primary rounded"></br>
                 <form action="adminSearchFlightResults.jsp" method="post">
                     <div class="form-row">
                       <div class="col">
@@ -98,7 +98,7 @@
                     </div></br>
                 </form></br>
             </div>
-            <div class="col-2"></div>
+            <div class="col-0 col-md-2"></div>
         </div>
         
         <%

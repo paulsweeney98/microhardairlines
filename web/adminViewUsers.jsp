@@ -21,95 +21,99 @@
 
 
         <div class="row mt-3">
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
 
-            <table>
-                <tr class="col-4 text-center border-top border-bottom border-primary rounded">
-                    <th><%=dataBundle.getString("adminViewUsers_email")%></th>
-                    <th><%=dataBundle.getString("adminViewUsers_name")%></th>
-                    <th><%=dataBundle.getString("adminViewUsers_phoneNumber")%></th>
-                    <th><%=dataBundle.getString("adminViewUsers_country")%></th>
-                    <th><%=dataBundle.getString("adminViewUsers_county")%></th>
-                    <th><%=dataBundle.getString("adminViewUsers_userType")%></th>
-                    <th><%=dataBundle.getString("adminViewUsers_suspended")%></th>
-                    <th></th>
-                </tr>
-                <%
-                    UserDao uDao = new UserDao(Dao.getDatabaseName());
+            <div class="col-12 col-md-4">
+                <table>
+                    <tr class="text-center border-top border-bottom border-primary rounded">
+                        <th><%=dataBundle.getString("adminViewUsers_email")%></th>
+                        <th><%=dataBundle.getString("adminViewUsers_name")%></th>
+                        <th><%=dataBundle.getString("adminViewUsers_phoneNumber")%></th>
+                        <th><%=dataBundle.getString("adminViewUsers_country")%></th>
+                        <th><%=dataBundle.getString("adminViewUsers_county")%></th>
+                        <th><%=dataBundle.getString("adminViewUsers_userType")%></th>
+                        <th><%=dataBundle.getString("adminViewUsers_suspended")%></th>
+                        <th></th>
+                    </tr>
+                    <%
+                        UserDao uDao = new UserDao(Dao.getDatabaseName());
 
-                    ArrayList<User> users = uDao.getUsers();
+                        ArrayList<User> users = uDao.getUsers();
 
-                    if (users != null && !users.isEmpty()) {
-                        for (User u : users) {
-                            int id = u.getUserId();
-                            String email = u.getEmail();
-                            String firstName = u.getFirstName();
-                            String lastName = u.getLastName();
-                            String phoneNumber = u.getPhoneNumber();
-                            String country = u.getCountry();
-                            String county = u.getCounty();
-                            int privileges = u.getPrivileges();
-                            int suspended = u.getSuspended();
-                %>
+                        if (users != null && !users.isEmpty()) {
+                            for (User u : users) {
+                                int id = u.getUserId();
+                                String email = u.getEmail();
+                                String firstName = u.getFirstName();
+                                String lastName = u.getLastName();
+                                String phoneNumber = u.getPhoneNumber();
+                                String country = u.getCountry();
+                                String county = u.getCounty();
+                                int privileges = u.getPrivileges();
+                                int suspended = u.getSuspended();
+                    %>
 
-                <tr class="col-4 text-center border-top border-bottom border-primary rounded">
-                    <td><i><%=email%></i></td>
-                    <td><%=firstName%> <%=lastName%></td>
-                    <td><%=phoneNumber%></td>
-                    <td><%=country%></td>
-                    <td><%=county%></td>
-                    <td>
-                        <%
-                            if (privileges == 2) {
-                        %>
-                        <i><%=dataBundle.getString("adminViewUsers_admin")%></i>
-                        <%
-                        } else if (privileges == 1) {
-                        %>
-                        <i><%=dataBundle.getString("adminViewUsers_normalUser")%></i>
-                        <%
-                        } else {
-                        %>
-                        <i><%=dataBundle.getString("adminViewUsers_none")%></i>
-                        <%
-                            }
-                        %>
-                    </td>
+                    <tr class="text-center border-top border-bottom border-primary rounded">
+                        <td><i><%=email%></i></td>
+                        <td><%=firstName%> <%=lastName%></td>
+                        <td><%=phoneNumber%></td>
+                        <td><%=country%></td>
+                        <td><%=county%></td>
+                        <td>
+                            <%
+                                if (privileges == 2) {
+                            %>
+                            <i><%=dataBundle.getString("adminViewUsers_admin")%></i>
+                            <%
+                            } else if (privileges == 1) {
+                            %>
+                            <i><%=dataBundle.getString("adminViewUsers_normalUser")%></i>
+                            <%
+                            } else {
+                            %>
+                            <i><%=dataBundle.getString("adminViewUsers_none")%></i>
+                            <%
+                                }
+                            %>
+                        </td>
+
+                            <%
+                                if (suspended == 1) {
+                            %>
+                            <td>
+                                <i><%=dataBundle.getString("adminViewUsers_yes")%></i>
+                            </td>
+                            <td>
+                                <form action="Servlet" method="post">
+                                    <input class="btn btn-success" type="Submit" value="<%=dataBundle.getString("adminViewUsers_enableUser")%>">
+                                    <input type="hidden" name="id" value="<%=id%>" />
+                                    <input type="hidden" name="action" value="adminUnsuspendUser" />
+                                </form>
+                            </td>
+                            <%
+                            } else {
+                            %>
+                            <td>
+                                <i><%=dataBundle.getString("adminViewUsers_no")%></i>
+                            </td>
+                            <td>
+                                <form action="Servlet" method="post">
+                                    <input class="btn btn-danger" type="Submit" value="<%=dataBundle.getString("adminViewUsers_suspendUser")%>">
+                                    <input type="hidden" name="id" value="<%=id%>" />
+                                    <input type="hidden" name="action" value="adminSuspendUser" />
+                                </form>
+                            </td>
+                            <%
+                                }
+
+                            %>
+                    </tr>
                     
-                        <%
-                            if (suspended == 1) {
-                        %>
-                        <td>
-                            <i><%=dataBundle.getString("adminViewUsers_yes")%></i>
-                        </td>
-                        <td>
-                            <form action="Servlet" method="post">
-                                <input class="btn btn-success" type="Submit" value="<%=dataBundle.getString("adminViewUsers_enableUser")%>">
-                                <input type="hidden" name="id" value="<%=id%>" />
-                                <input type="hidden" name="action" value="adminUnsuspendUser" />
-                            </form>
-                        </td>
-                        <%
-                        } else {
-                        %>
-                        <td>
-                            <i><%=dataBundle.getString("adminViewUsers_no")%></i>
-                        </td>
-                        <td>
-                            <form action="Servlet" method="post">
-                                <input class="btn btn-danger" type="Submit" value="<%=dataBundle.getString("adminViewUsers_suspendUser")%>">
-                                <input type="hidden" name="id" value="<%=id%>" />
-                                <input type="hidden" name="action" value="adminSuspendUser" />
-                            </form>
-                        </td>
-                        <%
-                            }
-
-                        %>
-                </tr>
                 <%
                     }
-
+                %>
+                    </table>
+                <%
                 } else {
                 %>
                 <div class="text-center">
@@ -128,7 +132,8 @@
                 <%
                     }
                 %>
-            </table>
+            </div>
+            <div class="col-0 col-md-4"></div>
         </div>
 
     </body>

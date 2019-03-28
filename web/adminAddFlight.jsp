@@ -37,7 +37,7 @@
             
         <h3 class="text-center">Add Flight</h3>
            
-        <div class="row">
+        <div class="row d-none d-md-flex">
             <div class="col-2"></div>
             <div class="col-8 border border-primary rounded"></br>
                 <form action="Servlet" method="post">
@@ -116,6 +116,95 @@
                 </form></br>
             </div>
             <div class="col-2"></div>
+        </div>
+                        
+<!--        Mobile Version-->
+        <div class="row d-block d-md-none">
+            <div class="col border border-primary rounded"></br>
+                <form action="Servlet" method="post">
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="flightNumber">Flight Number</label>
+                        <input name="flightNumber" id="flightNumber" type="text" class="form-control" required >
+                      </div>
+                      <div class="col">
+                        <label for="price">Price</label>
+                        <input name="price" id="price" type="number" class="form-control" required >
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="departureTerminal">Departure Terminal</label>
+                        <input name="departureTerminal" id="departureTerminal" type="text" class="form-control" required >
+                      </div>
+                      <div class="col">
+                        <label for="arrivalTerminal">Arrival Terminal</label>
+                        <input name="arrivalTerminal" id="arrivalTerminal" type="text" class="form-control" required >
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="departureAirport">Departure Airport</label>
+                        <input name="departureAirport" id="departureAirport" type="text" class="form-control" required >
+                      </div>
+                      <div class="col">
+                        <label for="departureAirportAbbreviation">Departure Airport Abbreviation</label>
+                        <input name="departureAirportAbbreviation" id="departureAirportAbbreviation" type="text" class="form-control" required >
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="destinationAirport">Destination Airport</label>
+                        <input name="destinationAirport" id="destinationAirport" type="text" class="form-control" required >
+                      </div>
+                      <div class="col">
+                        <label for="destinationAirportAbbreviation">Destination Airport Abbreviation</label>
+                        <input name="destinationAirportAbbreviation" id="destinationAirportAbbreviation" type="text" class="form-control" required >
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="departureDate">Departure Date</label>
+                        <input name="departureDate" id="departureDate" required type="date" min="<%=LocalDate.now()%>" class="form-control" required />
+                      </div>
+                      <div class="col">
+                        <label for="departureTime">Departure Time</label>
+                        <input name="departureTime" id="departureTime" type="time" class="form-control" required >
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="arrivalTime">Arrival Time</label>
+                        <input name="arrivalTime" id="arrivalTime" type="time" class="form-control" required >
+                      </div>
+                      <div class="col">
+                        <label for="planeInventoryId">Plane</label>
+                        <select name="planeInventoryId" id="planeInventoryId"class="form-control" required>
+                            <%
+                                for (Plane_Inventory planeI : planeIs) {
+                            %>
+                            <option value="<%=planeI.getId()%>"><%=pDao.getPlaneById(planeI.getPlaneId()).getMake()%> <%=pDao.getPlaneById(planeI.getPlaneId()).getModel()%></option>
+                            <%
+                                }
+                            %>
+                        </select>
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row text-center">
+                      <div class="col">
+                          <input class="btn btn-success" type="submit" value="Add Flight" />&nbsp;&nbsp;
+                        <input class="btn btn-danger" type="reset">
+                      </div>
+                    </div></br>
+                    <input type="hidden" name ="action" value="adminAddFlight" />
+                </form></br>
+            </div>
         </div>
         
         <%

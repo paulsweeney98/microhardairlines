@@ -59,7 +59,7 @@
                             }
         %>
 
-        <div class="row">
+        <div class="row d-none d-md-flex">
             <div class="col-2"></div>
             <div class="col-8 border border-primary rounded"></br>
                 <form action="Servlet" method="post">
@@ -140,6 +140,97 @@
                 </form></br>
             </div>
             <div class="col-2"></div>
+        </div>
+                    
+<!--        Mobile Version-->
+        <div class="row d-flex d-md-none">
+            <div class="col border border-primary rounded"></br>
+                <form action="Servlet" method="post">
+                    <div class="form-row">
+                        <div class="col">
+                            <b><label for="toggleFlightNumber"><%=dataBundle.getString("adminEditFlight_flightNumber")%></label> <%=flightNumber%></b></br>
+                            <%=dataBundle.getString("adminEditFlight_editForAllFlights")%> <input name="toggleFlightNumber" id="toggleFlightNumber" type="checkbox" value="Yes" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label for="price"><%=dataBundle.getString("adminEditFlight_price")%></label>
+                            <input name="price" id="price" type="number" class="form-control" value="<%=pricePaid%>" required >
+                        </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="departureTerminal"><%=dataBundle.getString("adminEditFlight_departureTerminal")%></label>
+                            <input name="departureTerminal" id="departureTerminal" type="text" class="form-control" value="<%=departureTerminal%>"required >
+                        </div>
+                        <div class="col">
+                            <label for="arrivalTerminal"><%=dataBundle.getString("adminEditFlight_arrivalTerminal")%></label>
+                            <input name="arrivalTerminal" id="arrivalTerminal" type="text" class="form-control" value="<%=arrivalTerminal%>" required >
+                        </div>
+                    </div></br>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="departureAirport"><%=dataBundle.getString("adminEditFlight_departureAirport")%></label>
+                            <input name="departureAirport" id="departureAirport" type="text" class="form-control" value="<%=departureAirport%>" required >
+                        </div>
+                        <div class="col">
+                            <label for="departureAirportAbbreviation"><%=dataBundle.getString("adminEditFlight_departureAirportAbbreviation")%></label>
+                            <input name="departureAirportAbbreviation" id="departureAirportAbbreviation" type="text" class="form-control" value="<%=departureAirportAbbreviation%>" required >
+                        </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="destinationAirport"><%=dataBundle.getString("adminEditFlight_destinationAirport")%></label>
+                            <input name="destinationAirport" id="destinationAirport" type="text" class="form-control" value="<%=arrivalAirport%>" required >
+                        </div>
+                        <div class="col">
+                            <label for="destinationAirportAbbreviation"><%=dataBundle.getString("adminEditFlight_destinationAirportAbbreviation")%></label>
+                            <input name="destinationAirportAbbreviation" id="destinationAirportAbbreviation" type="text" class="form-control" value="<%=arrivalAirportAbbreviation%>" required >
+                        </div>
+                    </div></br>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="departureDate"><%=dataBundle.getString("adminEditFlight_departureDate")%></label>
+                            <input name="departureDate" id="departureDate" required type="date" min="<%=LocalDate.now()%>" class="form-control" value="<%=departureDate%>" required />
+                        </div>
+                        <div class="col">
+                            <label for="departureTime"><%=dataBundle.getString("adminEditFlight_departureTime")%></label>
+                            <input name="departureTime" id="departureTime" type="time" class="form-control" value="<%=departureTime%>" required >
+                        </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="arrivalTime"><%=dataBundle.getString("adminEditFlight_arrivalTime")%></label>
+                            <input name="arrivalTime" id="arrivalTime" type="time" class="form-control" value="<%=arrivalTime%>" required >
+                        </div>
+                        <div class="col">
+                            <label for="planeInventoryId"><%=dataBundle.getString("adminEditFlight_plane")%></label>
+                            <select name="planeInventoryId" id="planeInventoryId"class="form-control" required>
+                                <%
+                                    for (Plane_Inventory planeI : planeIs) {
+                                %>
+                                <option value="<%=planeI.getId()%>"><%=pDao.getPlaneById(planeI.getPlaneId()).getMake()%> <%=pDao.getPlaneById(planeI.getPlaneId()).getModel()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                    </div></br>
+
+                    <div class="form-row text-center">
+                        <div class="col">
+                            <input class="btn btn-success" type="submit" value="<%=dataBundle.getString("adminEditFlight_editFlight")%>" />&nbsp;&nbsp;
+                            <input class="btn btn-danger" type="reset" value="<%=dataBundle.getString("adminEditFlight_reset")%>">
+                        </div>
+                    </div></br>
+                    <input type="hidden" name="flightNumber" value="<%=flightNumber%>" />
+                    <input type="hidden" name="id" value="<%=id%>" />
+                    <input type="hidden" name="action" value="adminEditFlight" />
+                </form></br>
+            </div>
         </div>
 
         <%

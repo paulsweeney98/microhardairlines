@@ -38,21 +38,21 @@
         %>
         
         <div class="row mt-3">
-            <div class="col-4"></div>
-            <div class="col-4 text-center border-top border-bottom border-primary rounded">
-                <h1 class="float-left"><%=departureTime%></h1>
-                <h1 class="float-right"><%=arrivalTime%></h1>
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4 text-center border-top border-bottom border-primary rounded">
+                <h1 class="float-left ml-3 ml-md-0"><%=departureTime%></h1>
+                <h1 class="float-right mr-3 mr-md-0"><%=arrivalTime%></h1>
                 
                 <h2 class="text-center"><%=duration%></h2>
                 </br>
-                <h3 class="float-left"><%=f.getDepartureAirportAbbreviation()%></h3>
-                <h3 class="float-right"><%=f.getArrivalAirportAbbreviation()%></h3>
+                <h3 class="float-left ml-3 ml-md-0"><%=f.getDepartureAirportAbbreviation()%></h3>
+                <h3 class="float-right mr-3 mr-md-0"><%=f.getArrivalAirportAbbreviation()%></h3>
                 
                 <a href="adminEditFlight.jsp?flightId=<%=f.getId()%>" class="btn btn-success"><%=dataBundle.getString("adminSearchFlightResults_editFlight")%></a>
                 <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRemove<%=f.getId()%>" aria-expanded="false" aria-controls="collapseRemove<%=f.getId()%>"><%=dataBundle.getString("adminSearchFlightResults_removeFlight")%></button>
                 
                 </br></br>
-                <p href="#" class="float-right"><%=f.getFlightNumber()%></p>
+                <p href="#" class="float-right mr-3 mr-md-0"><%=f.getFlightNumber()%></p>
                 
                 </br></br>
                 <div class="collapse" id="collapseRemove<%=f.getId()%>">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
         </div>
         <%
                         }

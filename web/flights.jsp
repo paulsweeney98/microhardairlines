@@ -269,19 +269,19 @@
         <div class="row mt-3">
             <div class="col-0 col-md-4"></div>
             <div class="col-12 col-md-4 text-center border-top border-bottom border-primary rounded">
-                <h1 class="float-left"><%=departureTime%></h1>
-                <h1 class="float-right"><%=arrivalTime%></h1>
+                <h1 class="float-left ml-3 ml-md-0"><%=departureTime%></h1>
+                <h1 class="float-right mr-3 mr-md-0"><%=arrivalTime%></h1>
                 
                 <h2 class="text-center"><%=duration%></h2>
                 </br>
-                <h3 class="float-left"><%=f.getDepartureAirportAbbreviation()%></h3>
-                <h3 class="float-right"><%=f.getArrivalAirportAbbreviation()%></h3>
+                <h3 class="float-left ml-3 ml-md-0"><%=f.getDepartureAirportAbbreviation()%></h3>
+                <h3 class="float-right mr-3 mr-md-0"><%=f.getArrivalAirportAbbreviation()%></h3>
                 
                 <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseFares<%=f.getId()%>" aria-expanded="false" aria-controls="collapseFares<%=f.getId()%>">From <%=currencyFormatter.format(standardPrice)%></button>
                 
                 </br></br>
-                <a class="float-left" data-toggle="collapse" href="#collapseFlightDetails<%=f.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=f.getId()%>">Flight Details</a>
-                <p href="#" class="float-right"><%=f.getFlightNumber()%></p>
+                <a class="float-left ml-3 ml-md-0" data-toggle="collapse" href="#collapseFlightDetails<%=f.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=f.getId()%>">Flight Details</a>
+                <p href="#" class="float-right mr-3 mr-md-0"><%=f.getFlightNumber()%></p>
                 
                 </br></br>
                 <div class="collapse" id="collapseFares<%=f.getId()%>">
