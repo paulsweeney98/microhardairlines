@@ -190,9 +190,11 @@
                         </div><br/>
                             
                         <div class="form-row">
-                            <div class="col">
+                            <div class="col-0 col-md-3"></div>
+                            <div class="col-12 col-md-6">
                                 <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
                             </div>
+                            <div class="col-0 col-md-3"></div>
                         </div><br/>
                                 
                         <!-- Include a hidden field to identify what the user wants to do -->
@@ -251,9 +253,11 @@
                         </div><br/>
                             
                         <div class="form-row">
-                            <div class="col">
+                            <div class="col-0 col-md-3"></div>
+                            <div class="col-12 col-md-6">
                                 <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
                             </div>
+                            <div class="col-0 col-md-3"></div>
                         </div><br/>
                                 
                         <!-- Include a hidden field to identify what the user wants to do -->

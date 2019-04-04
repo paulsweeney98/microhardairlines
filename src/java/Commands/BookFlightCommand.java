@@ -270,18 +270,7 @@ public class BookFlightCommand implements Command {
                             session.setAttribute("errorMessage", errorMessage);
                             forwardToJsp = "error.jsp";
                         } else {
-                            forwardToJsp = "index.jsp";
-                            
-                            // Remove all attributes for the flights
-                            session.removeAttribute("numPassengers");
-                            session.removeAttribute("departureFlight");
-                            session.removeAttribute("returnFlight");
-                            for (int i = 0; i <= 10; i++) {
-                                session.removeAttribute("departureFlight" + i);
-                                session.removeAttribute("returnFlight" + i);
-                                session.removeAttribute("departureFlightCheckedBaggage" + i);
-                                session.removeAttribute("returnFlightCheckedBaggage" + i);
-                            }
+                            forwardToJsp = "bookingConfirmation.jsp";
                         }
 
                     } else {
