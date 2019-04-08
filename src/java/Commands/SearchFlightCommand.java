@@ -65,7 +65,7 @@ public class SearchFlightCommand implements Command {
             
             int numPassengers = v.convertStringToInt(numPassengersString);
             
-            if ((numPassengers > 0) && (numPassengers >= 10)) {
+            if ((numPassengers > 0) && (numPassengers <= 10)) {
                 
                 if (validDate && validDepartureDate && validReturnDate) {
                     

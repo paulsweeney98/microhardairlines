@@ -30,7 +30,7 @@ public class StoreCheckedBaggageCommand implements Command {
         int numPassengers = 0;
         numPassengers = (Integer)session.getAttribute("numPassengers");
 
-        if ((numPassengers > 0) && (numPassengers >= 10)) {
+        if ((numPassengers > 0) && (numPassengers <= 10)) {
             ArrayList<String> checkedBaggage = new ArrayList<String>();
 
             boolean detailsValid = true;

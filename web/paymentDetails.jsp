@@ -31,7 +31,7 @@
                 int numPassengers = -1;
                 numPassengers = (Integer) session.getAttribute("numPassengers");
 
-                if (session.getAttribute("departureFlight") != null && ((numPassengers > 0) && (numPassengers >= 10))) {
+                if (session.getAttribute("departureFlight") != null && ((numPassengers > 0) && (numPassengers <= 10))) {
                     int departureFlightId = -1;
                     User_Flight departureFlight = (User_Flight) session.getAttribute("departureFlight0");
                     departureFlightId = departureFlight.getFlightId();

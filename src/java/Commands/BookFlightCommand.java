@@ -59,7 +59,7 @@ public class BookFlightCommand implements Command {
                 // Get the logged in user
                 User loggedInUser = (User) session.getAttribute("loggedInUser");
 
-                if ((numPassengers > 0) && (numPassengers >= 10)) {
+                if ((numPassengers > 0) && (numPassengers <= 10)) {
 
                     if (loggedInUser != null) {
                         
