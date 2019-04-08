@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><%=dataBundle.getString("answerSecurityQuestion_title")%></title>
     </head>
     <body>
         <%
@@ -63,14 +63,14 @@
                         </div></br>
                         
                         <div class="form-row">
-                            <input name="newPassword" type="password" placeholder="New Password" required>
+                            <input name="newPassword" type="password" placeholder="<%=dataBundle.getString("answerSecurityQuestion_newPassword")%>" required>
                         </div>
                         <div class="form-row">
-                            <input name="confirmNewPassword" type="password" placeholder="Confirm Password" required>
+                            <input name="confirmNewPassword" type="password" placeholder="<%=dataBundle.getString("answerSecurityQuestion_confirmPassword")%>" required>
                         </div></br>
                             
                         <div class="form-row">
-                            <input type="submit" value="Submit" />
+                            <input type="submit" value="<%=dataBundle.getString("answerSecurityQuestion_submit")%>" />
                         </div>
                             
                         <input type="hidden" name="userId" value="<%=user.getUserId()%>" />
@@ -81,11 +81,11 @@
             </div>
             <%
                     } else {
-                        out.println("Problem finding questions");
+                        out.println(dataBundle.getString("answerSecurityQuestion_problemFindingQuestions"));
                     }
                 } else {
             %>
-            <h3 class="text-center">You have no security questions set up.</h3>
+            <h3 class="text-center"><%=dataBundle.getString("answerSecurityQuestion_noSecurityQuestions")%></h3>
             <%
                 }
             %>
@@ -94,7 +94,7 @@
             } else {
         %>
         <div class="text-center">
-            <h3>Enter your email address</h3>
+            <h3><%=dataBundle.getString("answerSecurityQuestion_enterEmail")%></h3>
             <form action="answerSecurityQuestion.jsp" method="post">
                 <input name="email" type="email" required>
                 <input type="submit" value="Submit" />

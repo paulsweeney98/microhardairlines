@@ -84,7 +84,7 @@
                                     <%
                                             }
                                         } else {
-                                            out.println("Security questions could not be retrieved. Please try again later.");
+                                            out.println(dataBundle.getString("securityQuestions_couldNotBeRetrieved"));
                                         }
                                     %>
                                 </select></td> 
@@ -105,7 +105,7 @@
                                     <%
                                             }
                                         } else {
-                                            out.println("Security questions could not be retrieved. Please try again later.");
+                                            out.println(dataBundle.getString("securityQuestions_couldNotBeRetrieved"));
                                         }
                                     %>
                                 </select></td> 
@@ -125,7 +125,7 @@
                                     <%
                                             }
                                         } else {
-                                            out.println("Security questions could not be retrieved. Please try again later.");
+                                            out.println(dataBundle.getString("securityQuestions_couldNotBeRetrieved"));
                                         }
                                     %>
                                 </select></td> 
@@ -135,7 +135,7 @@
                         </tr>
                     </table>
                     </br>
-                    <input type="submit" value="Add Security Questions" />
+                    <input type="submit" value="<%=dataBundle.getString("securityQuestions_addSecurityQuestions")%>" />
                     <!-- Include a hidden field to identify what the user wants to do -->
                     <input type="hidden" name ="action" value="addSecurityQuestions" />
                 </form>
@@ -146,9 +146,9 @@
         } else {
         %>
         <div class="text-center">
-            <h3>You must log in or register to add security questions to your account.</h3></br>
-            <a href="login.jsp" class="btn btn-success">Login</a>&nbsp;&nbsp;
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("securityQuestions_youMustLoginOrRegister")%></h3></br>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("securityQuestions_login")%></a>&nbsp;&nbsp;
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("securityQuestions_register")%></a>
         </div>
         <%
             }

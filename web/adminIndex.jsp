@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><%=dataBundle.getString("adminIndex_title")%><%=dataBundle.getString("adminIndex_")%></title>
     </head>
     <body>
         <%
@@ -19,8 +19,8 @@
         
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">Admin Page</h1>
-                <p class="lead">Welcome, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+                <h1 class="display-4"><%=dataBundle.getString("adminIndex_title")%></h1>
+                <p class="lead"><%=dataBundle.getString("adminIndex_welcome")%>, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
             </div>
         </div>
             
@@ -29,19 +29,19 @@
             <div class="col-12 col-md-8">
                 <div class="row text-center">
                     <div class="col border border-primary rounded"></br>
-                        <h3>Add Flight</h3>
+                        <h3><%=dataBundle.getString("adminIndex_addFlight")%></h3>
                         <p></p>
-                        <a href="adminAddFlight.jsp" class="btn btn-success">Add Flight</a></br></br>
+                        <a href="adminAddFlight.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_addFlight")%></a></br></br>
                     </div>
                     <div class="col border border-primary rounded"></br>
-                        <h3>Edit or Remove Flight</h3>
+                        <h3><%=dataBundle.getString("adminIndex_editOrRemoveFlight")%></h3>
                         <p></p>
-                        <a href="adminSearchFlight.jsp" class="btn btn-success">Search</a></br></br>
+                        <a href="adminSearchFlight.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_search")%></a></br></br>
                     </div>
                     <div class="col border border-primary rounded"></br>
-                        <h3>Disable or Enable Users</h3>
+                        <h3><%=dataBundle.getString("adminIndex_disableOrEnableUsers")%></h3>
                         <p></p>
-                        <a href="adminViewUsers.jsp" class="btn btn-success">View</a></br></br>
+                        <a href="adminViewUsers.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_view")%></a></br></br>
                     </div>
                 </div>
             </div>
@@ -52,8 +52,8 @@
             } else {
         %>
         <div class="text-center">
-            <h3>You must be an admin to access this page</h3>
-            <a href="index.jsp" class="btn btn-success">Normal User Homepage</a>
+            <h3><%=dataBundle.getString("adminIndex_mustBeAdmin")%></h3>
+            <a href="index.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_normalUserHomepage")%></a>
         </div>
         <%
             }

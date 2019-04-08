@@ -16,19 +16,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Booking Confirmation</title>
     </head>
     <body>
         <%
             if (loggedInUser != null) {
         %>
 
-        <div class="jumbotron jumbotron-fluid bg-primary text-light">
-            <div class="container">
-                <h1 class="display-4">Booking Confirmed!</h1>
-                <p class="lead">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+            <div class="container col-12" >
+                <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
+                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4">Booking Confirmed!</h1>
+                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
             </div>
-        </div>
         
         <%
                 FlightDao fDao = new FlightDao(Dao.getDatabaseName());
@@ -165,15 +164,15 @@
             }
 
             // Remove all attributes for the flights
-            session.removeAttribute("numPassengers");
-            session.removeAttribute("departureFlight");
-            session.removeAttribute("returnFlight");
-            for (int i = 0; i <= 10; i++) {
-                session.removeAttribute("departureFlight" + i);
-                session.removeAttribute("returnFlight" + i);
-                session.removeAttribute("departureFlightCheckedBaggage" + i);
-                session.removeAttribute("returnFlightCheckedBaggage" + i);
-            }
+//            session.removeAttribute("numPassengers");
+//            session.removeAttribute("departureFlight");
+//            session.removeAttribute("returnFlight");
+//            for (int i = 0; i <= 10; i++) {
+//                session.removeAttribute("departureFlight" + i);
+//                session.removeAttribute("returnFlight" + i);
+//                session.removeAttribute("departureFlightCheckedBaggage" + i);
+//                session.removeAttribute("returnFlightCheckedBaggage" + i);
+//            }
         %>
     </body>
 </html>

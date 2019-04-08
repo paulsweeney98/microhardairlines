@@ -21,251 +21,263 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=dataBundle.getString("index_title")%></title>
     </head>
-    
-        <script>
-            $(document).ready(function(){
-                // Tabs
-                $("#one_way_content").hide();
-                
-                $("#return_trip").click(function(){
-                  $("#one_way_content").hide();
-                  $("#return_content").show();
-                  
-                  this.className += " active";
-                  document.getElementById("one_way").className = "nav-link";
-                });
-                $("#one_way").click(function(){
-                  $("#return_content").hide();
-                  $("#one_way_content").show();
-                  
-                  this.className += " active";
-                  document.getElementById("return_trip").className = "nav-link";
-                });
-                
-                // Flights dropdown
-                $("input").click(function(){
-                    $(this).next().show();
-                    $(this).next().hide();
-                });
-                
-                // Set min for return date
-                $("#returnDate").click(function(){
-                    document.getElementById("returnDate").min = document.getElementById("departureDate").value;
-                });
-                
-                 // Set max for departure date
-                $("#departureDate").click(function(){
-                    document.getElementById("departureDate").max = document.getElementById("returnDate").value;
-                });
-            });
-        </script>
-        
-        <%
-            // Dates for advertisement
-            LocalDate plusOneWeek = LocalDate.now().plusWeeks(1);
-            LocalDate plusOneWeekThreeDays = plusOneWeek.plusDays(1);
-            
-            // Min date for searching
-            LocalDate todaysDate = LocalDate.now();
-        %>
-        
-        <div class="row mt-3">
-            <div class="col-0 col-md-1"></div>
-            <div class="col-12 col-md-10">
-                <div id="demo" class="carousel slide" data-ride="carousel">
 
-                  <!-- Indicators -->
-                  <ul class="carousel-indicators">
+    <script>
+        $(document).ready(function () {
+            // Tabs
+            $("#one_way_content").hide();
+
+            $("#return_trip").click(function () {
+                $("#one_way_content").hide();
+                $("#return_content").show();
+
+                this.className += " active";
+                document.getElementById("one_way").className = "nav-link";
+            });
+            $("#one_way").click(function () {
+                $("#return_content").hide();
+                $("#one_way_content").show();
+
+                this.className += " active";
+                document.getElementById("return_trip").className = "nav-link";
+            });
+
+            // Flights dropdown
+            $("input").click(function () {
+                $(this).next().show();
+                $(this).next().hide();
+            });
+
+            // Set min for return date
+            $("#returnDate").click(function () {
+                document.getElementById("returnDate").min = document.getElementById("departureDate").value;
+            });
+
+            // Set max for departure date
+            $("#departureDate").click(function () {
+                document.getElementById("departureDate").max = document.getElementById("returnDate").value;
+            });
+        });
+    </script>
+
+    <%
+        // Dates for advertisement
+        LocalDate plusOneWeek = LocalDate.now().plusWeeks(1);
+        LocalDate plusOneWeekThreeDays = plusOneWeek.plusDays(1);
+
+        // Min date for searching
+        LocalDate todaysDate = LocalDate.now();
+
+        FlightDao fDao = new FlightDao(Dao.getDatabaseName());
+    %>
+
+    <div class="row mt-3">
+        <div class="col-0 col-md-1"></div>
+        <div class="col-12 col-md-10">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
                     <li data-target="#demo" data-slide-to="0" class="active"></li>
                     <li data-target="#demo" data-slide-to="1"></li>
                     <li data-target="#demo" data-slide-to="2"></li>
-                  </ul>
+                </ul>
 
-                  <!-- The slideshow -->
-                  <div class="carousel-inner">
+                <!-- The slideshow -->
+                <%
+                    ArrayList<Flight> londonFlights = fDao.getFlightsByLocationsDepartureDatePassengerNum("Dublin", "London Heathrow", java.sql.Date.valueOf(plusOneWeek), 1);
+                    double londonPrice = londonFlights.get(0).getPrice();
+                    ArrayList<Flight> parisFlights = fDao.getFlightsByLocationsDepartureDatePassengerNum("Dublin", "Paris", java.sql.Date.valueOf(plusOneWeek), 1);
+                    double parisPrice = parisFlights.get(0).getPrice();
+                    ArrayList<Flight> newYorkFlights = fDao.getFlightsByLocationsDepartureDatePassengerNum("Dublin", "New York", java.sql.Date.valueOf(plusOneWeek), 1);
+                    double newYorkPrice = newYorkFlights.get(0).getPrice();
+                    %>
+                <div class="carousel-inner">
                     <div class="carousel-item active">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=New%20York&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
-                            <img src="images/new_york.jpg" alt="New York" width="1200">
+                            <img src="images/new_york_original.jpg" alt="New York" width="1200">
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead">New York From <br/>€<%=newYorkPrice%></h1></b>
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=London%20Heathrow&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
-                            <img src="images/london.jpg" alt="London" width="1200">
+                            <img src="images/london_original.jpg" alt="London" width="1200">
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead">London From <br/>€<%=londonPrice%></h1></b>
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=Paris&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
-                            <img src="images/paris.jpg" alt="Paris" width="1200">
+                            <img src="images/paris_original.jpg" alt="Paris" width="1200">
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead">Paris From <br/>€<%=parisPrice%></h1></b>
                         </a>
                     </div>
-                  </div>
+                </div>
 
-                  <!-- Left and right controls -->
-                  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
-                  </a>
-                  <a class="carousel-control-next" href="#demo" data-slide="next">
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
-                  </a>
-                </div>
+                </a>
             </div>
-            <div class="col-0 col-md-1"></div>
         </div>
-        
-        </br></br>
-        <div class="row mt-3">
-            <div class="col-0 col-md-2"></div>
-            <div class="col-12 col-md-8 text-center">
-                
-                <div>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#" id="return_trip" ><%=dataBundle.getString("index_returnTrip")%></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#" id="one_way" ><%=dataBundle.getString("index_oneWay")%></a>
-                        </li>
-                    </ul>
-                </div>
-                
-                </br>
-                <div id="return_content">
-                    <form action="Servlet" method="post">
-                        <div class="form-row">
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_departure")%></label>
-                                <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' class="form-control">
-                                <datalist id="departureAirport">
-                                    <%
-                                        FlightDao fDao = new FlightDao(Dao.getDatabaseName());
-                                        ArrayList<Flight> departureAirports = fDao.getDepartureAirports();
-                                        if (departureAirports != null && !departureAirports.isEmpty()){
-                                            for (Flight f: departureAirports){
-                                    %>
-                                        <option value="<%=f.getDepartureAirport()%>"><%=f.getDepartureAirportAbbreviation()%></option>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </datalist>
-                            </div>
+        <div class="col-0 col-md-1"></div>
+    </div>
 
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_destination")%></label>
-                                <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' class="form-control">
-                                <datalist id="destinationAirport">
-                                    <%
-                                        ArrayList<Flight> arrivalAirports = fDao.getArrivalAirports();
-                                        if (arrivalAirports != null && !arrivalAirports.isEmpty()){
-                                            for (Flight f: arrivalAirports){
-                                    %>
-                                        <option value="<%=f.getArrivalAirport()%>"><%=f.getArrivalAirportAbbreviation()%></option>
-                                    <%
-                                            }
-                                        } else {
+    </br></br>
+    <div class="row mt-3">
+        <div class="col-0 col-md-2"></div>
+        <div class="col-12 col-md-8 text-center">
 
-                                        }
-                                    %>
-                                </datalist>
-                            </div>
-                        </div><br/>
-
-                        <div class="form-row">
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_departureDate")%></label>
-                                <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" class="form-control" />
-                            </div>
-
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_returnDate")%></label>
-                                <input name="returnDate" onfocusin="updateDate()" id="returnDate" required type="date" min="" class="form-control" />
-                            </div>
-                        </div><br/>
-
-                        <div class="form-row">
-                            <div class="col-6">
-                                <label><%=dataBundle.getString("index_numberOfPassengers")%></label>
-                                <input name="numPassengers" required min="1" max="10" type="number" placeholder="<%=dataBundle.getString("index_max10")%>" class="form-control" />
-                            </div>
-                        </div><br/>
-                            
-                        <div class="form-row">
-                            <div class="col-0 col-md-3"></div>
-                            <div class="col-12 col-md-6">
-                                <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
-                            </div>
-                            <div class="col-0 col-md-3"></div>
-                        </div><br/>
-                                
-                        <!-- Include a hidden field to identify what the user wants to do -->
-                        <input type="hidden" name ="action" value="searchFlight" />
-                    </form>
-                </div>
-                            
-                <div id="one_way_content">
-                    <form action="Servlet" method="post">
-                        <div class="form-row">
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_departure")%></label>
-                                <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' class="form-control">
-                                <datalist id="departureAirport">
-                                    <%
-                                        if (departureAirports != null && !departureAirports.isEmpty()){
-                                            for (Flight f: departureAirports){
-                                    %>
-                                        <option value="<%=f.getDepartureAirport()%>"><%=f.getDepartureAirportAbbreviation()%></option>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </datalist>
-                            </div>
-
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_destination")%></label>
-                                <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' class="form-control">
-                                <datalist id="destinationAirport">
-                                    <%
-                                        if (arrivalAirports != null && !arrivalAirports.isEmpty()){
-                                            for (Flight f: arrivalAirports){
-                                    %>
-                                        <option value="<%=f.getArrivalAirport()%>"><%=f.getArrivalAirportAbbreviation()%></option>
-                                    <%
-                                            }
-                                        } else {
-
-                                        }
-                                    %>
-                                </datalist>
-                            </div>
-                        </div><br/>
-
-                        <div class="form-row">
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_departureDate")%></label>
-                                <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" class="form-control" />
-                            </div>
-                            
-                            <div class="col">
-                                <label><%=dataBundle.getString("index_numberOfPassengers")%></label>
-                                <input name="numPassengers" required min="1" max="10" type="number" placeholder="<%=dataBundle.getString("index_max10")%>" class="form-control" />
-                            </div>
-                        </div><br/>
-                            
-                        <div class="form-row">
-                            <div class="col-0 col-md-3"></div>
-                            <div class="col-12 col-md-6">
-                                <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
-                            </div>
-                            <div class="col-0 col-md-3"></div>
-                        </div><br/>
-                                
-                        <!-- Include a hidden field to identify what the user wants to do -->
-                        <input type="hidden" name ="action" value="searchFlight" />
-                    </form>
-                </div>
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="return_trip" ><%=dataBundle.getString("index_returnTrip")%></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="one_way" ><%=dataBundle.getString("index_oneWay")%></a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-0 col-md-2"></div>
+
+            </br>
+            <div id="return_content">
+                <form action="Servlet" method="post">
+                    <div class="form-row">
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_departure")%></label>
+                            <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' class="form-control">
+                            <datalist id="departureAirport">
+                                <%
+                                    ArrayList<Flight> departureAirports = fDao.getDepartureAirports();
+                                    if (departureAirports != null && !departureAirports.isEmpty()) {
+                                        for (Flight f : departureAirports) {
+                                %>
+                                <option value="<%=f.getDepartureAirport()%>"><%=f.getDepartureAirportAbbreviation()%></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </datalist>
+                        </div>
+
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_destination")%></label>
+                            <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' class="form-control">
+                            <datalist id="destinationAirport">
+                                <%
+                                    ArrayList<Flight> arrivalAirports = fDao.getArrivalAirports();
+                                    if (arrivalAirports != null && !arrivalAirports.isEmpty()) {
+                                        for (Flight f : arrivalAirports) {
+                                %>
+                                <option value="<%=f.getArrivalAirport()%>"><%=f.getArrivalAirportAbbreviation()%></option>
+                                <%
+                                        }
+                                    } else {
+
+                                    }
+                                %>
+                            </datalist>
+                        </div>
+                    </div><br/>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_departureDate")%></label>
+                            <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" class="form-control" />
+                        </div>
+
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_returnDate")%></label>
+                            <input name="returnDate" onfocusin="updateDate()" id="returnDate" required type="date" min="" class="form-control" />
+                        </div>
+                    </div><br/>
+
+                    <div class="form-row">
+                        <div class="col-6">
+                            <label><%=dataBundle.getString("index_numberOfPassengers")%></label>
+                            <input name="numPassengers" required min="1" max="10" type="number" placeholder="<%=dataBundle.getString("index_max10")%>" class="form-control" />
+                        </div>
+                    </div><br/>
+
+                    <div class="form-row">
+                        <div class="col-0 col-md-3"></div>
+                        <div class="col-12 col-md-6">
+                            <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
+                        </div>
+                        <div class="col-0 col-md-3"></div>
+                    </div><br/>
+
+                    <!-- Include a hidden field to identify what the user wants to do -->
+                    <input type="hidden" name ="action" value="searchFlight" />
+                </form>
+            </div>
+
+            <div id="one_way_content">
+                <form action="Servlet" method="post">
+                    <div class="form-row">
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_departure")%></label>
+                            <input list="departureAirport" name="departureAirport" placeholder='<%=dataBundle.getString("index_departure")%>' class="form-control">
+                            <datalist id="departureAirport">
+                                <%
+                                    if (departureAirports != null && !departureAirports.isEmpty()) {
+                                        for (Flight f : departureAirports) {
+                                %>
+                                <option value="<%=f.getDepartureAirport()%>"><%=f.getDepartureAirportAbbreviation()%></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </datalist>
+                        </div>
+
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_destination")%></label>
+                            <input list="destinationAirport" name="destinationAirport" placeholder='<%=dataBundle.getString("index_destination")%>' class="form-control">
+                            <datalist id="destinationAirport">
+                                <%
+                                    if (arrivalAirports != null && !arrivalAirports.isEmpty()) {
+                                        for (Flight f : arrivalAirports) {
+                                %>
+                                <option value="<%=f.getArrivalAirport()%>"><%=f.getArrivalAirportAbbreviation()%></option>
+                                <%
+                                        }
+                                    } else {
+
+                                    }
+                                %>
+                            </datalist>
+                        </div>
+                    </div><br/>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_departureDate")%></label>
+                            <input name="departureDate" id="departureDate" required type="date" min="<%=todaysDate.toString()%>" class="form-control" />
+                        </div>
+
+                        <div class="col">
+                            <label><%=dataBundle.getString("index_numberOfPassengers")%></label>
+                            <input name="numPassengers" required min="1" max="10" type="number" placeholder="<%=dataBundle.getString("index_max10")%>" class="form-control" />
+                        </div>
+                    </div><br/>
+
+                    <div class="form-row">
+                        <div class="col-0 col-md-3"></div>
+                        <div class="col-12 col-md-6">
+                            <input type="submit" value="<%=dataBundle.getString("index_search")%>" class="form-control btn btn-success" />
+                        </div>
+                        <div class="col-0 col-md-3"></div>
+                    </div><br/>
+
+                    <!-- Include a hidden field to identify what the user wants to do -->
+                    <input type="hidden" name ="action" value="searchFlight" />
+                </form>
+            </div>
         </div>
-    
+        <div class="col-0 col-md-2"></div>
+    </div>
+
 </html>
