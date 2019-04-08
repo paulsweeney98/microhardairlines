@@ -96,19 +96,28 @@
                     <div class="carousel-item active">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=New%20York&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
                             <img src="images/new_york_original.jpg" alt="New York" width="1200">
-                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead">New York From <br/>€<%=newYorkPrice%></h1></b>
+                            <!--Desktop Version-->
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">New York From <br/>€<%=newYorkPrice%></h1></b>
+                            <!--Mobile Version-->
+                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">New York From <br/>€<%=newYorkPrice%></h1></b>
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=London%20Heathrow&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
                             <img src="images/london_original.jpg" alt="London" width="1200">
-                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead">London From <br/>€<%=londonPrice%></h1></b>
+                            <!--Desktop Version-->
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">London From <br/>€<%=londonPrice%></h1></b>
+                            <!--Mobile Version-->
+                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">London From <br/>€<%=londonPrice%></h1></b>
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=Paris&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
                             <img src="images/paris_original.jpg" alt="Paris" width="1200">
-                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead">Paris From <br/>€<%=parisPrice%></h1></b>
+                            <!--Desktop Version-->
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">Paris From <br/>€<%=parisPrice%></h1></b>
+                            <!--Mobile Version-->
+                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">Paris From <br/>€<%=parisPrice%></h1></b>
                         </a>
                     </div>
                 </div>
