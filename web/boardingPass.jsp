@@ -55,8 +55,13 @@
                   <!-- Indicators -->
                   <ul class="carousel-indicators">
                     <li data-target="#demo" data-slide-to="0" class="active bg-primary"></li>
-                    <li data-target="#demo" data-slide-to="1" class="bg-primary"></li>
-                    <li data-target="#demo" data-slide-to="2" class="bg-primary"></li>
+                    <%
+                        for (int i = 1; i < user_flights.size(); i++) {
+                    %>
+                    <li data-target="#demo" data-slide-to="<%=i%>" class="bg-primary"></li>
+                    <%
+                        }
+                    %>
                   </ul>
 
                   <!-- The slideshow -->

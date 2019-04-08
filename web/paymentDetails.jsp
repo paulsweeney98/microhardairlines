@@ -4,6 +4,7 @@
     Author     : pauls
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="Dtos.Checked_baggage"%>
 <%@page import="Dtos.User_Flight"%>
 <%@page import="java.util.ArrayList"%>
@@ -30,7 +31,7 @@
                 int numPassengers = -1;
                 numPassengers = (Integer) session.getAttribute("numPassengers");
 
-                if (session.getAttribute("departureFlight") != null && numPassengers > 0) {
+                if (session.getAttribute("departureFlight") != null && ((numPassengers > 0) && (numPassengers >= 10))) {
                     int departureFlightId = -1;
                     User_Flight departureFlight = (User_Flight) session.getAttribute("departureFlight0");
                     departureFlightId = departureFlight.getFlightId();
@@ -57,21 +58,34 @@
                                 returnCheckedBaggagePrice = returnCheckedBaggagePrice + checkedBaggage.getPricePaid();
                             }
                         }
+                        
+                        // Caculating the total price
+                        double totalPrice = departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice;
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        totalPrice = v.convertStringToDouble(df.format(totalPrice));
         %>
 
+        <!--Total price to be sent to Paypal javascript function-->
+        <input id="totalPrice" value="<%=totalPrice%>" type="hidden"/>
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
-            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(totalPrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
         <%
         } else {
+            // Caculating the total price
+            double totalPrice = departureFlight.getPricePaid() + departureCheckedBaggagePrice;
+            DecimalFormat df = new DecimalFormat("#.##");
+            totalPrice = v.convertStringToDouble(df.format(totalPrice));
         %>
 
+        <!--Total price to be sent to Paypal javascript function-->
+        <input id="totalPrice" value="<%=totalPrice%>" type="hidden"/>
         <h3>
             &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(totalPrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br></br>
 
@@ -101,6 +115,48 @@
             %>
         </div>
 
+        </br>
+
+        <div class="row text-center">
+            <div class="col-4"></div>
+            <div id="paypal-button-container" class="col-4"></div>
+            <div class="col-4"></div>
+        </div>
+        
+        <script>
+            
+            
+            paypal.Buttons({
+              createOrder: function(data, actions) {
+                var amountValue = document.getElementById("totalPrice").value;
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+//                      value: '0.01'
+                      value: amountValue
+                    }
+                  }]
+                });
+              },
+              onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                  alert('Transaction completed by ' + details.payer.name.given_name);
+                  window.location = 'http://localhost:8084/microhard_airlines/Servlet?action=bookFlight&paidWithPaypal=true';
+                  // Call your server to save the transaction
+//                  return fetch('/paypal-transaction-complete', {
+//                    method: 'post',
+//                    headers: {
+//                      'content-type': 'application/json'
+//                    },
+//                    body: JSON.stringify({
+//                      orderID: data.orderID
+//                    })
+//                  });
+                });
+              }
+            }).render('#paypal-button-container');
+        </script>
+        
         </br>
         <div class="row">
             <div class="col-3"></div>

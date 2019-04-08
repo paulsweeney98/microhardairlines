@@ -40,9 +40,15 @@ public class BookFlightCommand implements Command {
         String expiryYear = request.getParameter("expiryYear");
         String cvv = request.getParameter("cvv");
         
-        if (type != null && !type.equals("") && number != null && !number.equals("") && expiryMonth != null && !expiryMonth.equals("") && expiryYear != null && !expiryYear.equals("") && cvv != null && !cvv.equals("")) {
+        // If the user paid with Paypal
+        String paidWithPaypal = request.getParameter("paidWithPaypal");
+        
+        if ((type != null && !type.equals("") && number != null && !number.equals("") && expiryMonth != null && !expiryMonth.equals("") && expiryYear != null && !expiryYear.equals("") && cvv != null && !cvv.equals("") && paidWithPaypal == null) || (paidWithPaypal != null && !paidWithPaypal.equals(""))) {
             
-            boolean validCard = v.checkCard(type, number, expiryMonth, expiryYear, cvv);
+            boolean validCard = true;
+            if (paidWithPaypal == null) {
+                validCard = v.checkCard(type, number, expiryMonth, expiryYear, cvv);
+            }
             
             if (validCard) {
 
@@ -53,7 +59,7 @@ public class BookFlightCommand implements Command {
                 // Get the logged in user
                 User loggedInUser = (User) session.getAttribute("loggedInUser");
 
-                if (numPassengers > 0) {
+                if ((numPassengers > 0) && (numPassengers >= 10)) {
 
                     if (loggedInUser != null) {
                         

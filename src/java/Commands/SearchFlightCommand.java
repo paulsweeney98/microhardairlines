@@ -65,7 +65,7 @@ public class SearchFlightCommand implements Command {
             
             int numPassengers = v.convertStringToInt(numPassengersString);
             
-            if (numPassengers > 0) {
+            if ((numPassengers > 0) && (numPassengers >= 10)) {
                 
                 if (validDate && validDepartureDate && validReturnDate) {
                     
@@ -95,7 +95,7 @@ public class SearchFlightCommand implements Command {
             } else {
                 forwardToJsp = "error.jsp";
 
-                session.setAttribute("errorMessage", "You must book for at least one passenger.");
+                session.setAttribute("errorMessage", "You must book for at least one passenger and at most 10 passengers.");
             }
 
         } else {

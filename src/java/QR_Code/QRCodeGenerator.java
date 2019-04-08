@@ -21,8 +21,8 @@ import java.nio.file.Path;
  */
     
 public class QRCodeGenerator {
-//    private static final String QR_CODE_IMAGE_PATH = "C:\\College\\Year 3\\Semester 2\\Software Project\\microhard_airlines\\web\\QRCodeImages/";
-    private static final String QR_CODE_IMAGE_PATH = "E:\\College\\Year 3\\Semester 2\\Software Project\\test\\microhard_airlines\\web\\QRCodeImages/";
+    private static final String QR_CODE_IMAGE_PATH = "C:\\College\\Year 3\\Semester 2\\Software Project\\microhard_airlines\\web\\QRCodeImages/";
+//    private static final String QR_CODE_IMAGE_PATH = "E:\\College\\Year 3\\Semester 2\\Software Project\\test\\microhard_airlines\\web\\QRCodeImages/";
 
     public void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {

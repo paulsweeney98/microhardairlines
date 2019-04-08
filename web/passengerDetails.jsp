@@ -48,7 +48,7 @@
                 numPassengers = v.convertStringToInt(numPassengersString);
             }
             
-            if (numPassengers != -1) {
+            if ((numPassengers > 0) && (numPassengers >= 10)) {
             
                 if (flight != null && departureFlightPricePaidString != null && !departureFlightPricePaidString.equals("")) {
                     

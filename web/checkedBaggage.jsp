@@ -58,7 +58,7 @@
                 int numPassengers = 0;
                 numPassengers = (Integer)session.getAttribute("numPassengers");
 
-                if (numPassengers > 0) {
+                if ((numPassengers > 0) && (numPassengers >= 10)) {
 
         %>
         

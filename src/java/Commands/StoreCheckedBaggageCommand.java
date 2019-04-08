@@ -30,7 +30,7 @@ public class StoreCheckedBaggageCommand implements Command {
         int numPassengers = 0;
         numPassengers = (Integer)session.getAttribute("numPassengers");
 
-        if (numPassengers > 0) {
+        if ((numPassengers > 0) && (numPassengers >= 10)) {
             ArrayList<String> checkedBaggage = new ArrayList<String>();
 
             boolean detailsValid = true;
@@ -108,7 +108,7 @@ public class StoreCheckedBaggageCommand implements Command {
             }
 
         } else {
-            String errorMessage = "You must book for at least one passenger";
+            String errorMessage = "You must book for at least one passenger, and at most 10 passengers";
             session.setAttribute("errorMessage", errorMessage);
             forwardToJsp = "error.jsp";
         }
