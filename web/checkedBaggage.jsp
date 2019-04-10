@@ -34,23 +34,31 @@
             
                 if (session.getAttribute("returnFlight") != null) {
                     User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
+                    // Getting the return date to display it in the summary
+                    Flight returnFlightObject = fDao.getFlightById(returnFlight.getFlightId());
         %>
         
+        <!--Return Flight Version-->
+        
+        <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
-            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
-            <span class="float-right mr-3"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%></span>
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%></span>
         </h3>
-        <hr></br></br>
+        <hr></br>
         
         <%
                 } else {
         %>
         
+        <!--One-Way Flight Version-->
+        
+        <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
-            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right mr-3"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid())%></span>
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid())%></span>
         </h3>
-        <hr></br></br>
+        <hr></br>
         
         <%
                 }

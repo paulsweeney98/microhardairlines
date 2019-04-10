@@ -91,11 +91,19 @@
                         session.setAttribute("departureFlight", departureFlight);
                         session.setAttribute("returnFlight", returnFlight);
                         
-                        
+                        // Getting the return date to display it in the summary
+                        Flight returnFlightObject = fDao.getFlightById(returnFlight.getFlightId());
         %>
-        <div class="row text-center">
-            <h1><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%></h1>
-        </div>
+        
+        <!--Return Flight Version-->
+        
+        <!--Desktop and Mobile Version-->
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%></span>
+        </h3>
+        <hr></br>
+        
         <%
                     } else if (departureFlightIdString != null && !departureFlightIdString.equals("") && departureFlightPricePaidString != null && !departureFlightPricePaidString.equals("") && departureFlightTravelClass != null && !departureFlightTravelClass.equals("")) {
         
@@ -120,9 +128,16 @@
                         session.setAttribute("numPassengers", numPassengers);
                         session.setAttribute("departureFlight", departureFlight);
         %>
-        <div class="row text-center">
-            <h1><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%></h1>
-        </div>
+        
+        <!--One-Way Flight Version-->
+        
+        <!--Desktop and Mobile Version-->
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid())%></span>
+        </h3>
+        <hr></br>
+        
         <%
                     } else {
                         out.println(dataBundle.getString("passengerDetails_thereWasAProblemWithYourSelection"));

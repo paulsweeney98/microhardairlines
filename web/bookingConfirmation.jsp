@@ -21,15 +21,7 @@
     <body>
         <%
             if (loggedInUser != null) {
-        %>
-
-            <div class="container col-12" >
-                <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
-                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4">Booking Confirmed!</h1>
-                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
-            </div>
-        
-        <%
+                
                 FlightDao fDao = new FlightDao(Dao.getDatabaseName());
                 Validation v = new Validation();
 
@@ -55,6 +47,7 @@
 
                     if (session.getAttribute("returnFlight") != null) {
                         User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
+                        // Getting the return date to display it in the summary
                         Flight returnFlightObject = fDao.getFlightById(returnFlight.getFlightId());
 
                         // Get return checked baggage prices
@@ -67,9 +60,30 @@
                         }
         %>
 
+        <!--Return Flight Version-->
+        
+        <!--Desktop Version-->
+        <div class="d-none d-md-flex" >
+            <div class="col-12">
+                <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
+                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4">Booking Confirmed!</h1>
+                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead d-none d-md-flex">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+            </div>
+        </div>
+        
+        <!--Mobile Version-->
+        <div class="d-flex d-md-none" >
+            <div class="col-12">
+                <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
+                <h1 style="position: absolute; top: 5px; left: 25px; color: white; font-size: 200%;" class="display-4">Booking Confirmed!</h1>
+            </div>
+        </div>
+        
+        <!--Desktop and Mobile Version-->
+        <br>
         <h3 class="ml-3">
-            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> - <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
-            <span class="float-right mr-3"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%></span>
         </h3>
         <hr></br>
 
@@ -77,9 +91,30 @@
         } else {
         %>
 
+        <!--One-Way Flight Version-->
+        
+        <!--Desktop Version-->
+        <div class="d-none d-md-flex" >
+            <div class="col-12">
+                <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
+                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4">Booking Confirmed!</h1>
+                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead d-none d-md-flex">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+            </div>
+        </div>
+        
+        <!--Mobile Version-->
+        <div class="d-flex d-md-none" >
+            <div class="col-12">
+                <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
+                <h1 style="position: absolute; top: 5px; left: 25px; color: white; font-size: 200%;" class="display-4">Booking Confirmed!</h1>
+            </div>
+        </div>
+        
+        <!--Desktop and Mobile Version-->
+        <br>
         <h3 class="ml-3">
-            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%> - <%=dateFormatter.format(flight.getDate())%>
-            <span class="float-right mr-3"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%></span>
         </h3>
         <hr></br>
 
@@ -93,7 +128,7 @@
         <div class="row text-center">
             <div class="col-0 col-md-2"></div>
             <div class="col-0 col-md-8 flex-wrap">
-                <h3><%=dataBundle.getString("paymentDetails_passengersBooked")%>Passengers Booked:</h3>
+                <h3><%=dataBundle.getString("paymentDetails_passengersBooked")%></h3>
                 <%
                     for (int i = 0; i < numPassengers; i++) {
                         if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null) {
@@ -102,6 +137,7 @@
                 %>
 
                 <div class="col-4 border border-primary rounded">
+                    <i class="fas fa-user"></i><br>
                     <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
                     </br><%=dataBundle.getString("paymentDetails_checkedBaggage")%>: <%=departureFlightCheckedBaggage.getWeight()%> kg
                 </div>
@@ -112,36 +148,17 @@
                 %>
             </div>
             <div class="col-0 col-md-2"></div>
-        </div>
+        </div></br></br>
             
         <div class="row text-center">
             <div class="col-0 col-md-2"></div>
-            <div class="col-0 col-md-8">
-                <div class="col border border-primary rounded">
-                    <h3>View Upcoming Trips</h3></br>
-                    <a href="upcomingTrips.jsp" class="btn btn-success">View</a>
-                </div>
-                <%
-                    if (departureFlight.getTravelClass().equals("standard")) {
-                %>
-                <div class="col border border-primary rounded">
-                    <h3>Add Priority Boarding to your departure flight</h3></br>
-                    <a href="addPriorityBoarding.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success">Add</a>
-                </div>
-                <%
-                    }
-                %>
-                <div class="col border border-primary rounded">
-                    <h3>Add Checked Baggage</h3></br>
-                    <a href="#" class="btn btn-success"></a>
-                </div>
-                <div class="col border border-primary rounded">
-                    <h3></h3></br>
-                    <a href="#" class="btn btn-success"></a>
-                </div>
+            <div class="col-0 col-md-8 border border-primary rounded">
+                <h3>Manage Upcoming Trips</h3>
+                <p>To check in and view boarding passes, add checked baggage, or add priority boarding, click the button below.</p>
+                <a href="upcomingTrips.jsp" class="btn btn-success">Manage</a><p></p>
             </div>
             <div class="col-0 col-md-2"></div>
-        </div>
+        </div></br>
 
         <%
                 } else {
