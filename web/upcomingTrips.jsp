@@ -35,21 +35,21 @@
         %>
         
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4 text-center border-top border-bottom border-primary rounded">
-                <h1 class="float-left"><%=v.changeMinutesToHours(flight.getDepartureTime())%></h1>
-                <h1 class="float-right"><%=v.changeMinutesToHours(flight.getArrivalTime())%></h1>
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4 text-center border-top border-bottom border-primary rounded">
+                <h1 class="float-left ml-3 ml-md-0"><%=v.changeMinutesToHours(flight.getDepartureTime())%></h1>
+                <h1 class="float-right mr-3 mr-md-0"><%=v.changeMinutesToHours(flight.getArrivalTime())%></h1>
                 
                 <h2 class="text-center"><%=flight.getArrivalAirport()%></h2>
                 </br>
-                <h3 class="float-left"><%=flight.getDepartureAirportAbbreviation()%></h3>
-                <h3 class="float-right"><%=flight.getArrivalAirportAbbreviation()%></h3>
+                <h3 class="float-left ml-3 ml-md-0"><%=flight.getDepartureAirportAbbreviation()%></h3>
+                <h3 class="float-right mr-3 mr-md-0"><%=flight.getArrivalAirportAbbreviation()%></h3>
                 
                 <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#manageBooking<%=flight.getId()%>" aria-expanded="false" aria-controls="manageBooking<%=flight.getId()%>">Manage Booking</button>
                 
                 </br></br>
-                <a class="float-left" data-toggle="collapse" href="#collapseFlightDetails<%=flight.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=flight.getId()%>">Flight Details</a>
-                <p class="float-right">Passengers Booked: <%=numPassengers%></p>
+                <a class="float-left ml-3 ml-md-0" data-toggle="collapse" href="#collapseFlightDetails<%=flight.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=flight.getId()%>">Flight Details</a>
+                <p class="float-right mr-3 mr-md-0">Passengers Booked: <%=numPassengers%></p>
                 
                 </br></br>
                 <div class="collapse" id="manageBooking<%=flight.getId()%>">
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
         </div></br>
         
         <%      

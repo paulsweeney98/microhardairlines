@@ -53,29 +53,29 @@
             if (firstClassOnly == false) {
         %>
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4 border-top border-bottom border-primary rounded">
-                </br><p>You are about to cancel this flight, if you haven't booked a first class ticket then you will not be refunded.</p>
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4 border-top border-bottom border-primary rounded">
+                </br><p class="ml-3 ml-md-0 mr-3 mr-md-0">You are about to cancel this flight, if you haven't booked a first class ticket then you will not be refunded.</p>
                 <div class='text-center'>
                     <a href='upcomingTrips.jsp' class='btn btn-success'>Go Back</a>
                     <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
                 </div></br>
             </div>
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
         </div>
         
         <% } else { %>
         
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4 border-top border-bottom border-primary rounded">
-                </br><p>You are about to cancel this flight, you will be refunded for your first class booking(s).</p>
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4 border-top border-bottom border-primary rounded">
+                </br><p class="ml-3 ml-md-0 mr-3 mr-md-0">You are about to cancel this flight, you will be refunded for your first class booking(s).</p>
                 <div class='text-center'>
                     <a href='upcomingTrips.jsp' class='btn btn-success'>Go Back</a>
                     <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
                 </div></br>
             </div>
-            <div class="col-4"></div>
+            <div class="col-0 col-md-4"></div>
         </div>
         
         <% } %>

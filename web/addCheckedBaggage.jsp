@@ -73,9 +73,8 @@
                     User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
         %>
 
-        <h3>
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%>
-            <span class="float-right"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%>&nbsp;&nbsp;</span>
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
         </h3>
         <hr></br></br>
 
@@ -83,9 +82,8 @@
         } else {
         %>
 
-        <h3>
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right"><%=dataBundle.getString("checkedBaggage_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid())%>&nbsp;&nbsp;</span>
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
         </h3>
         <hr></br></br>
 
@@ -99,42 +97,20 @@
 
         %>
 
-        <%            if (session.getAttribute("travelClass") != null) {
-                String travelClass = (String) session.getAttribute("travelClass");
-                if (travelClass.equals("standard")) {
-        %>
-
-        <!--Add priority boarding to standard booking-->
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
-
-            </div>
-            <div class="col-3"></div>
-        </div>
-
-        <%
-                }
-            }
-
-        %>
-
-        <!--        Seat selection-->
-
         <!--Checked baggage-->
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
+            <div class="col-0 col-md-3"></div>
+            <div class="col-12 col-md-6 text-center">
                 <form action="Servlet" method="post">
                     <%                        for (int i = 0; i < numPassengers; i++) {
                             if (session.getAttribute("departureFlight" + i) != null) {
                                 departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
                     %>
                     <div class="form-row">
-                        <div class="col">
+                        <div class="col ml-3 ml-md-0">
                             <h3><%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%></h3>
                         </div>
-                        <div class="col">
+                        <div class="col mr-3 mr-md-0">
                             <label for="weight"><%=dataBundle.getString("checkedBaggage_weight")%></label>
                             <select name="weight<%=i%>" id="weight" class="form-control">
                                 <option value="0"><%=dataBundle.getString("checkedBaggage_noBag")%></option>
@@ -153,7 +129,7 @@
                     <input type="hidden" name ="action" value="addCheckedBaggage" />
                 </form>
             </div>
-            <div class="col-3"></div>
+            <div class="col-0 col-md-3"></div>
         </div>
 
         <%

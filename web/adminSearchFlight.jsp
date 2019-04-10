@@ -66,13 +66,6 @@
                       <div class="col">
                         <label for="destinationAirport"><%=dataBundle.getString("adminSearchFlight_destinationAirport")%></label>
                         <input name="destinationAirport" id="destinationAirport" type="text" class="form-control" required >
-                      </div>
-                    </div></br>
-                    
-                    <div class="form-row">
-                      <div class="col">
-                        <label for="departureDate"><%=dataBundle.getString("adminSearchFlight_departureDate")%></label>
-                        <input list="departureDate" name="departureDate" id="departureDate" required type="date" min="<%=LocalDate.now()%>" class="form-control" required />
                         <datalist id="destinationAirport">
                             <%
                                 ArrayList<Flight> arrivalAirports = fDao.getArrivalAirports();
@@ -87,6 +80,13 @@
                                 }
                             %>
                         </datalist>
+                      </div>
+                    </div></br>
+                    
+                    <div class="form-row">
+                      <div class="col">
+                        <label for="departureDate"><%=dataBundle.getString("adminSearchFlight_departureDate")%></label>
+                        <input list="departureDate" name="departureDate" id="departureDate" required type="date" min="<%=LocalDate.now()%>" class="form-control" required />
                       </div>
                     </div></br>
                     

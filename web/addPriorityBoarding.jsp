@@ -77,9 +77,8 @@
                 Flight flight = fDao.getFlightById(departureFlightId);
         %>
 
-        <h3>
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right"><%=dataBundle.getString("priorityBoarding_total")%>: <%=currencyFormatter.format(departureFlight.getPricePaid())%>&nbsp;&nbsp;</span>
+        <h3 class="ml-3">
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
         </h3>
         <hr></br></br>
 
@@ -98,9 +97,9 @@
 
         <!--Add priority boarding to standard booking-->
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 text-center">
-                <p><%=dataBundle.getString("priorityBoarding_wouldYouLikePriorityBoarding")%></p>
+            <div class="col-0 col-md-3"></div>
+            <div class="col-12 col-md-6 text-center">
+                <p class="ml-3 ml-md-0 mr-3 mr-md-0"><%=dataBundle.getString("priorityBoarding_wouldYouLikePriorityBoarding")%></p>
                 <form action="Servlet" method="post">
                     <% for (int i = 0; i < numPassengers; i++) {
                             if (session.getAttribute("departureFlight" + i) != null) {
@@ -135,7 +134,7 @@
                     <input type="hidden" name ="action" value="addPriorityBoarding"/>
                 </form>
             </div>
-            <div class="col-3"></div>
+            <div class="col-0 col-md-3"></div>
         </div>
 
         <%
