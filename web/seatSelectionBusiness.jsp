@@ -4,6 +4,8 @@
     Author     : pauls
 --%>
 
+<%@page import="Dtos.Flight"%>
+<%@page import="Daos.FlightDao"%>
 <%@page import="Dtos.User_Flight"%>
 <%@page import="Validation.Validation"%>
 <%@page import="Daos.User_FlightDao"%>
@@ -30,7 +32,16 @@
                     ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserIdTravelClass(flightId, loggedInUser.getUserId(), "business");
                         if (takenSeats != null && !takenSeats.isEmpty() && user_flights != null && !user_flights.isEmpty()) {
                             session.setAttribute("user_flights", user_flights);
+                            
+                            // Get flight details
+                            FlightDao fDao = new FlightDao(Dao.getDatabaseName());
+                            Flight flight = fDao.getFlightById(flightId);
         %>
+        
+        <h3 class="ml-3">
+            Check In For: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
+        </h3>
+        <hr></br>
         
         <%
             if (session.getAttribute("errorMessage") != null) {
@@ -44,18 +55,31 @@
             }
         %>
         
-        <div class="row mt-3">
-            <div class="col-5 text-center">
-                <h3><%=dataBundle.getString("seatSelection_pleaseSelect")%> <%=user_flights.size()%> <%=dataBundle.getString("seatSelection_seatsFor")%></h3>
+        <!--Desktop and Mobile Version-->
+        <div class="row">
+            <div class="col-0 col-md-4"></div>
+            <div class="col-12 col-md-4">
+                <h3 class="ml-4"><%=dataBundle.getString("seatSelection_pleaseSelect")%> <%=user_flights.size()%> <%=dataBundle.getString("seatSelection_seatsFor")%></h3>
                 <%
                     for (User_Flight user_flight : user_flights) {
                 %>
-                <h4><%=user_flight.getPassengerFirstName()%> <%=user_flight.getPassengerLastName()%></h4>
+                <h4 class="ml-4"><%=user_flight.getPassengerFirstName()%> <%=user_flight.getPassengerLastName()%></h4>
                 <%
                     }
                 %>
+                
+                <form action="Servlet" method="post">
+                    </br><button type="submit" class="btn btn-success ml-4"><%=dataBundle.getString("seatSelection_submit")%></button>
+                    <input type="hidden" name="seatsBookedJSON" id="seatsBookedJSON" value="" />
+                    <input type="hidden" name ="action" value="selectSeat" />
+                </form>
             </div>
-            <div class="col-2 border border-primary rounded text-center">
+            <div class="col-0 col-md-4"></div>
+        </div><br>
+
+        <div class="row">
+            <div class="col-1 col-md-4"></div>
+            <div class="col-10 col-md-4 border border-primary rounded text-center">
                 <div class="float-left">
                     <%
                         String colourA = "limegreen";
@@ -64,7 +88,7 @@
                         String colourD = "limegreen";
                         String colourE = "limegreen";
                         String colourF = "limegreen";
-                        
+
                         String classA = "";
                         String classB = "";
                         String classC = "";
@@ -72,7 +96,7 @@
                         String classE = "";
                         String classF = "";
                         
-                        for (int i = 1; i <= 7; i++) {
+                        for (int i = 1; i <= 4; i++) {
                             if (takenSeats.contains(i + "a")) {
                                 colourA = "red";
                                 classA = "disabled";
@@ -94,10 +118,16 @@
                                 colourC = "limegreen";
                                 classC = "";
                             }
+
+                            if (i == 11 || i == 21) {
                     %>
-                    <a href="#" id="<%=i%>a" class="<%=classA%>" style="font-size: 30px; color: <%=colourA%>;"><i class="fas fa-user"></i></a>
-                    <a href="#" id="<%=i%>b" class="<%=classB%>" style="font-size: 30px; color: <%=colourB%>;"><i class="fas fa-user"></i></a>
-                    <a href="#" id="<%=i%>c" class="<%=classC%>" style="font-size: 30px; color: <%=colourC%>;"><i class="fas fa-user"></i></a></br>
+                    </br>
+                    <%
+                            }
+                    %>
+                    <a href="#" id="<%=i%>a" class="<%=classA%> ml-4" style="font-size: 40px; color: <%=colourA%>;"><i class="fas fa-user"></i></a>
+                    <a href="#" id="<%=i%>b" class="<%=classB%>" style="font-size: 40px; color: <%=colourB%>;"><i class="fas fa-user"></i></a>
+                    <a href="#" id="<%=i%>c" class="<%=classC%>" style="font-size: 40px; color: <%=colourC%>;"><i class="fas fa-user"></i></a></br>
                     <%
                         }
                     %>
@@ -105,7 +135,7 @@
                 
                 <div class="float-right">
                     <%
-                        for (int i = 1; i <= 7; i++) {
+                        for (int i = 1; i <= 4; i++) {
                             if (takenSeats.contains(i + "d")) {
                                 colourD = "red";
                                 classD = "disabled";
@@ -127,23 +157,22 @@
                                 colourF = "limegreen";
                                 classF = "";
                             }
+
+                            if (i == 11 || i == 21) {
                     %>
-                    <a href="#" id="<%=i%>d" class="<%=classD%>" style="font-size: 30px; color: <%=colourD%>;"><i class="fas fa-user"></i></a>
-                    <a href="#" id="<%=i%>e" class="<%=classE%>" style="font-size: 30px; color: <%=colourE%>;"><i class="fas fa-user"></i></a>
-                    <a href="#" id="<%=i%>f" class="<%=classF%>" style="font-size: 30px; color: <%=colourF%>;"><i class="fas fa-user"></i></a></br>
+                    </br>
+                    <%
+                            }
+                    %>
+                    <a href="#" id="<%=i%>d" class="<%=classD%>" style="font-size: 40px; color: <%=colourD%>;"><i class="fas fa-user"></i></a>
+                    <a href="#" id="<%=i%>e" class="<%=classE%>" style="font-size: 40px; color: <%=colourE%>;"><i class="fas fa-user"></i></a>
+                    <a href="#" id="<%=i%>f" class="<%=classF%> mr-4" style="font-size: 40px; color: <%=colourF%>;"><i class="fas fa-user"></i></a></br>
                     <%
                         }
                     %>
                 </div>
             </div>
-            <div class="col-2"></div>
-            <form action="Servlet" method="post">
-                
-                
-                </br><button type="submit" class="btn btn-success"><%=dataBundle.getString("seatSelection_submit")%></button>
-                <input type="hidden" name="seatsBookedJSON" id="seatsBookedJSON" value="" />
-                <input type="hidden" name ="action" value="selectSeat" />
-            </form>
+            <div class="col-1 col-md-4"></div>
         </div>
             
         <%          } else {
