@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cancel Flight</title>
+        <title><%=dataBundle.getString("cancelFlight_title")%></title>
     </head>
     <body>
         <%
@@ -55,10 +55,10 @@
         <div class="row">
             <div class="col-0 col-md-4"></div>
             <div class="col-12 col-md-4 border-top border-bottom border-primary rounded">
-                </br><p class="ml-3 ml-md-0 mr-3 mr-md-0">You are about to cancel this flight, if you haven't booked a first class ticket then you will not be refunded.</p>
+                </br><p class="ml-3 ml-md-0 mr-3 mr-md-0"><%=dataBundle.getString("cancelFlight_youAreAboutToCancelNoRefund")%></p>
                 <div class='text-center'>
-                    <a href='upcomingTrips.jsp' class='btn btn-success'>Go Back</a>
-                    <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
+                    <a href='upcomingTrips.jsp' class='btn btn-success'><%=dataBundle.getString("cancelFlight_goBack")%></a>
+                    <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'><%=dataBundle.getString("cancelFlight_title")%></a>
                 </div></br>
             </div>
             <div class="col-0 col-md-4"></div>
@@ -69,10 +69,10 @@
         <div class="row">
             <div class="col-0 col-md-4"></div>
             <div class="col-12 col-md-4 border-top border-bottom border-primary rounded">
-                </br><p class="ml-3 ml-md-0 mr-3 mr-md-0">You are about to cancel this flight, you will be refunded for your first class booking(s).</p>
+                </br><p class="ml-3 ml-md-0 mr-3 mr-md-0"><%=dataBundle.getString("cancelFlight_youAreAboutToCancelRefund")%></p>
                 <div class='text-center'>
-                    <a href='upcomingTrips.jsp' class='btn btn-success'>Go Back</a>
-                    <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'>Cancel Flight</a>
+                    <a href='upcomingTrips.jsp' class='btn btn-success'><%=dataBundle.getString("cancelFlight_goBack")%></a>
+                    <a href='Servlet?action=cancelFlight&flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>' class='btn btn-danger'><%=dataBundle.getString("cancelFlight_title")%></a>
                 </div></br>
             </div>
             <div class="col-0 col-md-4"></div>
@@ -80,18 +80,18 @@
         
         <% } %>
         <%          } else {
-                        out.println("No bookings found");
+                        out.println(dataBundle.getString("cancelFlight_noBookingsFound"));
                     }
                 } else {
         %>
         <div class="text-center">
-            <h3>You have no flights booked.</h3>
-            <a href="index.jsp" class="btn btn-success">Search for flights</a>
+            <h3><%=dataBundle.getString("cancelFlight_noFlightsBooked")%></h3>
+            <a href="index.jsp" class="btn btn-success"><%=dataBundle.getString("cancelFlight_searchForFlights")%></a>
         </div>
         <%
                 }
             } else {
-                out.println("No bookings found");
+                out.println(dataBundle.getString("cancelFlight_noBookingsFound"));
             }
         %>
     </body>

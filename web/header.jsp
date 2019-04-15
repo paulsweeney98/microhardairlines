@@ -141,26 +141,26 @@
             <div class="dropdown-menu border border-primary">
                 <form action="Servlet" method="post" class="px-4 py-3">
                   <div class="form-group">
-                    <label for="exampleDropdownFormEmail1">Email address</label>
+                    <label for="exampleDropdownFormEmail1"><%=dataBundle.getString("login_email")%></label>
                     <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" value="<%=emailCookie%>">
                   </div>
                   <div class="form-group">
-                    <label for="exampleDropdownFormPassword1">Password</label>
+                    <label for="exampleDropdownFormPassword1"><%=dataBundle.getString("login_password")%></label>
                     <input name="password" type="password" class="form-control" id="exampleDropdownFormPassword1" value="<%=passwordCookie%>">
                   </div>
                   <div class="form-check">
                     <input name="rememberMe" type="checkbox" class="form-check-input" id="dropdownCheck">
                     <label class="form-check-label" for="dropdownCheck">
-                      Remember me
+                      <%=dataBundle.getString("login_rememberMe")%>
                     </label>
                   </div></br>
-                  <button type="submit" class="btn btn-primary">Login</button>
+                  <button type="submit" class="btn btn-primary"><%=dataBundle.getString("login_login")%></button>
                   
                   <input type="hidden" name ="action" value="login" />
                 </form>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="register.jsp">New around here? Register</a>
-                <a class="dropdown-item" href="answerSecurityQuestion.jsp">Forgot password?</a>
+                <a class="dropdown-item" href="register.jsp"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
+                <a class="dropdown-item" href="answerSecurityQuestion.jsp"><%=dataBundle.getString("login_forgotPassword")%></a>
             </div>
             <%
                 }

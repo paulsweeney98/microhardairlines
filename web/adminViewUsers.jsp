@@ -28,9 +28,7 @@
                     <tr class="text-center border-top border-bottom border-primary rounded">
                         <th><%=dataBundle.getString("adminViewUsers_email")%></th>
                         <th><%=dataBundle.getString("adminViewUsers_name")%></th>
-                        <th><%=dataBundle.getString("adminViewUsers_phoneNumber")%></th>
-                        <th><%=dataBundle.getString("adminViewUsers_country")%></th>
-                        <th><%=dataBundle.getString("adminViewUsers_county")%></th>
+
                         <th><%=dataBundle.getString("adminViewUsers_userType")%></th>
                         <th><%=dataBundle.getString("adminViewUsers_suspended")%></th>
                         <th></th>
@@ -56,9 +54,7 @@
                     <tr class="text-center border-top border-bottom border-primary rounded">
                         <td><i><%=email%></i></td>
                         <td><%=firstName%> <%=lastName%></td>
-                        <td><%=phoneNumber%></td>
-                        <td><%=country%></td>
-                        <td><%=county%></td>
+                        
                         <td>
                             <%
                                 if (privileges == 2) {

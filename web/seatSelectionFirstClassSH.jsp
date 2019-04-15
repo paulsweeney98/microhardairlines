@@ -39,7 +39,7 @@
         %>
         
         <h3 class="ml-3">
-            First Class Check In For: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
+            <%=dataBundle.getString("seatSelection_firstClassCheckInFor")%>: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
         </h3>
         <hr></br>
         

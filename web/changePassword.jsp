@@ -42,7 +42,7 @@
                         </div>
                     </div></br>
                     
-                    <input class="btn btn-success" type="submit" value="Change Password" />
+                    <input class="btn btn-success" type="submit" value="<%=dataBundle.getString("changePassword_ChangePassword")%>" />
                     <input type="hidden" name="email" value="<%=email%>" />
                     <!-- Include a hidden field to identify what the user wants to do -->
                     <input type="hidden" name ="action" value="changePassword" />
@@ -55,9 +55,9 @@
             } else {
         %>
         <div class="text-center">
-            <h3>You must be logged in to change your password.</h3>
-            <a href="login.jsp" class="btn btn-success">Login</a>
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("changePassword_mustBeLoggedIn")%></h3>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("login_login")%></a>
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
         </div>
         <%
             }

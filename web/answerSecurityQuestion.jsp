@@ -97,7 +97,7 @@
             <h3><%=dataBundle.getString("answerSecurityQuestion_enterEmail")%></h3>
             <form action="answerSecurityQuestion.jsp" method="post">
                 <input name="email" type="email" required>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="<%=dataBundle.getString("answerSecurityQuestion_submit")%>" />
             </form>
         </div>
         <%

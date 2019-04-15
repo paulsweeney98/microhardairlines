@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Booking Confirmation</title>
+        <title><%=dataBundle.getString("bookingConfirmation_title")%></title>
     </head>
     <body>
         <%
@@ -66,8 +66,8 @@
         <div class="d-none d-md-flex" >
             <div class="col-12">
                 <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
-                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4">Booking Confirmed!</h1>
-                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead d-none d-md-flex">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4"><%=dataBundle.getString("bookingConfirmation_bookingConfirmed")%>!</h1>
+                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead d-none d-md-flex"><%=dataBundle.getString("bookingConfirmation_thankYou")%>, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
             </div>
         </div>
         
@@ -75,7 +75,7 @@
         <div class="d-flex d-md-none" >
             <div class="col-12">
                 <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
-                <h1 style="position: absolute; top: 5px; left: 25px; color: white; font-size: 200%;" class="display-4">Booking Confirmed!</h1>
+                <h1 style="position: absolute; top: 5px; left: 25px; color: white; font-size: 200%;" class="display-4"><%=dataBundle.getString("bookingConfirmation_bookingConfirmed")%>!</h1>
             </div>
         </div>
         
@@ -97,8 +97,8 @@
         <div class="d-none d-md-flex" >
             <div class="col-12">
                 <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
-                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4">Booking Confirmed!</h1>
-                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead d-none d-md-flex">Thank you for booking this flight, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
+                <h1 style="position: absolute; top: 25px; left: 50px; color: white;" class="display-4"><%=dataBundle.getString("bookingConfirmation_bookingConfirmed")%>!</h1>
+                <p style="position: absolute; top: 100px; left: 55px; color: white;"class="lead d-none d-md-flex"><%=dataBundle.getString("bookingConfirmation_thankYou")%>, <%=loggedInUser.getFirstName()%> <%=loggedInUser.getLastName()%></p>
             </div>
         </div>
         
@@ -106,7 +106,7 @@
         <div class="d-flex d-md-none" >
             <div class="col-12">
                 <img style="object-fit: contain; width: 100%;" src="images/microhard plane cropped.png" alt=""/>
-                <h1 style="position: absolute; top: 5px; left: 25px; color: white; font-size: 200%;" class="display-4">Booking Confirmed!</h1>
+                <h1 style="position: absolute; top: 5px; left: 25px; color: white; font-size: 200%;" class="display-4"><%=dataBundle.getString("bookingConfirmation_bookingConfirmed")%>!</h1>
             </div>
         </div>
         
@@ -155,9 +155,9 @@
         <div class="row text-center">
             <div class="col-0 col-md-2"></div>
             <div class="col-0 col-md-8 border border-primary rounded">
-                <h3>Manage Upcoming Trips</h3>
-                <p>To check in and view boarding passes, add checked baggage, or add priority boarding, click the button below.</p>
-                <a href="upcomingTrips.jsp" class="btn btn-success">Manage</a><p></p>
+                <h3><%=dataBundle.getString("bookingConfirmation_manageUpcomingTrips")%></h3>
+                <p><%=dataBundle.getString("bookingConfirmation_toCheckInAndViewBoardingPasses")%></p>
+                <a href="upcomingTrips.jsp" class="btn btn-success"><%=dataBundle.getString("bookingConfirmation_manage")%></a><p></p>
             </div>
             <div class="col-0 col-md-2"></div>
         </div></br>

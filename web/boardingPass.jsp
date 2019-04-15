@@ -23,7 +23,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Microhard Airlines</title>
+        <title><%=dataBundle.getString("boardingPass_title")%></title>
     </head>
     <body>
         <%
@@ -44,7 +44,7 @@
         
         <!--Should only display on desktops-->
         <div class="d-none d-md-block text-md-center">
-            <a href="printBoardingPass.jsp?flightId=<%=flightId%>" class="btn btn-success">Print Boarding Pass(es)</a>
+            <a href="printBoardingPass.jsp?flightId=<%=flightId%>" class="btn btn-success"><%=dataBundle.getString("boardingPass_printBoardingPass")%></a>
         </div>
         
         <!--Should only display on mobile-->
@@ -76,7 +76,7 @@
                     %>
                     <div class="carousel-item active border rounded">
                         <div class="bg-primary text-light">
-                            <h4 class="text-center">Microhard Airlines</h4>
+                            <h4 class="text-center"><%=dataBundle.getString("boardingPass_microhardAirlines")%></h4>
 
                             <h3 class="float-left ml-4"><%=flight.getDepartureAirportAbbreviation()%></h3>
                             <h3 class="float-right mr-4"><%=flight.getArrivalAirportAbbreviation()%></h3>
@@ -95,41 +95,41 @@
                             
                         <div class="row">
                             <div class="col text-left ml-4">
-                                <label for="name"><strong>Name:</strong></label>
+                                <label for="name"><strong><%=dataBundle.getString("boardingPass_name")%>:</strong></label>
                                 <p id="name"><%=user_flight.getPassengerFirstName()%> <%=user_flight.getPassengerLastName()%></p>
                             </div>
                             <div class="col text-left ml-4">
-                                <label for="flightNumber"><strong>Flight Number:</strong></label>
+                                <label for="flightNumber"><strong><%=dataBundle.getString("boardingPass_flightNumber")%>:</strong></label>
                                 <p id="flightNumber"><%=flight.getFlightNumber()%></p>
                             </div>
                         </div>
                             
                         <div class="row">
                             <div class="col text-left ml-4">
-                                <label for="date"><strong>Date:</strong></label>
+                                <label for="date"><strong><%=dataBundle.getString("boardingPass_date")%>:</strong></label>
                                 <p id="date"><%=flight.getDate()%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="departureTime"><strong>Departure Time:</strong></label>
+                                <label for="departureTime"><strong><%=dataBundle.getString("boardingPass_departureTime")%>:</strong></label>
                                 <p id="departureTime"><%=v.changeMinutesToHours(flight.getDepartureTime())%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="arrivalTime"><strong>Arrival Time</strong></label>
+                                <label for="arrivalTime"><strong><%=dataBundle.getString("boardingPass_arrivalTime")%>:</strong></label>
                                 <p id="arrivalTime"><%=v.changeMinutesToHours(flight.getArrivalTime())%></p>
                             </div>
                         </div>
                             
                         <div class="row">
                             <div class="col text-left ml-4">
-                                <label for="seat"><strong>Seat:</strong></label>
+                                <label for="seat"><strong><%=dataBundle.getString("boardingPass_seat")%>:</strong></label>
                                 <p id="seat"><%=user_flight.getSeat()%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="boardingDoor"><strong>Boarding Door:</strong></label>
+                                <label for="boardingDoor"><strong><%=dataBundle.getString("boardingPass_boardingDoor")%>:</strong></label>
                                 <p id="boardingDoor"><%=user_flight.getBoardingDoor()%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="terminal"><strong>Terminal:</strong></label>
+                                <label for="terminal"><strong><%=dataBundle.getString("boardingPass_terminal")%>:</strong></label>
                                 <p id="terminal"><%=flight.getDepartureTerminal()%></p>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                     %>
                     <div class="carousel-item border rounded">
                         <div class="bg-primary text-light">
-                            <h4 class="text-center">Microhard Airlines</h4>
+                            <h4 class="text-center"><%=dataBundle.getString("boardingPass_microhardAirlines")%></h4>
 
                             <h3 class="float-left ml-4"><%=flight.getDepartureAirportAbbreviation()%></h3>
                             <h3 class="float-right mr-4"><%=flight.getArrivalAirportAbbreviation()%></h3>
@@ -160,41 +160,41 @@
                             
                         <div class="row">
                             <div class="col text-left ml-4">
-                                <label for="name"><strong>Name:</strong></label>
+                                <label for="name"><strong><%=dataBundle.getString("boardingPass_name")%>:</strong></label>
                                 <p id="name"><%=user_flight.getPassengerFirstName()%> <%=user_flight.getPassengerLastName()%></p>
                             </div>
                             <div class="col text-left ml-4">
-                                <label for="flightNumber"><strong>Flight Number:</strong></label>
+                                <label for="flightNumber"><strong><%=dataBundle.getString("boardingPass_flightNumber")%>:</strong></label>
                                 <p id="flightNumber"><%=flight.getFlightNumber()%></p>
                             </div>
                         </div>
                             
                         <div class="row">
                             <div class="col text-left ml-4">
-                                <label for="date"><strong>Date:</strong></label>
+                                <label for="date"><strong><%=dataBundle.getString("boardingPass_date")%>:</strong></label>
                                 <p id="date"><%=flight.getDate()%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="departureTime"><strong>Departure Time:</strong></label>
+                                <label for="departureTime"><strong><%=dataBundle.getString("boardingPass_departureTime")%>:</strong></label>
                                 <p id="departureTime"><%=v.changeMinutesToHours(flight.getDepartureTime())%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="arrivalTime"><strong>Arrival Time</strong></label>
+                                <label for="arrivalTime"><strong><%=dataBundle.getString("boardingPass_arrivalTime")%>:</strong></label>
                                 <p id="arrivalTime"><%=v.changeMinutesToHours(flight.getArrivalTime())%></p>
                             </div>
                         </div>
                             
                         <div class="row">
                             <div class="col text-left ml-4">
-                                <label for="seat"><strong>Seat:</strong></label>
+                                <label for="seat"><strong><%=dataBundle.getString("boardingPass_seat")%>:</strong></label>
                                 <p id="seat"><%=user_flight.getSeat()%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="boardingDoor"><strong>Boarding Door:</strong></label>
+                                <label for="boardingDoor"><strong><%=dataBundle.getString("boardingPass_boardingDoor")%>:</strong></label>
                                 <p id="boardingDoor"><%=user_flight.getBoardingDoor()%></p>
                             </div>
                             <div class="col text-left">
-                                <label for="terminal"><strong>Terminal:</strong></label>
+                                <label for="terminal"><strong><%=dataBundle.getString("boardingPass_terminal")%>:</strong></label>
                                 <p id="terminal"><%=flight.getDepartureTerminal()%></p>
                             </div>
                         </div>
@@ -221,14 +221,14 @@
                   
         <%
                 } else {
-                    out.println("Invalid flight id.");
+                    out.println(dataBundle.getString("boardingPass_invalidFlightId"));
                 }
             } else {
         %>
         <div class="text-center">
-            <h3>Please login</h3>
-            <a href="login.jsp" class="btn btn-success">Login</a>
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("boardingPass_pleaseLogin")%></h3>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("boardingPass_login")%></a>
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("boardingPass_register")%></a>
         </div>
         <%
             }

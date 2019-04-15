@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>User</title>
+        <title><%=dataBundle.getString("editUserProfile_title")%></title>
     </head>
     <body>
         <%
@@ -27,7 +27,7 @@
                 <p class="text-dark"><%=dataBundle.getString("editUserProfile_hereIsAllYourInformation")%></p>
                 <%
                 if (loggedInUser == null){
-                    out.println("User not logged in");
+                    out.println(dataBundle.getString("editUserProfile_userNotLoggedIn"));
                 } else {
                     String change = request.getParameter("change");
                     if (change == null) {
@@ -49,7 +49,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_firstName")%></b></label>
                     <input name="firstName" required size=15 type="text" value="<%=loggedInUser.getFirstName()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -70,7 +70,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_lastName")%></b></label>
                     <input name="lastName" required size=15 type="text" value="<%=loggedInUser.getLastName()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -91,7 +91,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_email")%> </b></label>
                     <input name="email" required size=15 type="email" value="<%=loggedInUser.getEmail()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -112,7 +112,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_phoneNumber")%></b></label>
                     <input name="phoneNumber" required size=15 type="text" value="<%=loggedInUser.getPhoneNumber()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -134,7 +134,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_addressLine1")%></b></label>
                     <input name="addressLine1" required size=15 type="text" value="<%=loggedInUser.getAddressLine1()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -154,7 +154,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_addressLine2")%></b></label>
                     <input name="addressLine2" required size=15 type="text" value="<%=loggedInUser.getAddressLine2()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -174,7 +174,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_cityOrTown")%></b></label>
                     <input name="cityOrTown" required size=15 type="text" value="<%=loggedInUser.getCityOrTown()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -194,7 +194,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_postalCode")%></b></label>
                     <input name="postalCode" required size=15 type="text" value="<%=loggedInUser.getPostalCode()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -214,7 +214,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_county")%></b></label>
                     <input name="county" required size=15 type="text" value="<%=loggedInUser.getCounty()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>
@@ -234,7 +234,7 @@
                 <form action="Servlet" method="post">
                     <label><b><%=dataBundle.getString("editUserProfile_country")%></b></label>
                     <input name="country" required size=15 type="text" value="<%=loggedInUser.getCountry()%>" />
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="<%=dataBundle.getString("editUserProfile_edit")%>" />
                     <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>" />
                     <input type="hidden" name ="action" value="editAccountDetails" />
                 </form>

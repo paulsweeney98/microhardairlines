@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Upcoming Trips</title>
+        <title><%=dataBundle.getString("upcomingTrips_title")%></title>
     </head>
     <body>
         <%
@@ -45,11 +45,11 @@
                 <h3 class="float-left ml-3 ml-md-0"><%=flight.getDepartureAirportAbbreviation()%></h3>
                 <h3 class="float-right mr-3 mr-md-0"><%=flight.getArrivalAirportAbbreviation()%></h3>
                 
-                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#manageBooking<%=flight.getId()%>" aria-expanded="false" aria-controls="manageBooking<%=flight.getId()%>">Manage Booking</button>
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#manageBooking<%=flight.getId()%>" aria-expanded="false" aria-controls="manageBooking<%=flight.getId()%>"><%=dataBundle.getString("upcomingTrips_manageBooking")%></button>
                 
                 </br></br>
-                <a class="float-left ml-3 ml-md-0" data-toggle="collapse" href="#collapseFlightDetails<%=flight.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=flight.getId()%>">Flight Details</a>
-                <p class="float-right mr-3 mr-md-0">Passengers Booked: <%=numPassengers%></p>
+                <a class="float-left ml-3 ml-md-0" data-toggle="collapse" href="#collapseFlightDetails<%=flight.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=flight.getId()%>"><%=dataBundle.getString("upcomingTrips_flightDetails")%></a>
+                <p class="float-right mr-3 mr-md-0"><%=dataBundle.getString("upcomingTrips_passengersBooked")%>: <%=numPassengers%></p>
                 
                 </br></br>
                 <div class="collapse" id="manageBooking<%=flight.getId()%>">
@@ -77,28 +77,28 @@
                                     if (allCheckedInFirstClass == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionFirstClassLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionFirstClassLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkIn")%></a>
                             </div>
                             <%
                                     // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
                                     } else if (allCheckedInBusiness == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionBusinessLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionBusinessLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkIn")%></a>
                             </div>
                             <%
                                     // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
                                     } else if (allCheckedInStandard == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionStandardLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionStandardLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkIn")%></a>
                             </div>
                             <%
                                     // In this case there are no passengers on this booking that need to be checked in
                                     } else {
                             %>
                             <div class="col-6">
-                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Boarding Pass</a>
+                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_boardingPass")%></a>
                             </div>
                             <%
                                     }
@@ -108,28 +108,28 @@
                                     if (allCheckedInFirstClass == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionFirstClassSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionFirstClassSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkIn")%></a>
                             </div>
                             <%
                                     // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
                                     } else if (allCheckedInBusiness == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionBusinessSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionBusinessSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkIn")%></a>
                             </div>
                             <%
                                     // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
                                     } else if (allCheckedInStandard == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionStandardSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionStandardSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkIn")%></a>
                             </div>
                             <%
                                     // In this case there are no passengers on this booking that need to be checked in
                                     } else {
                             %>
                             <div class="col-6">
-                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Boarding Pass</a>
+                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_boardingPass")%></a>
                             </div>
                             <%
                                     }
@@ -147,7 +147,7 @@
                                 if (allPriority == false) {
                             %>
                             <div class="col-6">
-                                <a href="addPriorityBoarding.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success">Priority Boarding</a>
+                                <a href="addPriorityBoarding.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_priorityBoarding")%></a>
                             </div>
                             <%
                                 }
@@ -156,10 +156,10 @@
                             
                         <div class="row text-center">
                             <div class="col-6">
-                                <a href="cancelFlight.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-danger">Cancel Flight</a>
+                                <a href="cancelFlight.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>" class="btn btn-danger"><%=dataBundle.getString("upcomingTrips_cancelFlight")%></a>
                             </div>
                             <div class="col-6">
-                                <a href="addCheckedBaggage.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>&travelClass=<%=user_flights.get(0).getTravelClass()%>" class="btn btn-success">Checked Baggage</a>
+                                <a href="addCheckedBaggage.jsp?flightId=<%=flight.getId()%>&userId=<%=loggedInUser.getUserId()%>&travelClass=<%=user_flights.get(0).getTravelClass()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_checkedBaggage")%></a>
                             </div>
                         </div>
                     </div>
@@ -168,14 +168,13 @@
                 </br></br>
                 <div class="collapse" id="collapseFlightDetails<%=flight.getId()%>">
                     <div class="card card-body">
-                        <p>Flight Number: <%=flight.getFlightNumber()%></p></br>
+                        <p><%=dataBundle.getString("upcomingTrips_flightNumber")%>: <%=flight.getFlightNumber()%></p></br>
                         <p>
-                            Flight will leave from <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) at <%=v.changeMinutesToHours(flight.getDepartureTime())%> on <%=dateFormatter.format(flight.getDate())%>, 
-                            and arrive at <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) at <%=v.changeMinutesToHours(flight.getArrivalTime())%>.
+                            <%=dataBundle.getString("upcomingTrips_flightWillLeaveFrom")%> <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("upcomingTrips_at")%> <%=v.changeMinutesToHours(flight.getDepartureTime())%> <%=dataBundle.getString("upcomingTrips_on")%> <%=dateFormatter.format(flight.getDate())%>, 
+                            <%=dataBundle.getString("upcomingTrips_andArriveAt")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("upcomingTrips_at")%> <%=v.changeMinutesToHours(flight.getArrivalTime())%>.
                         </p>
                         <p>
-                            <span class="text-danger">WARNING:</span> If you book a standard OR business ticket, you will not be refunded for any 
-                            cancellations and you will not be permitted to make changes to your flight. This is a feature only for first class ticket holders.
+                            <span class="text-danger"><%=dataBundle.getString("upcomingTrips_warning")%>:</span> <%=dataBundle.getString("upcomingTrips_ifYouBookAStandardOrBusinessTicket")%>
                         </p>
                     </div>
                 </div>
@@ -188,17 +187,17 @@
                 } else {
         %>
         <div class="text-center">
-            <h3>You have no flights booked.</h3>
-            <a href="index.jsp" class="btn btn-success">Search for flights</a>
+            <h3><%=dataBundle.getString("upcomingTrips_noFlightsBooked")%></h3>
+            <a href="index.jsp" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_searchForFlights")%></a>
         </div>
         <%
                 }
             } else {
         %>
         <div class="text-center">
-            <h3>Please login</h3>
-            <a href="login.jsp" class="btn btn-success">Login</a>
-            <a href="register.jsp" class="btn btn-success">Register</a>
+            <h3><%=dataBundle.getString("upcomingTrips_pleaseLogin")%></h3>
+            <a href="login.jsp" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_login")%></a>
+            <a href="register.jsp" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_register")%></a>
         </div>
         <%
             }
