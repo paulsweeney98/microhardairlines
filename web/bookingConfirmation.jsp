@@ -124,28 +124,30 @@
             if (numPassengers > 0) {
 
         %>
-
+        
+        <h3 class="text-center"><%=dataBundle.getString("paymentDetails_passengersBooked")%></h3>
         <div class="row text-center">
             <div class="col-0 col-md-2"></div>
-            <div class="col-0 col-md-8 flex-wrap">
-                <h3><%=dataBundle.getString("paymentDetails_passengersBooked")%></h3>
-                <%
-                    for (int i = 0; i < numPassengers; i++) {
-                        if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null) {
-                            departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
-                            Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
-                %>
+            <div class="container col-12 col-md-8">
+                <div class="d-flex flex-wrap text-center">
+                    <%
+                        for (int i = 0; i < numPassengers; i++) {
+                            if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null) {
+                                departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
+                                Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
+                    %>
 
-                <div class="col-4 border border-primary rounded">
-                    <i class="fas fa-user"></i><br>
-                    <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
-                    </br><%=dataBundle.getString("paymentDetails_checkedBaggage")%>: <%=departureFlightCheckedBaggage.getWeight()%> kg
-                </div>
+                    <div class="col-3 border border-primary rounded">
+                        <i class="fas fa-user"></i><br>
+                        <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
+                        </br><%=dataBundle.getString("paymentDetails_checkedBaggage")%>: <%=departureFlightCheckedBaggage.getWeight()%> kg
+                    </div>
 
-                <%
+                    <%
+                            }
                         }
-                    }
-                %>
+                    %>
+                </div>
             </div>
             <div class="col-0 col-md-2"></div>
         </div></br></br>

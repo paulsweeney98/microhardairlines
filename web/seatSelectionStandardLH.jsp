@@ -1,7 +1,7 @@
 <%-- 
-    Document   : seatSelection
-    Created on : 21-Feb-2019, 12:59:42
-    Author     : D00191889
+    Document   : seatSelectionStandardLH
+    Created on : 15-Apr-2019, 14:01:32
+    Author     : Paul Sweeney
 --%>
 
 <%@page import="Dtos.Flight"%>
@@ -39,7 +39,7 @@
         %>
         
         <h3 class="ml-3">
-            Check In For: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
+            Standard Check In For: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
         </h3>
         <hr></br>
         
@@ -96,7 +96,7 @@
                         String classE = "";
                         String classF = "";
                         
-                        for (int i = 1; i <= 23; i++) {
+                        for (int i = 1; i <= 25; i++) {
                             if (takenSeats.contains(i + "a")) {
                                 colourA = "red";
                                 classA = "disabled";
@@ -135,7 +135,7 @@
                 
                 <div class="float-right">
                     <%
-                        for (int i = 1; i <= 23; i++) {
+                        for (int i = 1; i <= 25; i++) {
                             if (takenSeats.contains(i + "d")) {
                                 colourD = "red";
                                 classD = "disabled";

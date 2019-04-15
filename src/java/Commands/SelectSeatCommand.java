@@ -6,7 +6,9 @@
 package Commands;
 
 import Daos.Dao;
+import Daos.FlightDao;
 import Daos.User_FlightDao;
+import Dtos.Flight;
 import Dtos.User_Flight;
 import Validation.Validation;
 import java.util.ArrayList;
@@ -73,14 +75,37 @@ public class SelectSeatCommand implements Command {
                 } else {
                     String errorMessage = "Please select the correct amount of seats";
                     session.setAttribute("errorMessage", errorMessage);
-                    if (user_flights.get(0).getTravelClass().equals("standard")) {
-                        forwardToJsp = "seatSelectionStandard.jsp?flightId=" + user_flights.get(0).getFlightId();
-                    } else if (user_flights.get(0).getTravelClass().equals("business")) {
-                        forwardToJsp = "seatSelectionBusiness.jsp?flightId=" + user_flights.get(0).getFlightId();
-                    } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
-                        forwardToJsp = "seatSelectionFirstClass.jsp?flightId=" + user_flights.get(0).getFlightId();
+                    
+                    // Get the flight to check if it's short haul or long haul
+                    FlightDao fDao = new FlightDao(Dao.getDatabaseName());
+                    Flight flight = fDao.getFlightById(user_flights.get(0).getFlightId());
+                    
+                    // Flight is long haul
+                    if (flight.getDepartureAirportAbbreviation().equals("JFK") || flight.getArrivalAirportAbbreviation().equals("JFK")) {
+                    
+                        if (user_flights.get(0).getTravelClass().equals("standard")) {
+                            forwardToJsp = "seatSelectionStandardLH.jsp?flightId=" + user_flights.get(0).getFlightId();
+                        } else if (user_flights.get(0).getTravelClass().equals("business")) {
+                            forwardToJsp = "seatSelectionBusinessLH.jsp?flightId=" + user_flights.get(0).getFlightId();
+                        } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
+                            forwardToJsp = "seatSelectionFirstClassLH.jsp?flightId=" + user_flights.get(0).getFlightId();
+                        } else {
+                            forwardToJsp = "error.jsp";
+                        }
+                    
+                    // Flight is short haul
                     } else {
-                        forwardToJsp = "error.jsp";
+                        
+                        if (user_flights.get(0).getTravelClass().equals("standard")) {
+                            forwardToJsp = "seatSelectionStandardSH.jsp?flightId=" + user_flights.get(0).getFlightId();
+                        } else if (user_flights.get(0).getTravelClass().equals("business")) {
+                            forwardToJsp = "seatSelectionBusinessSH.jsp?flightId=" + user_flights.get(0).getFlightId();
+                        } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
+                            forwardToJsp = "seatSelectionFirstClassSH.jsp?flightId=" + user_flights.get(0).getFlightId();
+                        } else {
+                            forwardToJsp = "error.jsp";
+                        }
+                        
                     }
                 }
             } else {

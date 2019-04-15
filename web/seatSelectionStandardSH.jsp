@@ -1,7 +1,7 @@
 <%-- 
-    Document   : seatSelectionBusiness
-    Created on : 23-Feb-2019, 09:54:10
-    Author     : pauls
+    Document   : seatSelection
+    Created on : 21-Feb-2019, 12:59:42
+    Author     : D00191889
 --%>
 
 <%@page import="Dtos.Flight"%>
@@ -28,8 +28,8 @@
 
                 if (flightId > -1) {
                     User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
-                    ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "business");
-                    ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserIdTravelClass(flightId, loggedInUser.getUserId(), "business");
+                    ArrayList<String> takenSeats = ufDao.getTakenSeats(flightId, "standard");
+                    ArrayList<User_Flight> user_flights = ufDao.getUser_FlightsByFlightIdUserIdTravelClass(flightId, loggedInUser.getUserId(), "standard");
                         if (takenSeats != null && !takenSeats.isEmpty() && user_flights != null && !user_flights.isEmpty()) {
                             session.setAttribute("user_flights", user_flights);
                             
@@ -39,7 +39,7 @@
         %>
         
         <h3 class="ml-3">
-            Check In For: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
+            Standard Check In For: <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>)
         </h3>
         <hr></br>
         
@@ -54,7 +54,7 @@
         <%
             }
         %>
-        
+                
         <!--Desktop and Mobile Version-->
         <div class="row">
             <div class="col-0 col-md-4"></div>
@@ -96,7 +96,7 @@
                         String classE = "";
                         String classF = "";
                         
-                        for (int i = 1; i <= 4; i++) {
+                        for (int i = 1; i <= 23; i++) {
                             if (takenSeats.contains(i + "a")) {
                                 colourA = "red";
                                 classA = "disabled";
@@ -135,7 +135,7 @@
                 
                 <div class="float-right">
                     <%
-                        for (int i = 1; i <= 4; i++) {
+                        for (int i = 1; i <= 23; i++) {
                             if (takenSeats.contains(i + "d")) {
                                 colourD = "red";
                                 classD = "disabled";

@@ -57,43 +57,84 @@
                         <div class="row text-center">
                             <%
                                 // For loop needed to check all passenger seats
-                                boolean allCheckedIn = true;
+                                boolean allCheckedInStandard = true;
+                                boolean allCheckedInBusiness = true;
+                                boolean allCheckedInFirstClass = true;
                                 for (User_Flight user_flight : user_flights) {
-                                    if (user_flight.getSeat() == null) {
-                                        allCheckedIn = false;
+                                    if ((user_flight.getSeat() == null) && (user_flight.getTravelClass().equals("firstClass"))) {
+                                        allCheckedInFirstClass = false;
+                                    } else if ((user_flight.getSeat() == null) && (user_flight.getTravelClass().equals("business"))) {
+                                        allCheckedInBusiness = false;
+                                    } else if ((user_flight.getSeat() == null) && (user_flight.getTravelClass().equals("standard"))) {
+                                        allCheckedInStandard = false;
                                     }
                                 }
                                 
-                                if (allCheckedIn == false) {
-                                    if (user_flights.get(0).getTravelClass().equals("standard")) {
+                                // Checks to see if the flight is short haul or long haul
+                                // Flight is long haul if it goes in here
+                                if (flight.getArrivalAirportAbbreviation().equals("JFK") || flight.getDepartureAirportAbbreviation().equals("JFK")) {
+                                    // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
+                                    if (allCheckedInFirstClass == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionStandard.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionFirstClassLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
                             </div>
                             <%
-                                    } else if (user_flights.get(0).getTravelClass().equals("business")) {
+                                    // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
+                                    } else if (allCheckedInBusiness == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionBusiness.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionBusinessLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
                             </div>
                             <%
-                                    } else if (user_flights.get(0).getTravelClass().equals("firstClass")) {
+                                    // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
+                                    } else if (allCheckedInStandard == false) {
                             %>
                             <div class="col-6">
-                                <a href="seatSelectionFirstClass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                                <a href="seatSelectionStandardLH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
                             </div>
                             <%
-                                    }
-                                } else {
+                                    // In this case there are no passengers on this booking that need to be checked in
+                                    } else {
                             %>
                             <div class="col-6">
                                 <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Boarding Pass</a>
                             </div>
                             <%
-                                }
+                                    }
+                                    // Flight is short haul if it goes in here
+                                } else {
+                                    // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
+                                    if (allCheckedInFirstClass == false) {
                             %>
-                            
+                            <div class="col-6">
+                                <a href="seatSelectionFirstClassSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                            </div>
                             <%
+                                    // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
+                                    } else if (allCheckedInBusiness == false) {
+                            %>
+                            <div class="col-6">
+                                <a href="seatSelectionBusinessSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                            </div>
+                            <%
+                                    // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
+                                    } else if (allCheckedInStandard == false) {
+                            %>
+                            <div class="col-6">
+                                <a href="seatSelectionStandardSH.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Check In</a>
+                            </div>
+                            <%
+                                    // In this case there are no passengers on this booking that need to be checked in
+                                    } else {
+                            %>
+                            <div class="col-6">
+                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success">Boarding Pass</a>
+                            </div>
+                            <%
+                                    }
+                                }
+                                
                                 // For loop to check priority status
                                 boolean allPriority = true;
                                 
