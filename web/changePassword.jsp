@@ -28,21 +28,22 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="oldPassword"><%=dataBundle.getString("changePassword_OldPassword")%></label></br>
-                            <input name="oldPassword" id="oldPassword" type="password" required>
+                            <input name="oldPassword" id="oldPassword" type="password" required class="form-control">
                         </div>
-                    </br>
+                    </div><br>
                     
+                    <div class="form-row">
                         <div class="col">
                             <label for="newPassword"><%=dataBundle.getString("changePassword_NewPassword")%></label>
-                            <input name="newPassword" id="newPassword" type="password" required>
+                            <input name="newPassword" id="newPassword" type="password" required class="form-control">
                         </div>
                         <div class="col">
                             <label for="confirmPassword"><%=dataBundle.getString("changePassword_ConfirmPassword")%></label>
-                            <input name="confirmPassword" id="confirmPassword" type="password" required>
+                            <input name="confirmPassword" id="confirmPassword" type="password" required class="form-control">
                         </div>
                     </div></br>
                     
-                    <input class="btn btn-success" type="submit" value="<%=dataBundle.getString("changePassword_ChangePassword")%>" />
+                    <input class="btn btn-success" type="submit" value="<%=dataBundle.getString("changePassword_Change")%>" />
                     <input type="hidden" name="email" value="<%=email%>" />
                     <!-- Include a hidden field to identify what the user wants to do -->
                     <input type="hidden" name ="action" value="changePassword" />

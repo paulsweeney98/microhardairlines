@@ -21,8 +21,8 @@
             if (loggedInUser != null) {
         %>
         <div class="row mt-3">
-            <div class="col-2"></div>
-            <div class="col-8 border border-primary text-center">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-md-8 border border-primary text-center">
                 <h1 class="text-center text-dark"><%=dataBundle.getString("editUserProfile_profile")%></h1>
                 <p class="text-dark"><%=dataBundle.getString("editUserProfile_hereIsAllYourInformation")%></p>
                 <%
@@ -243,7 +243,7 @@
                 }
                 %>
             </div>
-            <div class="col-2"></div>
+            <div class="col-0 col-md-2"></div>
         </div>
         <%
             } else {
