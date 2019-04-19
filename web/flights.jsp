@@ -290,6 +290,7 @@
                             <div class="col-4 border-right border-muted">
                                 <h4 class='text-center'><%=dataBundle.getString("flights_standard")%></h4></br>
                                 <p><%=dataBundle.getString("flights_10kgCabinBag")%></p>
+                                <p><%=dataBundle.getString("flights_selectSeat")%></p>
                             </div>
                             <div class="col-4 border-right border-muted">
                                 <h4 class='text-center'><%=dataBundle.getString("flights_business")%></h4></br>

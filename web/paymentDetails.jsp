@@ -47,8 +47,15 @@
                         }
                     }
 
+                    // Checking if return flight exists to know whether to display information on it for each passenger in 
+                    // the passenger summary
+                    boolean returnFlightExists = false;
+                    // Getting the travel class of the return flight for the passenger summary
+                    String returnFlightTravelClass = "";
                     if (session.getAttribute("returnFlight") != null) {
+                        returnFlightExists = true;
                         User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
+                        returnFlightTravelClass = returnFlight.getTravelClass();
                         // Getting the return date to display it in the summary
                         Flight returnFlightObject = fDao.getFlightById(returnFlight.getFlightId());
 
@@ -117,11 +124,53 @@
                                 departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
                                 Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
                     %>
-
-                    <div class="col-3 border border-primary rounded">
+                    
+                    <div class="col-4 border border-primary rounded">
                         <i class="fas fa-user"></i><br>
                         <%=departureFlight.getPassengerFirstName()%> <%=departureFlight.getPassengerLastName()%>
                         </br><%=dataBundle.getString("paymentDetails_checkedBaggage")%>: <%=departureFlightCheckedBaggage.getWeight()%> kg
+                        
+                        <!-- Each of these links open a modal with information on the different travel classes -->
+                        <!-- Code for the modal is at the bottom of the page -->
+                        <%
+                            if (departureFlight.getTravelClass().equals("standard")) {
+                        %>
+                        </br><%=dataBundle.getString("paymentDetails_departureFlightClass")%> <a href="#" data-toggle="modal" data-target="#travelClassesModal">Standard</a>
+                        <%
+                            } else if (departureFlight.getTravelClass().equals("business")) {
+                        %>
+                        </br><%=dataBundle.getString("paymentDetails_departureFlightClass")%> <a href="#" data-toggle="modal" data-target="#travelClassesModal">Business</a>
+                        <%
+                            } else if (departureFlight.getTravelClass().equals("firstClass")) {
+                        %>
+                        </br><%=dataBundle.getString("paymentDetails_departureFlightClass")%> <a href="#" data-toggle="modal" data-target="#travelClassesModal">First Class</a>
+                        <%
+                            }
+                        %>
+                        
+                        <%
+                            if (returnFlightExists) {
+                        %>
+                        
+                            <%
+                                if (returnFlightTravelClass.equals("standard")) {
+                            %>
+                            </br><%=dataBundle.getString("paymentDetails_returnFlightClass")%> <a href="#" data-toggle="modal" data-target="#travelClassesModal">Standard</a>
+                            <%
+                                } else if (returnFlightTravelClass.equals("business")) {
+                            %>
+                            </br><%=dataBundle.getString("paymentDetails_returnFlightClass")%> <a href="#" data-toggle="modal" data-target="#travelClassesModal">Business</a>
+                            <%
+                                } else if (returnFlightTravelClass.equals("firstClass")) {
+                            %>
+                            </br><%=dataBundle.getString("paymentDetails_returnFlightClass")%> <a href="#" data-toggle="modal" data-target="#travelClassesModal">First Class</a>
+                            <%
+                                }
+                            %>
+                        
+                        <%
+                            }
+                        %>
                     </div>
 
                     <%
@@ -261,6 +310,67 @@
               }
             }).render('#paypal-button-container');
         </script>
+              
+        <!-- Travel Classes Modal -->
+        <div class="modal fade" id="travelClassesModal" tabindex="-1" role="dialog" aria-labelledby="travelClassesModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="travelClassesModalTitle"><%=dataBundle.getString("paymentDetails_travelClasses")%></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class="row text-left">
+                        <div class="col-3 border-right border-muted">
+                          <h3><%=dataBundle.getString("paymentDetails_benefits")%></h3>
+                          <p><%=dataBundle.getString("flights_10kgCabinBag")%></p>
+                          <p><%=dataBundle.getString("flights_selectSeat")%></p>
+                          <p><%=dataBundle.getString("flights_20kgCheckedBag")%></p>
+                          <p><%=dataBundle.getString("flights_PriorityBoarding")%></p>
+                          <p><%=dataBundle.getString("flights_freeRefunds")%></p>
+                          <p><%=dataBundle.getString("flights_loungeAccess")%></p>
+                          <p><%=dataBundle.getString("flights_FastTrackSecurity")%></p>
+                        </div>
+                        <div class="col-3 border-right border-muted text-center">
+                          <h3><%=dataBundle.getString("paymentDetails_standard")%></h3>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                        </div>
+                        <div class="col-3 border-right border-muted text-center">
+                          <h3><%=dataBundle.getString("paymentDetails_business")%></h3>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                          <p><span style="color: red;"><i class="fas fa-times-circle"></i></span></p>
+                        </div>
+                        <div class="col-3 text-center">
+                          <h3><%=dataBundle.getString("paymentDetails_firstClass")%></h3>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                          <p><span style="color: limegreen;"><i class="fas fa-check-circle"></i></span></p>
+                        </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button
+              </div>
+            </div>
+          </div>
+        </div>
 
         <%
                 } else {
