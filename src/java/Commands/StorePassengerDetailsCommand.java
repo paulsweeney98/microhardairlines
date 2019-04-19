@@ -78,6 +78,8 @@ public class StorePassengerDetailsCommand implements Command {
                             } else {
                                 newUser_FlightDeparture = new User_Flight(-1, departureFlight.getFlightId(), passengerDetailsSplit[1], passengerDetailsSplit[2], departureFlight.getTravelClass(), departureFlight.getQueue(), null, null, 0, departureFlight.getPricePaid());
                             }
+                            
+                            newChecked_baggageDeparture = new Checked_baggage(0, 0, newUser_FlightDeparture.getId());
                         }
                         
                         User_Flight newUser_FlightReturn = null;
@@ -102,6 +104,8 @@ public class StorePassengerDetailsCommand implements Command {
                             } else {
                                 newUser_FlightReturn = new User_Flight(-1, returnFlight.getFlightId(), passengerDetailsSplit[1], passengerDetailsSplit[2], returnFlight.getTravelClass(), returnFlight.getQueue(), null, null, 0, returnFlight.getPricePaid());
                             }
+                            
+                            newChecked_baggageReturn = new Checked_baggage(0, 0, newUser_FlightReturn.getId());
                         }
                         
                         session.setAttribute("departureFlight" + i, newUser_FlightDeparture);
@@ -152,6 +156,8 @@ public class StorePassengerDetailsCommand implements Command {
                             } else {
                                 newUser_FlightDeparture = new User_Flight(-1, departureFlight.getFlightId(), passengerDetailsSplit[1], passengerDetailsSplit[2], departureFlight.getTravelClass(), departureFlight.getQueue(), null, null, 0, departureFlight.getPricePaid());
                             }
+                            
+                            newChecked_baggageDeparture = new Checked_baggage(0, 0, newUser_FlightDeparture.getId());
                         }
                         
                         if (newUser_FlightDeparture != null) {
