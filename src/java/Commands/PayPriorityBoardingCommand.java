@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Microhard - Paul Sweeney, Dean Farrelly and Gerard Hoey
- * 
+ *
  * The author of this class is Gerard Hoey
  */
 public class PayPriorityBoardingCommand implements Command {
@@ -33,7 +33,7 @@ public class PayPriorityBoardingCommand implements Command {
         String expiryMonth = request.getParameter("expiryMonth");
         String expiryYear = request.getParameter("expiryYear");
         String cvv = request.getParameter("cvv");
-        
+
         // If the user paid with Paypal
         String paidWithPaypal = request.getParameter("paidWithPaypal");
 
@@ -60,7 +60,7 @@ public class PayPriorityBoardingCommand implements Command {
                         int amountOfFails = 0;
 
                         if (session.getAttribute("departureFlight0") != null && session.getAttribute("departureFlightPriorityBoarding0") != null) {
-                            
+
                             for (int i = 0; i < numPassengers; i++) {
                                 // Adding Priority Boarding
                                 User_Flight priorityBoarding = (User_Flight) session.getAttribute("departureFlightPriorityBoarding" + i);
@@ -89,7 +89,14 @@ public class PayPriorityBoardingCommand implements Command {
                         } else {
                             forwardToJsp = "index.jsp";
 
-                            session.invalidate();
+                            // Remove all attributes for adding priority boarding
+                            session.removeAttribute("numPassengers");
+                            session.removeAttribute("departureFlight");
+                            session.removeAttribute("returnFlight");
+                            for (int i = 0; i <= 10; i++) {
+                                session.removeAttribute("departureFlight" + i);
+                                session.removeAttribute("departureFlightPriorityBoarding" + i);
+                            }
                         }
 
                     } else {

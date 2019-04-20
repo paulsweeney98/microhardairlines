@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Microhard - Paul Sweeney, Dean Farrelly and Gerard Hoey
- * 
+ *
  * The author of this class is Gerard Hoey
  */
 public class PayCheckedBaggageCommand implements Command {
@@ -29,28 +29,28 @@ public class PayCheckedBaggageCommand implements Command {
         User_FlightDao ufDao = new User_FlightDao(Dao.getDatabaseName());
         Checked_baggageDao cbDao = new Checked_baggageDao(Dao.getDatabaseName());
         HttpSession session = request.getSession();
-        
+
         String type = request.getParameter("type");
         String number = request.getParameter("number");
         String expiryMonth = request.getParameter("expiryMonth");
         String expiryYear = request.getParameter("expiryYear");
         String cvv = request.getParameter("cvv");
-        
+
         // If the user paid with Paypal
         String paidWithPaypal = request.getParameter("paidWithPaypal");
-        
+
         if ((type != null && !type.equals("") && number != null && !number.equals("") && expiryMonth != null && !expiryMonth.equals("") && expiryYear != null && !expiryYear.equals("") && cvv != null && !cvv.equals("") && paidWithPaypal == null) || (paidWithPaypal != null && !paidWithPaypal.equals(""))) {
-            
+
             boolean validCard = true;
             if (paidWithPaypal == null) {
                 validCard = v.checkCard(type, number, expiryMonth, expiryYear, cvv);
             }
-            
+
             if (validCard) {
 
                 // Get number of passengers
                 int numPassengers = 0;
-                numPassengers = (Integer)session.getAttribute("numPassengers");
+                numPassengers = (Integer) session.getAttribute("numPassengers");
 
                 // Get the logged in user
                 User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -66,13 +66,13 @@ public class PayCheckedBaggageCommand implements Command {
                             for (int i = 0; i < numPassengers; i++) {
                                 // Adding Checked_baggage
                                 Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
-                                
+
                                 int newDepartureChecked_baggageId = -1;
                                 if (departureFlightCheckedBaggage.getWeight() == 0) {
-                                        newDepartureChecked_baggageId = 1;
-                                    } else {
-                                        newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
-                                    }
+                                    newDepartureChecked_baggageId = 1;
+                                } else {
+                                    newDepartureChecked_baggageId = cbDao.addChecked_baggage(departureFlightCheckedBaggage);
+                                }
 
                                 // Incase of failure
                                 if (newDepartureChecked_baggageId < 0) {
@@ -94,7 +94,13 @@ public class PayCheckedBaggageCommand implements Command {
                         } else {
                             forwardToJsp = "index.jsp";
 
-                            session.invalidate();
+                            // Remove all attributes for flights from session before searching for a new one
+                            session.removeAttribute("numPassengers");
+                            session.removeAttribute("departureFlight");
+                            for (int i = 0; i <= 10; i++) {
+                                session.removeAttribute("departureFlight" + i);
+                                session.removeAttribute("departureFlightCheckedBaggage" + i);
+                            }
                         }
 
                     } else {
@@ -108,20 +114,20 @@ public class PayCheckedBaggageCommand implements Command {
                     session.setAttribute("errorMessage", errorMessage);
                     forwardToJsp = "error.jsp";
                 }
-        
+
             } else {
                 String errorMessage = "Invalid card. Payment not processed.";
                 session.setAttribute("errorMessage", errorMessage);
                 forwardToJsp = "error.jsp";
             }
-            
+
         } else {
             String errorMessage = "Invalid card details passed";
             session.setAttribute("errorMessage", errorMessage);
             forwardToJsp = "error.jsp";
         }
-        
+
         return forwardToJsp;
     }
-    
+
 }

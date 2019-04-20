@@ -43,6 +43,8 @@
                 <p><b><%=dataBundle.getString("editUserProfile_postalCode")%> </b><%=loggedInUser.getPostalCode()%> <a href="editAccountDetails.jsp?change=postalCode"><%=dataBundle.getString("editUserProfile_edit")%></a></p>
                 <p><b><%=dataBundle.getString("editUserProfile_county")%> </b><%=loggedInUser.getCounty()%> <a href="editAccountDetails.jsp?change=county"><%=dataBundle.getString("editUserProfile_edit")%></a></p>
                 <p><b><%=dataBundle.getString("editUserProfile_country")%> </b><%=loggedInUser.getCountry()%> <a href="editAccountDetails.jsp?change=country"><%=dataBundle.getString("editUserProfile_edit")%></a></p>
+                <br/><a href="securityQuestions.jsp" class="btn btn-success mr-3"><%=dataBundle.getString("editUserProfile_addOrChangeSecurityQuestions")%></a>
+                <br/><br/>
                 <%
                     } else if (change.equals("firstName")) {
                 %>

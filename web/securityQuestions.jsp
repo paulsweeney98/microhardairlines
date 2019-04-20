@@ -32,31 +32,8 @@
 
     <body>
         <div class="row mt-3">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                    <!-- Indicators -->
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3"></div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-4"></div>
-            <div class="col-4 border border-primary text-center">
+            <div class="col-lg-4 col-md-4"></div>
+            <div class="col-lg-5 col-md-6 border border-primary text-center">
                 <h1><%=dataBundle.getString("securityQuestions_securityQuestions")%></h1>
 
                 <%
@@ -135,9 +112,11 @@
                         </tr>
                     </table>
                     </br>
-                    <input type="submit" value="<%=dataBundle.getString("securityQuestions_addSecurityQuestions")%>" />
+                    <a href="editAccountDetails.jsp" class="btn btn-light border float-left ml-3 ml-md-0"><%=dataBundle.getString("securityQuestions_backToProfile")%></a>
+                    <input type="submit" class="btn btn-success float-right mr-3" value="<%=dataBundle.getString("securityQuestions_addSecurityQuestions")%>" />
                     <!-- Include a hidden field to identify what the user wants to do -->
-                    <input type="hidden" name ="action" value="addSecurityQuestions" />
+                    <input type="hidden" name="action" value="addSecurityQuestions" />
+                    <br/><br/>
                 </form>
             </div>
             <div class="col-4"></div>

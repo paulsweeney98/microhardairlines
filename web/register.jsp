@@ -38,12 +38,12 @@
                     <div class="form-row">
                         <div class="col">
                             <label for="password"><%=dataBundle.getString("register_password")%></label></br>
-                            <input name="password" id="password" type="password" required class="form-control">
+                            <input name="password" id="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Your password must contain at least 6 characters, with at least one number and one uppercase and lowercase letter" required class="form-control">
                         </div>
                             
                         <div class="col">
                             <label for="confirmPassword"><%=dataBundle.getString("register_confirmPassword")%></label></br>
-                            <input name="confirmPassword" id="confirmPassword" type="password" required class="form-control">
+                            <input name="confirmPassword" id="confirmPassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Your password must contain at least 6 characters, with at least one number and one uppercase and lowercase letter" required class="form-control">
                         </div>
                     </div><br>
                     

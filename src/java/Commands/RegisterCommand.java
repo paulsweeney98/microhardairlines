@@ -52,30 +52,44 @@ public class RegisterCommand implements Command {
                 // Check email is valid
                 boolean validEmail = v.checkEmail(email);
                 if (validEmail) {
-                    // Check password matches confirm password
-                    UserDao uDao = new UserDao(Dao.getDatabaseName());
-                    if (password.equals(confirmPassword)) {
-                        // Check if email already exists
-                        User u = uDao.getUserByEmail(email);
-                        if (u.getUserId() == -1) {
-                            User addUser = new User(email, password, firstName, lastName, (java.sql.Date) dateOfBirth, phoneNumber, addressLine1, addressLine2, cityOrTown, postalCode, county, country, User.STANDARD, User.ENABLED);
-                            int newId = uDao.addUser(addUser);
-                            if (newId != -1) {
-                                // Registration was successful, log the user in!
-                                User u1 = uDao.getCurrentUser(email, password);
+                    // Check password is valid as according to regular expression
+                    String passwordPattern = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}";
+                    if (password.matches(passwordPattern)) {
+                        // Check password matches confirm password
+                        UserDao uDao = new UserDao(Dao.getDatabaseName());
+                        if (password.equals(confirmPassword)) {
+                            // Check if email already exists
+                            User u = uDao.getUserByEmail(email);
+                            if (u.getUserId() == -1) {
+                                User addUser = new User(email, password, firstName, lastName, (java.sql.Date) dateOfBirth, phoneNumber, addressLine1, addressLine2, cityOrTown, postalCode, county, country, User.STANDARD, User.ENABLED);
+                                int newId = uDao.addUser(addUser);
+                                if (newId != -1) {
+                                    // Registration was successful, log the user in!
+                                    User u1 = uDao.getCurrentUser(email, password);
 
-                                HttpSession session = request.getSession();
-                                session.setAttribute("loggedInUser", u1);
+                                    HttpSession session = request.getSession();
+                                    session.setAttribute("loggedInUser", u1);
 
-                                if (booking != null) {
-                                    forwardToJsp = "paymentDetails.jsp";
+                                    if (booking != null) {
+                                        forwardToJsp = "paymentDetails.jsp";
+                                    } else {
+                                        forwardToJsp = "securityQuestions.jsp";
+                                    }
                                 } else {
-                                    forwardToJsp = "securityQuestions.jsp";
+                                    // The user couldn't be added to the database
+                                    // Send the user to the error page and inform them of this
+                                    String errorMessage = "User couldn't be added to the database at this time"
+                                            + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different email!";
+                                    HttpSession session = request.getSession();
+                                    session.setAttribute("errorMessage", errorMessage);
+                                    if (booking != null) {
+                                        forwardToJsp = "register.jsp?booking=" + booking;
+                                    } else {
+                                        forwardToJsp = "register.jsp";
+                                    }
                                 }
                             } else {
-                                // The user couldn't be added to the database
-                                // Send the user to the error page and inform them of this
-                                String errorMessage = "User couldn't be added to the database at this time"
+                                String errorMessage = "Email already taken"
                                         + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different email!";
                                 HttpSession session = request.getSession();
                                 session.setAttribute("errorMessage", errorMessage);
@@ -86,8 +100,8 @@ public class RegisterCommand implements Command {
                                 }
                             }
                         } else {
-                            String errorMessage = "Email already taken"
-                                    + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different email!";
+                            String errorMessage = "Passwords did not match"
+                                    + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try confirming password again!";
                             HttpSession session = request.getSession();
                             session.setAttribute("errorMessage", errorMessage);
                             if (booking != null) {
@@ -97,8 +111,8 @@ public class RegisterCommand implements Command {
                             }
                         }
                     } else {
-                        String errorMessage = "Passwords did not match"
-                                + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try confirming password again!";
+                        String errorMessage = "Password did not meet specified criteria"
+                                + " Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different password!";
                         HttpSession session = request.getSession();
                         session.setAttribute("errorMessage", errorMessage);
                         if (booking != null) {
