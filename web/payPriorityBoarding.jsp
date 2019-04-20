@@ -43,7 +43,7 @@
                         for (int i = 0; i < numPassengers; i++) {
                             User_Flight priorityBoarding = (User_Flight) session.getAttribute("departureFlightPriorityBoarding" + i);
                             if (priorityBoarding.getQueue().equals("priority")) {
-                                priorityBoardingPrice += 50.00;
+                                priorityBoardingPrice += 7.00;
                             }
                         }
                     }
@@ -61,10 +61,10 @@
         
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
-            &nbsp;&nbsp;<%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_oneWay")%>
-            <span class="float-right"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(priorityBoardingPrice)%>&nbsp;&nbsp;</span>
+            <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none">
+            <span class="float-md-right mr-md-3"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(priorityBoardingPrice)%>&nbsp;&nbsp;</span>
         </h3>
-        <hr></br></br>
+        <hr></br>
 
         <%
 
