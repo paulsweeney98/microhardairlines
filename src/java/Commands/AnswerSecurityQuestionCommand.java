@@ -51,7 +51,7 @@ public class AnswerSecurityQuestionCommand implements Command {
                             // Update password method
 
                             session.setAttribute("loggedInUser", user);
-                            forwardToJsp = "index.jsp";
+                            forwardToJsp = "changePassword.jsp";
                         } else {
                             session.setAttribute("errorMessage", "New password and confirm password doesn't match");
                             forwardToJsp = "error.jsp";

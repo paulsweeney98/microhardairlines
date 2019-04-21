@@ -117,6 +117,10 @@ public class CommandFactory {
                     // Do all logic for changing password
                     c = new ChangePasswordCommand();
                     break;
+                case "verifyWhatsAppCode":
+                    // Do all logic for changing password
+                    c = new VerifyWhatsAppCodeCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();

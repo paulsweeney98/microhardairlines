@@ -25,13 +25,15 @@
             FlightDao fDao = new FlightDao(Dao.getDatabaseName());
             Validation v = new Validation();
             
+            int numPassengers = (Integer) session.getAttribute("numPassengers");
+            
             if (session.getAttribute("departureFlight") != null) {
                 int departureFlightId = -1;
                 User_Flight departureFlight = (User_Flight) session.getAttribute("departureFlight0");
                 departureFlightId = departureFlight.getFlightId();
-                
+
                 Flight flight = fDao.getFlightById(departureFlightId);
-            
+
                 if (session.getAttribute("returnFlight") != null) {
                     User_Flight returnFlight = (User_Flight) session.getAttribute("returnFlight0");
                     // Getting the return date to display it in the summary
@@ -43,7 +45,7 @@
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
             <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
-            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid())%></span>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format((departureFlight.getPricePaid() + returnFlight.getPricePaid()) * numPassengers)%></span>
         </h3>
         <hr></br>
         
@@ -56,15 +58,12 @@
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
             <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%>
-            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid())%></span>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() * numPassengers)%></span>
         </h3>
         <hr></br>
         
         <%
                 }
-                
-                int numPassengers = 0;
-                numPassengers = (Integer)session.getAttribute("numPassengers");
 
                 if ((numPassengers > 0) && (numPassengers <= 10)) {
 

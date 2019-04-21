@@ -69,7 +69,21 @@
                         }
                         
                         // Caculating the total price
-                        double totalPrice = departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice;
+                        double totalPrice = 0;
+                        for (int i = 0; i < numPassengers; i++) {
+                            if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null && session.getAttribute("returnFlight" + i) != null && session.getAttribute("returnFlightCheckedBaggage" + i) != null) {
+                                departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
+                                returnFlight = (User_Flight) session.getAttribute("returnFlight" + i);
+                                totalPrice += departureFlight.getPricePaid();
+                                totalPrice += returnFlight.getPricePaid();
+                                
+                                Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
+                                Checked_baggage returnFlightCheckedBaggage = (Checked_baggage) session.getAttribute("returnFlightCheckedBaggage" + i);
+                                totalPrice += departureFlightCheckedBaggage.getPricePaid();
+                                totalPrice += returnFlightCheckedBaggage.getPricePaid();
+                            }
+                        }
+                        
                         DecimalFormat df = new DecimalFormat("#.##");
                         totalPrice = v.convertStringToDouble(df.format(totalPrice));
         %>
@@ -82,14 +96,23 @@
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
             <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
-            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + returnFlight.getPricePaid() + departureCheckedBaggagePrice + returnCheckedBaggagePrice)%>&nbsp;&nbsp;</span>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(totalPrice)%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br>
 
         <%
         } else {
             // Caculating the total price
-            double totalPrice = departureFlight.getPricePaid() + departureCheckedBaggagePrice;
+            double totalPrice = 0;
+            for (int i = 0; i < numPassengers; i++) {
+                if (session.getAttribute("departureFlight" + i) != null && session.getAttribute("departureFlightCheckedBaggage" + i) != null) {
+                    departureFlight = (User_Flight) session.getAttribute("departureFlight" + i);
+                    totalPrice += departureFlight.getPricePaid();
+
+                    Checked_baggage departureFlightCheckedBaggage = (Checked_baggage) session.getAttribute("departureFlightCheckedBaggage" + i);
+                    totalPrice += departureFlightCheckedBaggage.getPricePaid();
+                }
+            }
             DecimalFormat df = new DecimalFormat("#.##");
             totalPrice = v.convertStringToDouble(df.format(totalPrice));
         %>
@@ -102,7 +125,7 @@
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
             <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%>
-            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(departureFlight.getPricePaid() + departureCheckedBaggagePrice)%></span>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(totalPrice)%></span>
         </h3>
         <hr></br>
 

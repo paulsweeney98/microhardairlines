@@ -160,7 +160,7 @@
                 </form>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="register.jsp"><%=dataBundle.getString("login_dontHaveAnAccountRegisterHere")%></a>
-                <a class="dropdown-item" href="answerSecurityQuestion.jsp"><%=dataBundle.getString("login_forgotPassword")%></a>
+                <a class="dropdown-item" href="forgotPassword.jsp"><%=dataBundle.getString("login_forgotPassword")%></a>
             </div>
             <%
                 }
