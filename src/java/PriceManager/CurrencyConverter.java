@@ -11,15 +11,17 @@ package PriceManager;
  */
 public class CurrencyConverter {
     
-    public double convert(double originalAmount, String newCurrency) {
-        double newAmount = -1;
+    public double convert(double originalAmount, String newCurrencyCountry) {
+        double newAmount = originalAmount;
         
-        if (newCurrency.equals("EUR")) {
+        if (newCurrencyCountry.equals("IE") || newCurrencyCountry.equals("FR")) {
             newAmount = originalAmount;
-        } else if (newCurrency.equals("USD")) {
-            newAmount = originalAmount * 1.12;
-        } else if (newCurrency.equals("GBP")) {
-            newAmount = originalAmount * 0.86;
+        } else if (newCurrencyCountry.equals("GB")) {
+            newAmount = originalAmount * 0.87;
+        } else if (newCurrencyCountry.equals("US")) {
+            newAmount = originalAmount * 1.13;
+        } else if (newCurrencyCountry.equals("en-CA") || newCurrencyCountry.equals("fr-CA")) {
+            newAmount = originalAmount * 1.50;
         } else {
             newAmount = -1;
         }

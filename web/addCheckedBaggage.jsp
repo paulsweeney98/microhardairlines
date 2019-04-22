@@ -114,10 +114,10 @@
                             <label for="weight"><%=dataBundle.getString("checkedBaggage_weight")%></label>
                             <select name="weight<%=i%>" id="weight" class="form-control">
                                 <option value="0"><%=dataBundle.getString("checkedBaggage_noBag")%></option>
-                                <option value="15">15kg - <%=currencyFormatter.format(20)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
-                                <option value="20">20kg - <%=currencyFormatter.format(25)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
-                                <option value="25">25kg - <%=currencyFormatter.format(30)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
-                                <option value="40">40kg - <%=currencyFormatter.format(65)%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
+                                <option value="15">15kg - <%=currencyFormatter.format(converter.convert(20, country))%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
+                                <option value="20">20kg - <%=currencyFormatter.format(converter.convert(25, country))%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
+                                <option value="25">25kg - <%=currencyFormatter.format(converter.convert(30, country))%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
+                                <option value="40">40kg - <%=currencyFormatter.format(converter.convert(65, country))%> <%=dataBundle.getString("checkedBaggage_perFlight")%></option>
                             </select>
                         </div>
                     </div>

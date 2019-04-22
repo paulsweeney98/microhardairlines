@@ -52,6 +52,8 @@
                     DecimalFormat df = new DecimalFormat("#.##");
                     totalPrice = v.convertStringToDouble(df.format(totalPrice));
 
+                    // Converting the displayed price to the correct currency
+                    departureCheckedBaggagePrice = converter.convert(departureCheckedBaggagePrice, country);
         %>
 
         <!--Total price to be sent to Paypal javascript function-->

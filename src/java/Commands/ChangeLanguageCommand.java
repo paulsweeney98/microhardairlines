@@ -22,16 +22,30 @@ public class ChangeLanguageCommand implements Command{
         String forwardToJsp;
         
         // Update the language to the selected option
-        String language = request.getParameter("language");
+        String country = request.getParameter("country");
+        String countryCode = country;
+        
         // Assuming that the language parameter was supplied
-        if(language != null){
+        if(country != null){
+            String language = "";
+            if (country.equals("IE") || country.equals("GB") || country.equals("US") || country.equals("en-CA")) {
+                language = "en";
+            } else {
+                language = "fr";
+            }
+            
+            // If the country is Canada (english or french), the string needs to be altered
+            if (country.equals("en-CA") || country.equals("fr-CA")) {
+                countryCode = countryCode.substring(3);
+            }
+            
             // Create a locale based on the supplied language
-            Locale currentLocale = new Locale(language);
+            Locale currentLocale = new Locale(language, countryCode);
             
             // Store the locale and the chosen language in the session
             HttpSession session = request.getSession();
             session.setAttribute("currentLocale", currentLocale);
-            session.setAttribute("language", language);
+            session.setAttribute("country", country);
             // Reset the resource bundle so that it will be updated 
             // to reflect the current locale when the page is reloaded
             session.setAttribute("dataBundle", null);

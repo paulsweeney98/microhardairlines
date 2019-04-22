@@ -97,27 +97,27 @@
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=New%20York&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
                             <img src="images/new_york_original.jpg" alt="New York" width="1200">
                             <!--Desktop Version-->
-                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">New York <%=dataBundle.getString("index_from")%> <br/>€<%=newYorkPrice%></h1></b>
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">New York <%=dataBundle.getString("index_from")%> <br/><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(newYorkFlights.get(0), newYorkPrice, "standard"), country))%></h1></b>
                             <!--Mobile Version-->
-                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">New York <%=dataBundle.getString("index_from")%> <br/>€<%=newYorkPrice%></h1></b>
+                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">New York <%=dataBundle.getString("index_from")%> <br/><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(newYorkFlights.get(0), newYorkPrice, "standard"), country))%></h1></b>
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=London%20Heathrow&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
                             <img src="images/london_original.jpg" alt="London" width="1200">
                             <!--Desktop Version-->
-                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">London <%=dataBundle.getString("index_from")%> <br/>€<%=londonPrice%></h1></b>
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">London <%=dataBundle.getString("index_from")%> <br/><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(londonFlights.get(0), londonPrice, "standard"), country))%></h1></b>
                             <!--Mobile Version-->
-                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">London <%=dataBundle.getString("index_from")%> <br/>€<%=londonPrice%></h1></b>
+                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">London <%=dataBundle.getString("index_from")%> <br/><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(londonFlights.get(0), londonPrice, "standard"), country))%></h1></b>
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href='Servlet?action=searchFlight&departureAirport=Dublin&destinationAirport=Paris&departureDate=<%=plusOneWeek.toString()%>&returnDate=<%=plusOneWeekThreeDays.toString()%>&numPassengers=1'>
                             <img src="images/paris_original.jpg" alt="Paris" width="1200">
                             <!--Desktop Version-->
-                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">Paris <%=dataBundle.getString("index_from")%> <br/>€<%=parisPrice%></h1></b>
+                            <b><h1 style="position: absolute; top: 50px; left: 75px; color: white; font-size: 400%;"class="lead d-none d-md-flex">Paris <%=dataBundle.getString("index_from")%> <br/><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(parisFlights.get(0), parisPrice, "standard"), country))%></h1></b>
                             <!--Mobile Version-->
-                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">Paris <%=dataBundle.getString("index_from")%> <br/>€<%=parisPrice%></h1></b>
+                            <b><h1 style="position: absolute; top: 25px; left: 75px; color: white; font-size: 200%;"class="lead d-flex d-md-none">Paris <%=dataBundle.getString("index_from")%> <br/><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(parisFlights.get(0), parisPrice, "standard"), country))%></h1></b>
                         </a>
                     </div>
                 </div>

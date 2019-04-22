@@ -100,6 +100,8 @@
             java.sql.Date searchedDate = flight.getDate();
             LocalDate searchedDateLD = searchedDate.toLocalDate();
         %>
+        <!-- This is a date-picker that allows the user to change the date of the flight they are searching for quickly 
+        and easily-->
         <% if (bookingStage.equals("one_way")) { %>
         <div class="row mt-3">
             <div class="col-0 col-md-2"></div>
@@ -277,7 +279,7 @@
                 <h3 class="float-left ml-3 ml-md-0"><%=f.getDepartureAirportAbbreviation()%></h3>
                 <h3 class="float-right mr-3 mr-md-0"><%=f.getArrivalAirportAbbreviation()%></h3>
                 
-                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseFares<%=f.getId()%>" aria-expanded="false" aria-controls="collapseFares<%=f.getId()%>">From <%=currencyFormatter.format(standardPrice)%></button>
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseFares<%=f.getId()%>" aria-expanded="false" aria-controls="collapseFares<%=f.getId()%>">From <%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></button>
                 
                 </br></br>
                 <a class="float-left ml-3 ml-md-0" data-toggle="collapse" href="#collapseFlightDetails<%=f.getId()%>" role="button" aria-expanded="false" aria-controls="collapseFlightDetails<%=f.getId()%>">Flight Details</a>
@@ -311,6 +313,12 @@
                             </div>
                         </div>
                             
+                        <!--
+                        Each of the links below use several methods which have instances defined in the header:
+                        Currency Formatter
+                        Currency Converter
+                        Price Changer
+                        -->
                         <%
                             if (bookingStage.equals("one_way")) {
                         %>
@@ -319,13 +327,13 @@
                                 if (f.getStandardSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a type="submit" class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                                <a type="submit" class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a type="submit" class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                                <a type="submit" class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></a>
                             </div>
                             <%
                                 }
@@ -335,13 +343,13 @@
                                 if (f.getBusinessSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, businessPrice, "business"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, businessPrice, "business"), country))%></a>
                             </div>
                             <%
                                 }
@@ -351,13 +359,13 @@
                                 if (f.getFirstClassSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, firstClassPrice, "firstClass"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, firstClassPrice, "firstClass"), country))%></a>
                             </div>
                             <%
                                 }
@@ -371,13 +379,13 @@
                                 if (f.getStandardSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a type="submit" class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                                <a type="submit" class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a type="submit" class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                                <a type="submit" class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=standard&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></a>
                             </div>
                             <%
                                 }
@@ -387,13 +395,13 @@
                                 if (f.getBusinessSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                                <a class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, businessPrice, "business"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                                <a class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=business&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, businessPrice, "business"), country))%></a>
                             </div>
                             <%
                                 }
@@ -403,13 +411,13 @@
                                 if (f.getFirstClassSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                                <a class='btn btn-success' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, firstClassPrice, "firstClass"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                                <a class='btn btn-success disabled' href='Servlet?action=searchFlight&numPassengers=<%=numPassengers%>&departureFlightTravelClass=firstClass&departureDate=<%=returnDate%>&departureAirport=<%=f.getArrivalAirport()%>&destinationAirport=<%=f.getDepartureAirport()%>&departureFlightId=<%=f.getId()%>&departureFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, firstClassPrice, "firstClass"), country))%></a>
                             </div>
                             <%
                                 }
@@ -423,13 +431,13 @@
                                 if (f.getStandardSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a type="submit" class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=standard&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                                <a type="submit" class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=standard&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a type="submit" class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=standard&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(standardPrice)%></a>
+                                <a type="submit" class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=standard&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=standardPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, standardPrice, "standard"), country))%></a>
                             </div>
                             <%
                                 }
@@ -439,13 +447,13 @@
                                 if (f.getBusinessSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=business&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=business&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, businessPrice, "business"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=business&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(businessPrice)%></a>
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=business&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=businessPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, businessPrice, "business"), country))%></a>
                             </div>
                             <%
                                 }
@@ -455,13 +463,13 @@
                                 if (f.getFirstClassSeatsAvailable() >= numPassengersInt) {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=firstClass&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                                <a class='btn btn-success' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=firstClass&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, firstClassPrice, "firstClass"), country))%></a>
                             </div>
                             <%
                                 } else {
                             %>
                             <div class="col-4">
-                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=firstClass&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(firstClassPrice)%></a>
+                                <a class='btn btn-success disabled' href='passengerDetails.jsp?numPassengers=<%=numPassengers%>&departureFlightTravelClass=<%=departureFlightTravelClass%>&returnFlightTravelClass=firstClass&departureFlightId=<%=departureFlightId%>&departureFlightPricePaid=<%=departureFlightPricePaid%>&returnFlightId=<%=f.getId()%>&returnFlightPricePaid=<%=firstClassPrice%>'><%=currencyFormatter.format(converter.convert(priceChanger.setPrice(f, firstClassPrice, "firstClass"), country))%></a>
                             </div>
                             <%
                                 }

@@ -96,7 +96,7 @@
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
             <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_return")%> <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%> <%=dataBundle.getString("passengerDetails_to")%> <%=dateFormatter.format(returnFlightObject.getDate())%>
-            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(totalPrice)%>&nbsp;&nbsp;</span>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(converter.convert(totalPrice, country))%>&nbsp;&nbsp;</span>
         </h3>
         <hr></br>
 
@@ -120,12 +120,12 @@
         <!--One-Way Flight Version-->
         
         <!--Total price to be sent to Paypal javascript function-->
-        <input id="totalPrice" value="<%=totalPrice%>" type="hidden"/>
+        <input id="totalPrice" value="<%=converter.convert(totalPrice, country)%>" type="hidden"/>
         
         <!--Desktop and Mobile Version-->
         <h3 class="ml-3">
             <%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("passengerDetails_to")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <br class="d-flex d-md-none"><hr class="d-flex d-md-none"> <%=dateFormatter.format(flight.getDate())%>
-            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(totalPrice)%></span>
+            <span class="float-md-right mr-md-3"><br class="d-flex d-md-none"><hr class="d-flex d-md-none"><%=dataBundle.getString("paymentDetails_total")%> <%=currencyFormatter.format(converter.convert(totalPrice, country))%></span>
         </h3>
         <hr></br>
 

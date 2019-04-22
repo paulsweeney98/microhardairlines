@@ -4,6 +4,8 @@
     Author     : pauls
 --%>
 
+<%@page import="PriceManager.PriceChanger"%>
+<%@page import="PriceManager.CurrencyConverter"%>
 <%@page import="java.text.DateFormat"%>
 
 <%@page import="java.text.NumberFormat"%>
@@ -20,9 +22,12 @@
     // If there was no locale already set -- it's their first time here or their session timed out
     if(clientLocale == null){
         // Get the locale for the client's browser (that is what's stored in the request)
-        clientLocale = request.getLocale();
+//        clientLocale = request.getLocale();
+        clientLocale = new Locale("en", "IE");
         // Save it as the currently selected locale
         session.setAttribute("currentLocale", clientLocale);
+        
+        session.setAttribute("country", "IE");
     }
 %>
 <!-- Create the resource bundle we're going to be using in all pages.
@@ -45,6 +50,12 @@
 <%
     NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(clientLocale);
     DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.MEDIUM, clientLocale);
+    
+    // Instance for currency converter
+    CurrencyConverter converter = new CurrencyConverter();
+    
+    // Instance for PriceChanger
+    PriceChanger priceChanger = new PriceChanger();
 %>
 
 <html lang="en">
@@ -172,19 +183,63 @@
     <form action="Servlet" method="post">
         <!-- When the value of the drop down changes, 
         submit the form and send the value to the controller -->
-        <select name ="language" onchange="this.form.submit()">
+        <select name="country" onchange="this.form.submit()">
             <%
-                String language = (String) session.getAttribute("language");
-                if(language == null || language.equals("en")){
+                String country = (String) session.getAttribute("country");
+                if(country == null || country.equals("IE")){
 
             %>
-                <option value="en" selected>English</option>
-                <option value="fr">Français</option>
+                <option value="IE" selected>Ireland</option>
+                <option value="GB">UK</option>
+                <option value="US">USA</option>
+                <option value="FR">France</option>
+                <option value="en-CA">Canada (English)</option>
+                <option value="fr-CA">Canada (français)</option>
             <%
-                }else{
+                } else if (country.equals("GB")) {
             %>
-                <option value="en">English</option>
-                <option value="fr" selected>Français</option>
+                <option value="IE">Ireland</option>
+                <option value="GB" selected>UK</option>
+                <option value="US">USA</option>
+                <option value="FR">France</option>
+                <option value="en-CA">Canada (English)</option>
+                <option value="fr-CA">Canada (français)</option>
+            <%        
+                } else if (country.equals("US")) {
+            %>
+                <option value="IE">Ireland</option>
+                <option value="GB">UK</option>
+                <option value="US" selected>USA</option>
+                <option value="FR">France</option>
+                <option value="en-CA">Canada (English)</option>
+                <option value="fr-CA">Canada (français)</option>
+            <%        
+                } else if (country.equals("FR")) {
+            %>
+                <option value="IE">Ireland</option>
+                <option value="GB">UK</option>
+                <option value="US">USA</option>
+                <option value="FR" selected>France</option>
+                <option value="en-CA">Canada (English)</option>
+                <option value="fr-CA">Canada (français)</option>
+            <%        
+                } else if (country.equals("en-CA")) {
+            %>
+                <option value="IE">Ireland</option>
+                <option value="GB">UK</option>
+                <option value="US">USA</option>
+                <option value="FR">France</option>
+                <option value="en-CA" selected>Canada (English)</option>
+                <option value="fr-CA">Canada (français)</option>
+            <%        
+                } else if (country.equals("fr-CA")) {
+            %>
+                <option value="IE">Ireland</option>
+                <option value="GB">UK</option>
+                <option value="US">USA</option>
+                <option value="FR">France</option>
+                <option value="en-CA">Canada (English)</option>
+                <option value="fr-CA" selected>Canada (français)</option>
             <%        
                 }
             %>

@@ -53,6 +53,8 @@
                     DecimalFormat df = new DecimalFormat("#.##");
                     totalPrice = v.convertStringToDouble(df.format(totalPrice));
 
+                    // Converting the displayed price to the correct currency
+                    priorityBoardingPrice = converter.convert(priorityBoardingPrice, country);
         %>
         
         
