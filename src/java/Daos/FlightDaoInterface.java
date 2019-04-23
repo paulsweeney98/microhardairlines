@@ -47,6 +47,14 @@ public interface FlightDaoInterface {
     public ArrayList<Flight> getFlightsByLocationsDepartureDatePassengerNum(String departureAirport, String destinationAirport, Date date, int numPassengers);
     
     /**
+     * Get all <code>Flight</code> entries in the database before a certain date
+     * 
+     * @param date The date where the query ends
+     * @return <code>ArrayList</code> of <code>Flight</code> objects
+     */
+    public ArrayList<Flight> getFlightsBeforeDepartureDate(Date date);
+    
+    /**
      * Gets a <code>Flight</code> by its id.
      * 
      * @param id The id of the <code>Flight</code>.

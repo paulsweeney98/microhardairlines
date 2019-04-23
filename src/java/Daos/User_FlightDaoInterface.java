@@ -68,6 +68,8 @@ public interface User_FlightDaoInterface {
      */
     public ArrayList<User_Flight> getUser_FlightsByFlightIdUserId(int flightId, int userId);
     
+    public ArrayList<User_Flight> getUser_FlightsByFlightId(int flightId);
+    
     /**
      * Removes a User_Flight by passing its id.
      * 

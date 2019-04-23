@@ -38,6 +38,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
      * 
      * @return An ArrayList of flights.
      */
+    @Override
     public ArrayList<Flight> getFlights() {
         // DB interaction
         Connection con = null;
@@ -78,7 +79,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
 
                 Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
-                // Store each book in the ArrayList
+                // Store each flight in the ArrayList
                 flights.add(flight);
             }
         } catch (SQLException ex) {
@@ -155,7 +156,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
 
                 Flight flight = new Flight(id, planeInverntoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
-                // Store each book in the ArrayList
+                // Store each flight in the ArrayList
                 flights.add(flight);
             }
         } catch (SQLException ex) {
@@ -232,7 +233,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
 
                 Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
-                // Store each book in the ArrayList
+                // Store each flight in the ArrayList
                 flights.add(flight);
             }
         } catch (SQLException ex) {
@@ -318,11 +319,90 @@ public class FlightDao extends Dao implements FlightDaoInterface {
 
                 Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
 
-                // Store each book in the ArrayList
+                // Store each flight in the ArrayList
                 flights.add(flight);
             }
         } catch (SQLException ex) {
             System.out.println("An exception occurred while querying the flight table in the getFlightsByLocationsDepartureDatePassengerNum() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return flights;
+    }
+    
+    /**
+     * Get all <code>Flight</code> entries in the database before a certain date
+     * 
+     * @param date The date where the query ends
+     * @return <code>ArrayList</code> of <code>Flight</code> objects
+     */
+    @Override
+    public ArrayList<Flight> getFlightsBeforeDepartureDate(Date date) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        // ArrayList to store results
+        ArrayList<Flight> flights = new ArrayList();
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT * FROM flight "
+                        + "WHERE date < ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setDate(1, date);
+            // Execute SQL
+            rs = ps.executeQuery();
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int planeInventoryId = rs.getInt("planeInventoryId");
+                String flightNumber = rs.getString("flightNumber");
+                double price = rs.getDouble("price");
+                int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
+                int businessSeatsAvailable = rs.getInt("businessSeatsAvailable");
+                int firstClassSeatsAvailable = rs.getInt("firstClassSeatsAvailable");
+                date = rs.getDate("date");
+                int departureTime = rs.getInt("departureTime");
+                int arrivalTime = rs.getInt("arrivalTime");
+                int duration = rs.getInt("duration");
+                String departureAirport = rs.getString("departureAirport");
+                String departureAirportAbbreviation = rs.getString("departureAirportAbbreviation");
+                String arrivalAirport = rs.getString("arrivalAirport");
+                String arrivalAirportAbbreviation = rs.getString("arrivalAirportAbbreviation");
+                String departureTerminal = rs.getString("departureTerminal");
+                String arrivalTerminal = rs.getString("arrivalTerminal");
+
+                Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+
+                // Store each flight in the ArrayList
+                flights.add(flight);
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the getFlightsBeforeDepartureDate() method\n"
                     + ex.getMessage());
         } // Close open components
         finally {
@@ -516,7 +596,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             // Execute SQL
             ps.execute();
 
-            // Get newly generated book_id value
+            // Get newly generated id value
             generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 newId = generatedKeys.getInt(1);

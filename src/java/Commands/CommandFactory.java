@@ -93,6 +93,10 @@ public class CommandFactory {
                     // Do all logic to remove a flight
                     c = new AdminRemoveFlightCommand();
                     break;
+                case "adminArchive":
+                    // Do all logic to archive flights
+                    c = new AdminArchiveCommand();
+                    break;
                 case "adminSuspendUser": 
                     // Do all logic to suspend a user
                     c = new AdminSuspendUserCommand();

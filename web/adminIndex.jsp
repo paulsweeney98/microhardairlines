@@ -39,10 +39,15 @@
                         <a href="adminSearchFlight.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_search")%></a></br></br>
                     </div>
                     <div class="col border border-primary rounded"></br>
+                        <h3><%=dataBundle.getString("adminIndex_archiveFlights")%></h3>
+                        <p></p>
+                        <a href="adminArchiveFlights.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_archiveFlights")%></a></br></br>
+                    </div>
+                    <div class="col border border-primary rounded"></br>
                         <h3><%=dataBundle.getString("adminIndex_disableOrEnableUsers")%></h3>
                         <p></p>
                         <a href="adminViewUsers.jsp" class="btn btn-success"><%=dataBundle.getString("adminIndex_view")%></a></br></br>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div class="col-0 col-md-2"></div>
