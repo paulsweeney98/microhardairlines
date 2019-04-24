@@ -98,7 +98,7 @@
                                     } else {
                             %>
                             <div class="col-6">
-                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_boardingPass")%></a>
+                                <a href="Servlet?action=generateBoardingPass&flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_boardingPass")%></a>
                             </div>
                             <%
                                     }
@@ -129,7 +129,7 @@
                                     } else {
                             %>
                             <div class="col-6">
-                                <a href="boardingPass.jsp?flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_boardingPass")%></a>
+                                <a href="Servlet?action=generateBoardingPass&flightId=<%=user_flights.get(0).getFlightId()%>" class="btn btn-success"><%=dataBundle.getString("upcomingTrips_boardingPass")%></a>
                             </div>
                             <%
                                     }

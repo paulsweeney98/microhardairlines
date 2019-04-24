@@ -48,6 +48,9 @@
         </div>
         
         <!--Should only display on mobile-->
+        <p class="d-flex d-md-none text-danger ml-3">If QR Code does not display, reload the page</p>
+        
+        <!--Should only display on mobile-->
         <div class="d-xs-block d-md-none row mt-3">
             <div class="col">
                 <div id="demo" class="carousel slide" data-ride="carousel">
@@ -69,8 +72,6 @@
                     <%
                         int counter = 0;
                         for (User_Flight user_flight : user_flights) {
-                            // Generating QR code
-                            qrGenerator.generateQRCodeImage("ID: " + user_flight.getId() + "\nPassenger: " + user_flight.getPassengerFirstName() + " " + user_flight.getPassengerLastName() + "\nGoing From: " + flight.getDepartureAirport() + "\nTo: " + flight.getArrivalAirport(), 350, 350, "MyQRCode" + user_flight.getPassengerLastName() + user_flight.getId() + ".png");
                             
                             if (counter == 0) {
                     %>

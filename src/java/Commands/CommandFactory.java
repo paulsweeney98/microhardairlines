@@ -125,6 +125,10 @@ public class CommandFactory {
                     // Do all logic for changing password
                     c = new VerifyWhatsAppCodeCommand();
                     break;
+                case "generateBoardingPass":
+                    // Do all logic for changing password
+                    c = new GenerateBoardingPassCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();
