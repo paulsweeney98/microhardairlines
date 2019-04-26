@@ -44,7 +44,7 @@
         
         <div class="text-center">
             <button class="btn btn-success" onclick="print()"><%=dataBundle.getString("boardingPass_printBoardingPass")%></button>
-            <p class="text-danger ml-3">If QR Code does not display, reload the page</p>
+            <p class="text-danger ml-3"><%=dataBundle.getString("boardingPass_reloadPage")%></p>
         </div>
         
         <%

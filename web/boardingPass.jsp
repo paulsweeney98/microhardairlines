@@ -48,7 +48,7 @@
         </div>
         
         <!--Should only display on mobile-->
-        <p class="d-flex d-md-none text-danger ml-3">If QR Code does not display, reload the page</p>
+        <p class="d-flex d-md-none text-danger ml-3"><%=dataBundle.getString("boardingPass_reloadPage")%></p>
         
         <!--Should only display on mobile-->
         <div class="d-xs-block d-md-none row mt-3">
