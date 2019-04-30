@@ -129,6 +129,14 @@ public class CommandFactory {
                     // Do all logic for changing password
                     c = new GenerateBoardingPassCommand();
                     break;
+                case "flightStatusByFlightNumberAndDate":
+                    // Do all logic for changing password
+                    c = new FlightStatusByFlightNumberAndDateCommand();
+                    break;
+                case "flightStatusByLocationAndDate":
+                    // Do all logic for changing password
+                    c = new FlightStatusByLocationAndDateCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();

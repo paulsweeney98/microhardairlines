@@ -954,4 +954,243 @@ public class FlightDao extends Dao implements FlightDaoInterface {
         return rowsUpdated;
     }
     
+    /**
+     * Gets a <code>Flight</code> by its id.
+     * 
+     * @param flightNum The id of the <code>Flight</code>.
+     * @return The <code>Flight</code> found.
+     */
+    @Override
+    public Flight getFlightByFlightNum(int flightNum) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        // ArrayList to store results
+        Flight flight = null;
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT * FROM flight "
+                        + "WHERE flightNumber = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setInt(1, flightNum);
+            // Execute SQL
+            rs = ps.executeQuery();
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                int planeInventoryId = rs.getInt("planeInventoryId");
+                String flightNumber = rs.getString("flightNumber");
+                double price = rs.getDouble("price");
+                int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
+                int businessSeatsAvailable = rs.getInt("businessSeatsAvailable");
+                int firstClassSeatsAvailable = rs.getInt("firstClassSeatsAvailable");
+                Date date = rs.getDate("date");
+                int departureTime = rs.getInt("departureTime");
+                int arrivalTime = rs.getInt("arrivalTime");
+                int duration = rs.getInt("duration");
+                String departureAirport = rs.getString("departureAirport");
+                String departureAirportAbbreviation = rs.getString("departureAirportAbbreviation");
+                String arrivalAirport = rs.getString("arrivalAirport");
+                String arrivalAirportAbbreviation = rs.getString("arrivalAirportAbbreviation");
+                String departureTerminal = rs.getString("departureTerminal");
+                String arrivalTerminal = rs.getString("arrivalTerminal");
+
+                flight = new Flight(planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the getFlightById() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return flight;
+    }
+    
+    /**
+     * View all <code>Flight</code> entries in the database based on their departure 
+     * location, destination location, date of the flight and the number of passengers 
+     * being booked by the user.
+     *
+     * @return <code>ArrayList</code> of <code>Flight</code> objects
+     */
+    @Override
+    public ArrayList<Flight> getFlightsByLocationsDepartureDate(String departureAirport, String destinationAirport, Date date) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        // ArrayList to store results
+        ArrayList<Flight> flights = new ArrayList();
+
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT * FROM flight "
+                        + "WHERE departureAirport = ? "
+                        + "AND arrivalAirport = ? "
+                        + "AND date = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setString(1, departureAirport);
+            ps.setString(2, destinationAirport);
+            ps.setDate(3, date);
+            // Execute SQL
+            rs = ps.executeQuery();
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int planeInventoryId = rs.getInt("planeInventoryId");
+                String flightNumber = rs.getString("flightNumber");
+                double price = rs.getDouble("price");
+                int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
+                int businessSeatsAvailable = rs.getInt("businessSeatsAvailable");
+                int firstClassSeatsAvailable = rs.getInt("firstClassSeatsAvailable");
+                date = rs.getDate("date");
+                int departureTime = rs.getInt("departureTime");
+                int arrivalTime = rs.getInt("arrivalTime");
+                int duration = rs.getInt("duration");
+                departureAirport = rs.getString("departureAirport");
+                String departureAirportAbbreviation = rs.getString("departureAirportAbbreviation");
+                String arrivalAirport = rs.getString("arrivalAirport");
+                String arrivalAirportAbbreviation = rs.getString("arrivalAirportAbbreviation");
+                String departureTerminal = rs.getString("departureTerminal");
+                String arrivalTerminal = rs.getString("arrivalTerminal");
+
+                Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+
+                // Store each book in the ArrayList
+                flights.add(flight);
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the getFlightsByLocationsDepartureDatePassengerNum() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return flights;
+    }
+    
+    /**
+     * View all <code>Flight</code> entries in the database based on their departure 
+     * location, destination location, date of the flight and the number of passengers 
+     * being booked by the user.
+     *
+     * @return <code>ArrayList</code> of <code>Flight</code> objects
+     */
+    @Override
+    public Flight getFlightsByFlightNumAndDate(String flightNumber, Date date) {
+        // DB interaction
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        Flight flight = null;
+        
+        try {
+            con = getConnection();
+            // Query
+            String query = "SELECT * FROM flight "
+                        + "WHERE flightNumber = ? "
+                        + "AND date = ? ";
+            // Compile into SQL
+            ps = con.prepareStatement(query);
+            ps.setString(1, flightNumber);
+            ps.setDate(2, date);
+            // Execute SQL
+            rs = ps.executeQuery();
+            
+
+            // While loop through rows returned from query
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int planeInventoryId = rs.getInt("planeInventoryId");
+                flightNumber = rs.getString("flightNumber");
+                double price = rs.getDouble("price");
+                int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
+                int businessSeatsAvailable = rs.getInt("businessSeatsAvailable");
+                int firstClassSeatsAvailable = rs.getInt("firstClassSeatsAvailable");
+                date = rs.getDate("date");
+                int departureTime = rs.getInt("departureTime");
+                int arrivalTime = rs.getInt("arrivalTime");
+                int duration = rs.getInt("duration");
+                String departureAirport = rs.getString("departureAirport");
+                String departureAirportAbbreviation = rs.getString("departureAirportAbbreviation");
+                String arrivalAirport = rs.getString("arrivalAirport");
+                String arrivalAirportAbbreviation = rs.getString("arrivalAirportAbbreviation");
+                String departureTerminal = rs.getString("departureTerminal");
+                String arrivalTerminal = rs.getString("arrivalTerminal");
+
+                flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("An exception occurred while querying the flight table in the getFlightsByLocationsDepartureDatePassengerNum() method\n"
+                    + ex.getMessage());
+        } // Close open components
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        }
+        // Return results
+        return flight;
+    }
+    
 }

@@ -115,6 +115,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link active text-light" href="index.jsp"><%=dataBundle.getString("header_searchFlights")%></a>
+            <a class="nav-item nav-link active text-light" href="searchFlightStatus.jsp"><%=dataBundle.getString("header_flightStatus")%></a>
             <% if (loggedInUser != null) { %>
             <a class="nav-item nav-link text-light" href="upcomingTrips.jsp"><%=dataBundle.getString("header_manageTrips")%></a>
             <% } %>

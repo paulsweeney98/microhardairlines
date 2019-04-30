@@ -140,4 +140,10 @@ public interface FlightDaoInterface {
      */
     public int updateFirstClassSeats(int flightId, String seatType, int changeBy);
     
+    public Flight getFlightByFlightNum(int flightNum);
+    
+    public ArrayList<Flight> getFlightsByLocationsDepartureDate(String departureAirport, String destinationAirport, Date date);
+    
+    public Flight getFlightsByFlightNumAndDate(String flightNumber, Date date);
+    
 }
