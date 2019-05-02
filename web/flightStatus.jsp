@@ -34,7 +34,7 @@
         %>
           
         <h3 class='text-center'><%=flights.get(0).getDepartureAirport()%> (<%=flights.get(0).getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("flightStatus_To")%> <%=flights.get(0).getArrivalAirport()%> (<%=flights.get(0).getArrivalAirportAbbreviation()%>)</h3>
-        <h3 class='text-center'><%=dataBundle.getString("flightStatus_Date")%> <%=flights.get(0).getDate()%></h3>
+        <h3 class='text-center'><%=dataBundle.getString("flightStatus_Date")%> <%=dateFormatter.format(flights.get(0).getDate())%></h3>
         
         <%
                 for (Flight flight : flights) {
