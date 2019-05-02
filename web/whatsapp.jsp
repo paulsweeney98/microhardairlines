@@ -63,7 +63,7 @@
                         // that have been set up in the developer's section of the Twilio account, but this feature will
                         // be demonstrated during presentation using my phone number which I have previously set up on Twilio (this is Paul).
                         // This line of code below would send a WhatsApp message to any number if we paid for premium.
-                        whatsapp.sendWhatsAppMessage(code, user.getPhoneNumber());
+//                        whatsapp.sendWhatsAppMessage(code, user.getPhoneNumber());
         %>
         
         <div class="row text-center">

@@ -49,9 +49,15 @@ public class AnswerSecurityQuestionCommand implements Command {
                     if (user != null) {
                         if (newPassword.equals(confirmNewPassword)) {
                             // Update password method
-
-                            session.setAttribute("loggedInUser", user);
-                            forwardToJsp = "changePassword.jsp";
+                            int updated = uDao.updateUserPassword(user, newPassword);
+                            
+                            if (updated > -1) {
+                                session.setAttribute("loggedInUser", user);
+                                forwardToJsp = "index.jsp";
+                            } else {
+                                session.setAttribute("errorMessage", "Error changing password.");
+                                forwardToJsp = "error.jsp";
+                            }
                         } else {
                             session.setAttribute("errorMessage", "New password and confirm password doesn't match");
                             forwardToJsp = "error.jsp";

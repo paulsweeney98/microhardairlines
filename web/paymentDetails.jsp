@@ -22,6 +22,10 @@
     </head>
     <body>
         <%
+            // To test paying with PayPal you can login to my dummy account with the email "paulsweeney98-buyer@gmail.com"
+            // and password "Password1".
+            // Don't worry all payments are fake.
+            
             if (loggedInUser != null) {
 
                 FlightDao fDao = new FlightDao(Dao.getDatabaseName());
@@ -317,7 +321,7 @@
               },
               onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                  alert('Transaction completed by ' + details.payer.name.given_name);
+//                  alert('Transaction completed by ' + details.payer.name.given_name);
                   window.location = 'http://localhost:8084/microhard_airlines/Servlet?action=bookFlight&paidWithPaypal=true';
                   // Call your server to save the transaction
 //                  return fetch('/paypal-transaction-complete', {
