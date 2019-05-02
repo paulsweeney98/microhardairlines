@@ -93,7 +93,7 @@ public class AdminEditFlightCommand implements Command {
                 int results = -1;
                 
                 if (toggleFlightNumber.equals("Yes")) {
-                    Flight flight = new Flight(planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, departureDate, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, destinationAirport, destinationAirportAbbreviation, departureTerminal, arrivalTerminal);
+                    Flight flight = new Flight(planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, destinationAirport, destinationAirportAbbreviation, departureTerminal, arrivalTerminal);
                     results = fDao.editFlightByFlightNumber(flight);
                 } else {
                     Flight flight = new Flight(id, planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, departureDate, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, destinationAirport, destinationAirportAbbreviation, departureTerminal, arrivalTerminal);

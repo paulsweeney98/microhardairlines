@@ -141,14 +141,6 @@ public interface FlightDaoInterface {
     public int updateFirstClassSeats(int flightId, String seatType, int changeBy);
     
     /**
-     * Gets a <code>Flight</code> by its flightNum.
-     * 
-     * @param flightNum The id of the <code>Flight</code>.
-     * @return The <code>Flight</code> found.
-     */
-    public Flight getFlightByFlightNum(int flightNum);
-    
-    /**
      * View all <code>Flight</code> entries in the database based on their departure airport,
      * destination airport and date.
      * 

@@ -57,6 +57,25 @@ public class Flight {
         this.arrivalTerminal = arrivalTerminal;
     }
     
+    public Flight(int planeInventoryId, String flightNumber, double price, int standardSeatsAvailable, int businessSeatsAvailable, int firstClassSeatsAvailable, int departureTime, int arrivalTime, int duration, String departureAirport, String departureAirportAbbreviation, String arrivalAirport, String arrivalAirportAbbreviation, String departureTerminal, String arrivalTerminal) {
+        this.id = -1;
+        this.planeInventoryId = planeInventoryId;
+        this.flightNumber = flightNumber;
+        this.price = price;
+        this.standardSeatsAvailable = standardSeatsAvailable;
+        this.businessSeatsAvailable = businessSeatsAvailable;
+        this.firstClassSeatsAvailable = firstClassSeatsAvailable;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.duration = duration;
+        this.departureAirport = departureAirport;
+        this.departureAirportAbbreviation = departureAirportAbbreviation;
+        this.arrivalAirport = arrivalAirport;
+        this.arrivalAirportAbbreviation = arrivalAirportAbbreviation;
+        this.departureTerminal = departureTerminal;
+        this.arrivalTerminal = arrivalTerminal;
+    }
+    
     public Flight(int id, int planeInventoryId, String flightNumber, double price, int standardSeatsAvailable, int businessSeatsAvailable, int firstClassSeatsAvailable, Date date, int departureTime, int arrivalTime, int duration, String departureAirport, String departureAirportAbbreviation, String arrivalAirport, String arrivalAirportAbbreviation, String departureTerminal, String arrivalTerminal) {
         this.id = id;
         this.planeInventoryId = planeInventoryId;

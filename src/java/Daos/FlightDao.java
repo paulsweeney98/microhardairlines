@@ -711,7 +711,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             con = getConnection();
             // Query
             String query = "UPDATE flight "
-                    + " SET planeInventoryId = ?, price = ?, standardSeatsAvailable = ?, businessSeatsAvailable = ?, firstClassSeatsAvailable = ?, date = ?, departureTime = ?, arrivalTime = ?, duration = ?, departureAirport = ?, departureAirportAbbreviation = ?, arrivalAirport = ?, arrivalAirportAbbreviation = ?, departureTerminal = ?, arrivalTerminal = ?"
+                    + " SET planeInventoryId = ?, price = ?, standardSeatsAvailable = ?, businessSeatsAvailable = ?, firstClassSeatsAvailable = ?, departureTime = ?, arrivalTime = ?, duration = ?, departureAirport = ?, departureAirportAbbreviation = ?, arrivalAirport = ?, arrivalAirportAbbreviation = ?, departureTerminal = ?, arrivalTerminal = ?"
                     + " WHERE flightNumber = ?";
             // Compile into SQL
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -721,17 +721,16 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             ps.setInt(3, flight.getStandardSeatsAvailable());
             ps.setInt(4, flight.getBusinessSeatsAvailable());
             ps.setInt(5, flight.getFirstClassSeatsAvailable());
-            ps.setDate(6, flight.getDate());
-            ps.setInt(7, flight.getDepartureTime());
-            ps.setInt(8, flight.getArrivalTime());
-            ps.setInt(9, flight.getDuration());
-            ps.setString(10, flight.getDepartureAirport());
-            ps.setString(11, flight.getDepartureAirportAbbreviation());
-            ps.setString(12, flight.getArrivalAirport());
-            ps.setString(13, flight.getArrivalAirportAbbreviation());
-            ps.setString(14, flight.getDepartureTerminal());
-            ps.setString(15, flight.getArrivalTerminal());
-            ps.setString(16, flight.getFlightNumber());
+            ps.setInt(6, flight.getDepartureTime());
+            ps.setInt(7, flight.getArrivalTime());
+            ps.setInt(8, flight.getDuration());
+            ps.setString(9, flight.getDepartureAirport());
+            ps.setString(10, flight.getDepartureAirportAbbreviation());
+            ps.setString(11, flight.getArrivalAirport());
+            ps.setString(12, flight.getArrivalAirportAbbreviation());
+            ps.setString(13, flight.getDepartureTerminal());
+            ps.setString(14, flight.getArrivalTerminal());
+            ps.setString(15, flight.getFlightNumber());
             // Execute SQL
             rowsUpdated = ps.executeUpdate();
 
@@ -952,81 +951,6 @@ public class FlightDao extends Dao implements FlightDaoInterface {
             }
         }
         return rowsUpdated;
-    }
-    
-    /**
-     * Gets a <code>Flight</code> by its flightNum.
-     * 
-     * @param flightNum The id of the <code>Flight</code>.
-     * @return The <code>Flight</code> found.
-     */
-    @Override
-    public Flight getFlightByFlightNum(int flightNum) {
-        // DB interaction
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        // ArrayList to store results
-        Flight flight = null;
-
-        try {
-            con = getConnection();
-            // Query
-            String query = "SELECT * FROM flight "
-                        + "WHERE flightNumber = ? ";
-            // Compile into SQL
-            ps = con.prepareStatement(query);
-            ps.setInt(1, flightNum);
-            // Execute SQL
-            rs = ps.executeQuery();
-
-            // While loop through rows returned from query
-            while (rs.next()) {
-                int planeInventoryId = rs.getInt("planeInventoryId");
-                String flightNumber = rs.getString("flightNumber");
-                double price = rs.getDouble("price");
-                int standardSeatsAvailable = rs.getInt("standardSeatsAvailable");
-                int businessSeatsAvailable = rs.getInt("businessSeatsAvailable");
-                int firstClassSeatsAvailable = rs.getInt("firstClassSeatsAvailable");
-                Date date = rs.getDate("date");
-                int departureTime = rs.getInt("departureTime");
-                int arrivalTime = rs.getInt("arrivalTime");
-                int duration = rs.getInt("duration");
-                String departureAirport = rs.getString("departureAirport");
-                String departureAirportAbbreviation = rs.getString("departureAirportAbbreviation");
-                String arrivalAirport = rs.getString("arrivalAirport");
-                String arrivalAirportAbbreviation = rs.getString("arrivalAirportAbbreviation");
-                String departureTerminal = rs.getString("departureTerminal");
-                String arrivalTerminal = rs.getString("arrivalTerminal");
-
-                flight = new Flight(planeInventoryId, flightNumber, price, standardSeatsAvailable, businessSeatsAvailable, firstClassSeatsAvailable, date, departureTime, arrivalTime, duration, departureAirport, departureAirportAbbreviation, arrivalAirport, arrivalAirportAbbreviation, departureTerminal, arrivalTerminal);
-            }
-        } catch (SQLException ex) {
-            System.out.println("An exception occurred while querying the flight table in the getFlightById() method\n"
-                    + ex.getMessage());
-        } // Close open components
-        finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(FlightDao.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (con != null) {
-                freeConnection(con);
-            }
-        }
-        // Return results
-        return flight;
     }
     
      /**

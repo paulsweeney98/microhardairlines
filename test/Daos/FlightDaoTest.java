@@ -182,4 +182,33 @@ public class FlightDaoTest {
         }
     }
     
+    /**
+     * Test of getFlightsByLocationsDepartureDate method, of class FlightDao.
+     */
+    @Test
+    public void testGetFlightsByLocationsDepartureDate() {
+        System.out.println("getFlightsByLocationsDepartureDate");
+        String departureAirport = "Dublin";
+        String destinationAirport = "London Heathrow";
+        java.sql.Date date = java.sql.Date.valueOf("2019-02-18");
+        ArrayList<Flight> flights = fDao.getFlightsByLocationsDepartureDate(departureAirport, destinationAirport, date);
+        int expResult = 9;
+        int result = flights.size();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of getFlightsByFlightNumAndDate method, of class FlightDao.
+     */
+    @Test
+    public void testGetFlightsByFlightNumAndDate() {
+        System.out.println("getFlightsByFlightNumAndDate");
+        String flightNumber = "MA-1000";
+        java.sql.Date date = java.sql.Date.valueOf("2019-02-18");
+        String expResult = "London Heathrow";
+        Flight flight = fDao.getFlightsByFlightNumAndDate(flightNumber, date);
+        String result = flight.getArrivalAirport();
+        assertEquals(expResult, result);
+    }
+    
 }
