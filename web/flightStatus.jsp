@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Flight Status</title>
+        <title><%=dataBundle.getString("flightStatus_title")%></title>
     </head>
     <body>
         
@@ -47,14 +47,14 @@
             <% if (flight.getDate().toLocalDate().isAfter(todaysDate)) { %>
 
             <div class="col-3 col-md-2 border border-success bg-success text-center text-light">
-                <h3>On Time</h3>
+                <h3><%=dataBundle.getString("flightStatus_OnTime")%></h3>
             </div>
 
             <!-- Checking if the flight is before today -->
             <% } else if (flight.getDate().toLocalDate().isBefore(todaysDate)) { %>
             
             <div class="col-3 col-md-2 border border-primary bg-primary text-center text-light">
-                <h3>Landed</h3>
+                <h3><%=dataBundle.getString("flightStatus_Landed")%></h3>
             </div>
             
             <!-- The flight is either today or before today -->
@@ -63,19 +63,19 @@
                 <!-- Checking if the flight is in the air -->
                 <% if ((flight.getDepartureTime() <= ((now.getHour() * 60) + now.getMinute()) && (flight.getArrivalTime() >= ((now.getHour() * 60) + now.getMinute())))) { %>
                 <div class="col-3 col-md-2 border border-danger bg-danger text-center text-light">
-                    <h3>In Air</h3>
+                    <h3><%=dataBundle.getString("flightStatus_InAir")%></h3>
                 </div>
 
                 <!-- Checking if the flight hasn't left yet -->
                 <% } else if ((flight.getDepartureTime() > ((now.getHour() * 60) + now.getMinute()))) { %>
                 <div class="col-3 col-md-2 border border-success bg-success text-center text-light">
-                    <h3>On Time</h3>
+                    <h3><%=dataBundle.getString("flightStatus_OnTime")%></h3>
                 </div>
 
                 <!-- The flight has landed as its arrival time is after the current time -->
                 <% } else { %>
                 <div class="col-3 col-md-2 border border-primary bg-primary text-center text-light">
-                    <h3>Landed</h3>
+                    <h3><%=dataBundle.getString("flightStatus_Landed")%></h3>
                 </div>
                 <% } %>
 
