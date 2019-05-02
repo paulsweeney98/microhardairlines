@@ -44,9 +44,6 @@
                                 String email = u.getEmail();
                                 String firstName = u.getFirstName();
                                 String lastName = u.getLastName();
-                                String phoneNumber = u.getPhoneNumber();
-                                String country = u.getCountry();
-                                String county = u.getCounty();
                                 int privileges = u.getPrivileges();
                                 int suspended = u.getSuspended();
                     %>
