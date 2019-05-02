@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Flight Status</title>
+        <title><%=dataBundle.getString("flightStatus_title")%></title>
     </head>
     <body>
         <div id="byFlightNumber">
@@ -27,7 +27,7 @@
                     <form action="Servlet" method="post">
                         <div class="form-row">
                             <div class="col">
-                                <label>Flight Number</label>
+                                <label><%=dataBundle.getString("flightStatus_flightNumber")%></label>
                                 <input name="flightNumber" placeholder='Flight Number' class="form-control">
                             </div>
                             
@@ -57,7 +57,7 @@
                     <form action="Servlet" method="post">
                         <div class="form-row">
                             <div class="col">
-                                <label>Departure Airport</label>
+                                <label><%=dataBundle.getString("flightStatus_departureAirport")%></label>
                                 <input list="departureAirport" name="departureAirport" placeholder='Departure' class="form-control">
                                 
                                 <datalist id="departureAirport">
@@ -76,7 +76,7 @@
                             </div>
                             
                             <div class="col">
-                                <label>Destination Airport</label>
+                                <label><%=dataBundle.getString("flightStatus_destinationAirport")%></label>
                                 <input list="destinationAirport" name="destinationAirport" placeholder='Destination' class="form-control">
                                 
                                 <datalist id="destinationAirport">

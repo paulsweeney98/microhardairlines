@@ -587,18 +587,18 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
     
-     /**
-     * Updates a User's Phone Number.
-     * 
-     * If the information entered by the user to update there phone number
-     * is correct then the phone number is updated and if not an error is displayed.
-     * 
-     * @param user The user being passed through.
-     * @param addressLine1 The username of the user.
-     * 
-     * @return An int containing how many rows in the database were affected. Should
-     * contain 1 if a row was removed, and 0 if not.
-     */
+    /**
+    * Updates a User's first address line.
+    * 
+    * If the information entered by the user to update there first address line
+    * is correct then the first address line is updated and if not an error is displayed.
+    * 
+    * @param user The user being passed through.
+    * @param addressLine1 The second address line of the user.
+    * 
+    * @return An int containing how many rows in the database were affected. Should
+    * contain 1 if a row was removed, and 0 if not.
+    */
     @Override
     public int updateUserAddressLine1(User user, String addressLine1) {
         // Required for DB interation
@@ -646,18 +646,18 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
     
-     /**
-     * Updates a User's Phone Number.
-     * 
-     * If the information entered by the user to update there phone number
-     * is correct then the phone number is updated and if not an error is displayed.
-     * 
-     * @param user The user being passed through.
-     * @param phoneNumber The username of the user.
-     * 
-     * @return An int containing how many rows in the database were affected. Should
-     * contain 1 if a row was removed, and 0 if not.
-     */
+    /**
+    * Updates a User's Phone Number.
+    * 
+    * If the information entered by the user to update there phone number
+    * is correct then the phone number is updated and if not an error is displayed.
+    * 
+    * @param user The user being passed through.
+    * @param phoneNumber The username of the user.
+    * 
+    * @return An int containing how many rows in the database were affected. Should
+    * contain 1 if a row was removed, and 0 if not.
+    */
     @Override
     public int updateUserPhone(User user, String phoneNumber) {
         // Required for DB interation
@@ -705,6 +705,17 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
     
+    /**
+     * Updates a User's email.
+     * 
+     * If the information entered by the user to update there email
+     * is correct then the email is updated and if not an error is displayed.
+     * 
+     * @param email The username of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public User getUserByEmail(String email) {
         // Required for DB interation
@@ -771,7 +782,19 @@ public class UserDao extends Dao implements UserDaoInterface {
         
         return u;
     }
-
+    
+    /**
+     * Updates a User's second address line.
+     * 
+     * If the information entered by the user to update there second address line
+     * is correct then the second address line is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param addressLine2 The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateUserAddressLine2(User user, String addressLine2) {
         // Required for DB interation
@@ -818,7 +841,19 @@ public class UserDao extends Dao implements UserDaoInterface {
         
         return rowsAffected;
     }
-
+    
+    /**
+     * Updates a User's city or town.
+     * 
+     * If the information entered by the user to update there city or town
+     * is correct then the city or town is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param cityOrTown The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateCityOrTown(User user, String cityOrTown) {
         // Required for DB interation
@@ -866,6 +901,18 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
 
+    /**
+     * Updates a User's postal code.
+     * 
+     * If the information entered by the user to update there postal code
+     * is correct then the postal code is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param postalCode The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updatePostalCode(User user, String postalCode) {
         // Required for DB interation
@@ -912,7 +959,19 @@ public class UserDao extends Dao implements UserDaoInterface {
         
         return rowsAffected;
     }
-
+    
+    /**
+     * Updates a User's county.
+     * 
+     * If the information entered by the user to update there county
+     * is correct then the county is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param county The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateCounty(User user, String county) {
         // Required for DB interation
@@ -959,7 +1018,19 @@ public class UserDao extends Dao implements UserDaoInterface {
         
         return rowsAffected;
     }
-
+    
+    /**
+     * Updates a User's country.
+     * 
+     * If the information entered by the user to update there country
+     * is correct then the country is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param country The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateCountry(User user, String country) {
         // Required for DB interation
@@ -1007,6 +1078,18 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
 
+    /**
+     * Updates a User's first name.
+     * 
+     * If the information entered by the user to update there first name
+     * is correct then the first name is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param firstName The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateFirstName(User user, String firstName) {
         // Required for DB interation
@@ -1054,6 +1137,18 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
 
+    /**
+     * Updates a User's last name.
+     * 
+     * If the information entered by the user to update there last name
+     * is correct then the last name is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param lastName The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateLastName(User user, String lastName) {
         // Required for DB interation
@@ -1101,6 +1196,18 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
 
+    /**
+     * Updates a User's password.
+     * 
+     * If the information entered by the user to update there password
+     * is correct then the password is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param password The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     @Override
     public int updateUserPassword(User user, String password) {
         // Required for DB interation
@@ -1148,6 +1255,13 @@ public class UserDao extends Dao implements UserDaoInterface {
         return rowsAffected;
     }
 
+    /**
+     * Gets Users from the database.
+     * 
+     * Gets all from all Users from the database.
+     * 
+     * @return Returns an arraylist of Users.
+     */
     @Override
     public ArrayList<User> getUsers() {
         // DB interaction

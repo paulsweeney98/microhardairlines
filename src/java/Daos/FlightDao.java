@@ -955,7 +955,7 @@ public class FlightDao extends Dao implements FlightDaoInterface {
     }
     
     /**
-     * Gets a <code>Flight</code> by its id.
+     * Gets a <code>Flight</code> by its flightNum.
      * 
      * @param flightNum The id of the <code>Flight</code>.
      * @return The <code>Flight</code> found.
@@ -1029,11 +1029,14 @@ public class FlightDao extends Dao implements FlightDaoInterface {
         return flight;
     }
     
-    /**
-     * View all <code>Flight</code> entries in the database based on their departure 
-     * location, destination location, date of the flight and the number of passengers 
-     * being booked by the user.
-     *
+     /**
+     * View all <code>Flight</code> entries in the database based on their departure airport,
+     * destination airport and date.
+     * 
+     * @param departureAirport The departure airport of the flight.
+     * @param destinationAirport The destination airport of the flight.
+     * @param date The date of the flight.
+     * 
      * @return <code>ArrayList</code> of <code>Flight</code> objects
      */
     @Override
@@ -1114,10 +1117,12 @@ public class FlightDao extends Dao implements FlightDaoInterface {
     }
     
     /**
-     * View all <code>Flight</code> entries in the database based on their departure 
-     * location, destination location, date of the flight and the number of passengers 
-     * being booked by the user.
-     *
+     * View all <code>Flight</code> entries in the database based on their flight number
+     * and date.
+     * 
+     * @param flightNumber The number of the flight.
+     * @param date The date of the flight.
+     * 
      * @return <code>ArrayList</code> of <code>Flight</code> objects
      */
     @Override

@@ -124,23 +124,138 @@ public interface UserDaoInterface {
      */
     public int updateUserPhone(User user, String phoneNumber);
     
+    /**
+     * Updates a User's first address line.
+     * 
+     * If the information entered by the user to update there first address line
+     * is correct then the first address line is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param addressLine1 The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateUserAddressLine1(User user, String addressLine1);
     
+    /**
+     * Updates a User's second address line.
+     * 
+     * If the information entered by the user to update there second address line
+     * is correct then the second address line is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param addressLine2 The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateUserAddressLine2(User user, String addressLine2);
     
+    /**
+     * Updates a User's city or town.
+     * 
+     * If the information entered by the user to update there city or town
+     * is correct then the city or town is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param cityOrTown The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateCityOrTown(User user, String cityOrTown);
     
+    /**
+     * Updates a User's postal code.
+     * 
+     * If the information entered by the user to update there postal code
+     * is correct then the postal code is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param postalCode The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updatePostalCode(User user, String postalCode);
     
+    /**
+     * Updates a User's county.
+     * 
+     * If the information entered by the user to update there county
+     * is correct then the county is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param county The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateCounty(User user, String county);
     
+    /**
+     * Updates a User's country.
+     * 
+     * If the information entered by the user to update there country
+     * is correct then the country is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param country The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateCountry(User user, String country);
     
+    /**
+     * Updates a User's first name.
+     * 
+     * If the information entered by the user to update there first name
+     * is correct then the first name is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param firstName The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateFirstName(User user, String firstName);
     
+    /**
+     * Updates a User's last name.
+     * 
+     * If the information entered by the user to update there last name
+     * is correct then the last name is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param lastName The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateLastName(User user, String lastName);
     
+    /**
+     * Updates a User's password.
+     * 
+     * If the information entered by the user to update there password
+     * is correct then the password is updated and if not an error is displayed.
+     * 
+     * @param user The user being passed through.
+     * @param password The second address line of the user.
+     * 
+     * @return An int containing how many rows in the database were affected. Should
+     * contain 1 if a row was removed, and 0 if not.
+     */
     public int updateUserPassword(User user, String password);
     
+    /**
+     * Gets Users from the database.
+     * 
+     * Gets all from all Users from the database.
+     * 
+     * @return Returns an arraylist of Users.
+     */
     public ArrayList<User> getUsers();
 }
