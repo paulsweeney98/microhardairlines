@@ -20,7 +20,7 @@ public class PriceChanger {
         LocalDate todaysDate = LocalDate.now();
         LocalDate flightDate = LocalDate.parse(flight.getDate()+"");
         
-        if (todaysDate.isBefore(flightDate)) {
+        if (todaysDate.isBefore(flightDate) || todaysDate.isEqual(flightDate)) {
         
             // Getting the difference between today's date and the date of the flight
             int yearDifference = (flightDate.getYear() - todaysDate.getYear()) * 365;

@@ -25,6 +25,9 @@ public class FlightStatusByFlightNumberAndDateCommand implements Command {
         String forwardToJsp = "";
         HttpSession session = request.getSession();
         
+        // Removing any previous flight status searches
+        session.removeAttribute("flightStatus");
+        
         // Request Parameters
         String flightNumber = request.getParameter("flightNumber");
         String departureDateString = request.getParameter("departureDate");

@@ -25,6 +25,9 @@ public class FlightStatusByLocationAndDateCommand implements Command {
         String forwardToJsp = "";
         HttpSession session = request.getSession();
         
+        // Removing any previous flight status searches
+        session.removeAttribute("flightStatus");
+        
         // Request Parameters
         String departureAirport = request.getParameter("departureAirport");
         String destinationAirport = request.getParameter("destinationAirport");
