@@ -33,8 +33,8 @@
             if (flights != null && !flights.isEmpty()) {
         %>
           
-        <h3 class='text-center'><%=flights.get(0).getDepartureAirport()%> (<%=flights.get(0).getDepartureAirportAbbreviation()%>) to <%=flights.get(0).getArrivalAirport()%> (<%=flights.get(0).getArrivalAirportAbbreviation()%>)</h3>
-        <h3 class='text-center'>Date: <%=flights.get(0).getDate()%></h3>
+        <h3 class='text-center'><%=flights.get(0).getDepartureAirport()%> (<%=flights.get(0).getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("flightStatus_To")%> <%=flights.get(0).getArrivalAirport()%> (<%=flights.get(0).getArrivalAirportAbbreviation()%>)</h3>
+        <h3 class='text-center'><%=dataBundle.getString("flightStatus_Date")%> <%=flights.get(0).getDate()%></h3>
         
         <%
                 for (Flight flight : flights) {
@@ -82,7 +82,7 @@
             <% } %>
             
             <div class="col-9 col-md-4 border border-primary">
-                <p><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) to <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) departs at <%=v.changeMinutesToHours(flight.getDepartureTime())%> and arrives at <%=v.changeMinutesToHours(flight.getArrivalTime())%></p>
+                <p><%=flight.getDepartureAirport()%> (<%=flight.getDepartureAirportAbbreviation()%>) <%=dataBundle.getString("flightStatus_To")%> <%=flight.getArrivalAirport()%> (<%=flight.getArrivalAirportAbbreviation()%>) <%=dataBundle.getString("flightStatus_DepartsAt")%> <%=v.changeMinutesToHours(flight.getDepartureTime())%> <%=dataBundle.getString("flightStatus_AndArrivesAt")%> <%=v.changeMinutesToHours(flight.getArrivalTime())%></p>
             </div>
             <div class="col-0 col-md-3"></div>
         </div><br>
