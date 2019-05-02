@@ -81,7 +81,7 @@ public class SelectSeatCommand implements Command {
                     Flight flight = fDao.getFlightById(user_flights.get(0).getFlightId());
                     
                     // Flight is long haul
-                    if (flight.getDepartureAirportAbbreviation().equals("JFK") || flight.getArrivalAirportAbbreviation().equals("JFK")) {
+                    if (flight.getDepartureAirportAbbreviation().equals("JFK") || flight.getArrivalAirportAbbreviation().equals("JFK") || flight.getDepartureAirportAbbreviation().equals("DBX") || flight.getArrivalAirportAbbreviation().equals("DBX")) {
                     
                         if (user_flights.get(0).getTravelClass().equals("standard")) {
                             forwardToJsp = "seatSelectionStandardLH.jsp?flightId=" + user_flights.get(0).getFlightId();

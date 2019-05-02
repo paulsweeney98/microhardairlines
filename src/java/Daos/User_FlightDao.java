@@ -575,7 +575,7 @@ public class User_FlightDao extends Dao implements User_FlightDaoInterface {
             con = getConnection();
             // Query
             String query = "UPDATE user_flight "
-                    + "SET queue = 'priority', pricePaid = pricePaid + 50.00 "
+                    + "SET queue = 'priority', pricePaid = pricePaid + 7.00 "
                     + "WHERE id = ?";
             // Compile into SQL
             ps = con.prepareStatement(query);

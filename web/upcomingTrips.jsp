@@ -72,7 +72,7 @@
                                 
                                 // Checks to see if the flight is short haul or long haul
                                 // Flight is long haul if it goes in here
-                                if (flight.getArrivalAirportAbbreviation().equals("JFK") || flight.getDepartureAirportAbbreviation().equals("JFK")) {
+                                if (flight.getArrivalAirportAbbreviation().equals("JFK") || flight.getDepartureAirportAbbreviation().equals("JFK") || flight.getArrivalAirportAbbreviation().equals("DBX") || flight.getDepartureAirportAbbreviation().equals("DBX")) {
                                     // Checks to see if the booking is standard, business or first class and sends user to the appropriate check in page
                                     if (allCheckedInFirstClass == false) {
                             %>

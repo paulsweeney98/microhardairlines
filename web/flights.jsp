@@ -76,6 +76,15 @@
                     } else if (flight.getArrivalAirportAbbreviation().equals("JFK")) {
                         Cookie timesFlightSearchedJFK = new Cookie("timesFlightSearchedJFK", "1");
                         response.addCookie(timesFlightSearchedJFK);
+                    } else if (flight.getArrivalAirportAbbreviation().equals("DBX")) {
+                        Cookie timesFlightSearchedDBX = new Cookie("timesFlightSearchedDBX", "1");
+                        response.addCookie(timesFlightSearchedDBX);
+                    } else if (flight.getArrivalAirportAbbreviation().equals("ACE")) {
+                        Cookie timesFlightSearchedACE = new Cookie("timesFlightSearchedACE", "1");
+                        response.addCookie(timesFlightSearchedACE);
+                    } else if (flight.getArrivalAirportAbbreviation().equals("BCN")) {
+                        Cookie timesFlightSearchedBCN = new Cookie("timesFlightSearchedBCN", "1");
+                        response.addCookie(timesFlightSearchedBCN);
                     }
                 }
 

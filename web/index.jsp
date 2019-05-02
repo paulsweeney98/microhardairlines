@@ -63,7 +63,7 @@
     <%
         // Dates for advertisement
         LocalDate plusOneWeek = LocalDate.now().plusWeeks(1);
-        LocalDate plusOneWeekThreeDays = plusOneWeek.plusDays(1);
+        LocalDate plusOneWeekThreeDays = plusOneWeek.plusDays(3);
 
         // Min date for searching
         LocalDate todaysDate = LocalDate.now();
