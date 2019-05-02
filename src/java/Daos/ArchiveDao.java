@@ -100,7 +100,7 @@ public class ArchiveDao extends Dao implements ArchiveDaoInterface {
                 freeConnection(con);
             }
         }
-        // Return id
+        // Return success
         return success;
     }
 
@@ -151,7 +151,7 @@ public class ArchiveDao extends Dao implements ArchiveDaoInterface {
                 freeConnection(con);
             }
         }
-        // Return id
+        // Return success
         return success;
     }
 
@@ -209,7 +209,7 @@ public class ArchiveDao extends Dao implements ArchiveDaoInterface {
                 freeConnection(con);
             }
         }
-        // Return id
+        // Return success
         return success;
     }
 
