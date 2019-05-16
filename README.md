@@ -1,6 +1,6 @@
 # microhardairlines
 
-Feature Demonstration video: https://www.youtube.com/watch?v=YdtBB1Jvo0Q
+Feature Demonstration Video: https://www.youtube.com/watch?v=YdtBB1Jvo0Q
 
 Final year student group project. A web application for a commercial airline. This project was made by three final year university students; 
 Paul Sweeney, Dean Farrelly and Gerard Hoey.
